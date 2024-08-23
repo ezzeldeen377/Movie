@@ -1,10 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/firebase_options.dart';
+import 'package:movie/my_bloc_observer.dart';
 import 'package:movie/my_theme.dart';
 import 'package:movie/pages/home_screen/home_screen.dart';
 import 'package:movie/pages/init_route/init_route.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main (){
+Future<void> main () async {
+  Bloc.observer = MyBlocObserver();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseFirestore.instance.enableNetwork();
   runApp(MyApp());
 }
 
