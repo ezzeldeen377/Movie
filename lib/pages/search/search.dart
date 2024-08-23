@@ -9,14 +9,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  WatchListViewModel viewModel=WatchListViewModel();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    viewModel.getData('533535');
-
-  }
   @override
   Widget build(BuildContext context) {
     return  Container(color: Colors.black,);
