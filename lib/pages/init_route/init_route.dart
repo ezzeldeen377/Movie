@@ -3,7 +3,7 @@ import 'package:movie/app_colors.dart';
 import 'package:movie/pages/browse/browse.dart';
 import 'package:movie/pages/home_screen/home_screen.dart';
 import 'package:movie/pages/search/search.dart';
-import 'package:movie/pages/watch_list/watch_list.dart';
+import 'package:movie/pages/watch_list/watch_list_view.dart';
 
 class InitRoute extends StatefulWidget {
   static const String routeName='initRoute';
