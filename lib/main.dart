@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/my_theme.dart';
+import 'package:movie/pages/browse/Movies/MoviesPage.dart';
 import 'package:movie/pages/home_screen/home_screen.dart';
 import 'package:movie/pages/home_screen/my_bloc_observer.dart';
 import 'package:movie/pages/init_route/init_route.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       initialRoute: InitRoute.routeName,
       routes: {
+
         InitRoute.routeName:(context)=>InitRoute(),
       },
       theme: MyTheme.myTheme,
