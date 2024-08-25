@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../app_colors.dart';
 import 'cubit/more_like_this_state.dart';
 import 'cubit/more_like_this_view_model.dart';
-import 'more_like_this_Ui.dart';
+import 'more_like_this_widget.dart';
 
 class MoreLikeThisLogic extends StatefulWidget {
   String id;
