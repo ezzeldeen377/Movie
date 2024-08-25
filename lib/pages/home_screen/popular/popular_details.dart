@@ -4,8 +4,6 @@ import 'package:movie/pages/home_screen/popular/cubit/popular_state.dart';
 import 'package:movie/pages/home_screen/popular/popular_widget.dart';
 
 import '../../../app_colors.dart';
-import '../api/api_manager.dart';
-import '../model/popular_response.dart';
 import 'cubit/popular_details_view_model.dart';
 
 class PopularDetails extends StatefulWidget {

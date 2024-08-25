@@ -1,4 +1,4 @@
-import '../../model/popular_response.dart';
+import '../../model/movie_response.dart';
 
 abstract class PopularState {}
 
@@ -11,7 +11,7 @@ class PopularErrorState extends PopularState {
 }
 
 class PopularSuccessState extends PopularState {
-  List<Popular> popularList;
+  List<Movie> popularList;
 
   PopularSuccessState({required this.popularList});
 }

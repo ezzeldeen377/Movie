@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../api/api_manager.dart';
 import '../model/movieDetails.dart';
 import '../../../app_colors.dart';
-import 'Movie_details_Ui.dart';
+import 'Movie_details_widget.dart';
 import 'cubit/movie_details_state.dart';
 import 'cubit/movie_details_view_model.dart';
 

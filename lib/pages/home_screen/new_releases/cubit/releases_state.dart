@@ -1,4 +1,4 @@
-import 'package:movie/pages/home_screen/model/NewsReleases.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 
 abstract class ReleasesState {}
 
@@ -11,7 +11,7 @@ class ReleasesErrorState extends ReleasesState {
 }
 
 class ReleasesSuccessState extends ReleasesState {
-  List<Releases> releasesList;
+  List<Movie> releasesList;
 
   ReleasesSuccessState({required this.releasesList});
 }

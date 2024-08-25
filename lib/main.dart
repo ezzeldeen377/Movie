@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/firebase_options.dart';
 import 'package:movie/my_bloc_observer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie/my_theme.dart';
 import 'package:movie/pages/home_screen/home_screen.dart';
+import 'package:movie/pages/home_screen/my_bloc_observer.dart';
 import 'package:movie/pages/init_route/init_route.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,6 +18,7 @@ Future<void> main () async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseFirestore.instance.enableNetwork();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -33,8 +36,6 @@ class MyApp extends StatelessWidget {
         InitRoute.routeName:(context)=>InitRoute(),
       },
       theme: MyTheme.myTheme,
-
-
     );
   }
 

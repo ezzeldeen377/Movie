@@ -1,4 +1,4 @@
-import '../../model/NewsReleases.dart';
+import '../../model/movie_response.dart';
 
 abstract class MoreLikeState {}
 
@@ -11,7 +11,7 @@ class MoreLikeErrorState extends MoreLikeState {
 }
 
 class MoreLikeStateSuccessState extends MoreLikeState {
-  List<Releases> moreLike;
+  List<Movie> moreLike;
 
   MoreLikeStateSuccessState({required this.moreLike});
 }
