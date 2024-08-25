@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -5,12 +6,13 @@ import 'package:movie/app_colors.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
-import 'package:movie/pages/watch_list/model/MovieResponse.dart';
+
+import '../../home_screen/model/movie_response.dart';
 
 class WatchItem extends StatefulWidget {
   Movie movie;
   WatchItem({required this.movie});
-
+  String baseImageUrl='https://image.tmdb.org/t/p/original';
   @override
   State<WatchItem> createState() => _WatchItemState();
 }
@@ -59,11 +61,15 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
                     // Base image
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        widget.movie.posterPath!,
-                        width: MediaQuery.of(context).size.width*.33,
-                        height:MediaQuery.of(context).size.height*.18,
-                      ),
+                      child: CachedNetworkImage(
+                        imageUrl:  widget.baseImageUrl+widget.movie.posterPath!,
+                        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        fit: BoxFit.fill, 
+                        width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                        height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                      )
+
                     ),
                     // Overlay icon
                     Stack(alignment: Alignment.center,

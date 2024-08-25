@@ -244,7 +244,7 @@ class MovieDetailsUI extends StatelessWidget {
                 height: MediaQuery
                     .of(context)
                     .size
-                    .height * 0.4,
+                    .height * 0.5,
                 child: MoreLikeThisLogic(
                   id: movie.id.toString(),
                 )),

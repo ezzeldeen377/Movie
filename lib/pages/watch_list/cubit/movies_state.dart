@@ -1,5 +1,6 @@
 
-import 'package:movie/pages/watch_list/model/MovieResponse.dart';
+
+import '../../home_screen/model/movie_response.dart';
 
 abstract class MoviesState {}
 class LoadingState extends MoviesState{}

@@ -1,7 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/app_colors.dart';
-
+import 'package:movie/pages/home_screen/movie_details/movie_details_logic.dart';
 import '../api/api_constant.dart';
 import '../model/movie_response.dart';
 
@@ -31,7 +32,7 @@ class PopularWidget extends StatelessWidget {
                 // Adjust height based on screen size
                 autoPlay: true,
                 autoPlayInterval: Duration(seconds: 3),
-                viewportFraction: 0.9,
+                viewportFraction: 1,
                 enlargeCenterPage: true,
                 onPageChanged: (index, reason) {
                   // Handle page change if needed
@@ -49,79 +50,87 @@ class PopularWidget extends StatelessWidget {
                 final posterBackDropPath = movie.backdropPath ?? "";
                 final fullImageUrl2 = ApiConstant.imageUrl + posterBackDropPath;
 
-                return Container(
-                  child: Stack(
-                    children: [
-                      // Main image
-                      Container(
-                        width: double.infinity,
-                        height: screenHeight * 0.30,
-                        color: Colors.grey[300], // Placeholder color
-                        child: Image.network(
+                return InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MovieDetailsLogic(
+                          movieId: movie.id.toString(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    child: Stack(alignment: Alignment.topRight,
+                      children: [
+                        // Main image
+                        Image.network(
                           fullImageUrl2,
                           width: double.infinity,
-                          height: double.infinity,
+                          height: screenHeight * 0.30,
                           fit: BoxFit.fill,
                         ),
-                      ),
-                      // Overlay image positioned at the bottom
-                      Positioned(
-                        bottom: 0,
-                        left: 10,
-                        child: Container(
-                          width: screenWidth * 0.3,
-                          height: screenHeight * 0.2,
-                          color: Colors.grey[200], // Placeholder color
-                          child: Image.network(
-                            fullImageUrl, // Use different image URL if needed
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
+                        // Play icon positioned at the center of the large image
+                        Center(
+                          child: Icon(
+                            Icons.play_circle_filled,
+                            color: AppColors.whiteColor,
+                            size: screenWidth * 0.17, // Adjust size
                           ),
                         ),
-                      ),
-                      // Play icon positioned at the center of the large image
-                      Center(
-                        child: Icon(
-                          Icons.play_circle_filled,
-                          color: AppColors.whiteColor,
-                          size: screenWidth * 0.17, // Adjust size
-                        ),
-                      ),
-                      // Add title and release date positioned at the bottom right
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                movie.title ?? 'No title',
-                                style: TextStyle(
-                                  fontSize: screenWidth * 0.05,
-                                  // Adjust font size
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.whiteColor,
-                                ),
-                                textAlign: TextAlign.end,
+                        // Overlay image positioned at the bottom
+                        Row(crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                fullImageUrl, // Use different image URL if needed
+                                fit: BoxFit.fill,
+                                width: screenWidth * 0.35,
+                                height: screenHeight * 0.25,
                               ),
-                              SizedBox(height: 4),
-                              Text(
-                                'Release Date: ${movie.releaseDate ?? 'No date'}',
-                                style: TextStyle(
-                                  fontSize: screenWidth * 0.04,
-                                  // Adjust font size
-                                  color: Colors.grey[600],
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:Container(
+                                width: screenWidth*.6,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      movie.title ?? 'No title',
+                                      style: TextStyle(
+                                        fontSize: screenWidth * 0.05, // Adjust font size
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.whiteColor,
+                                      ),
+                                      softWrap: true,
+                                      textAlign: TextAlign.start,
+                                      maxLines: 2, // Limits the title to 2 lines
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text(
+                                      'Release Date: ${movie.releaseDate ?? 'No date'}',
+                                      style: TextStyle(
+                                        fontSize: screenWidth * 0.04, // Adjust font size
+                                        color: Colors.grey[600],
+                                      ),
+                                      softWrap: true,
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ],
                                 ),
-                                textAlign: TextAlign.end,
-                              ),
-                            ],
-                          ),
+                              )
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+
+                        // Add title and release date positioned at the bottom right
+                      ],
+                    ),
                   ),
                 );
               },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/app_colors.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
-import 'package:movie/pages/watch_list/model/MovieResponse.dart';
 
 class BookMarkWidget extends StatelessWidget {
   WatchListViewModel viewModel;
