@@ -4,16 +4,16 @@ import '../../../app_colors.dart';
 import '../Movie_list_widget.dart';
 import '../model/movie_response.dart';
 
-class RecommendedWidget extends StatelessWidget {
-  final List<Movie> recommendedList;
+class MoreLikeUi extends StatelessWidget {
+  final List<Movie> moreLike;
 
-  RecommendedWidget({required this.recommendedList});
+  MoreLikeUi({required this.moreLike});
 
   @override
   Widget build(BuildContext context) {
     return MovieListWidget(
-      title: 'Recommended',
-      movies: recommendedList,
+      title: 'More like this',
+      movies: moreLike,
       backgroundColor: AppColors.primaryColor,
     );
   }

@@ -1,4 +1,4 @@
-import '../../model/recommended_response.dart';
+import '../../model/movie_response.dart';
 
 abstract class RecommendedState {}
 
@@ -11,7 +11,7 @@ class RecommendedErrorState extends RecommendedState {
 }
 
 class RecommendedSuccessState extends RecommendedState {
-  List<Recommended> recommendedList;
+  List<Movie> recommendedList;
 
   RecommendedSuccessState({required this.recommendedList});
 }

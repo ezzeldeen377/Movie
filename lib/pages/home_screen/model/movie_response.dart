@@ -4,8 +4,8 @@
 /// total_pages : 59
 /// total_results : 1176
 
-class NewsReleases {
-  NewsReleases({
+class MovieResponse {
+  MovieResponse({
     this.dates,
     this.page,
     this.results,
@@ -13,13 +13,13 @@ class NewsReleases {
     this.totalResults,
   });
 
-  NewsReleases.fromJson(dynamic json) {
+  MovieResponse.fromJson(dynamic json) {
     dates = json['dates'] != null ? Dates.fromJson(json['dates']) : null;
     page = json['page'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Releases.fromJson(v));
+        results?.add(Movie.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
@@ -28,7 +28,7 @@ class NewsReleases {
 
   Dates? dates;
   int? page;
-  List<Releases>? results;
+  List<Movie>? results;
   int? totalPages;
   int? totalResults;
 
@@ -62,8 +62,8 @@ class NewsReleases {
 /// vote_average : 7.327
 /// vote_count : 1094
 
-class Releases {
-  Releases({
+class Movie {
+  Movie({
     this.adult,
     this.backdropPath,
     this.genreIds,
@@ -80,7 +80,7 @@ class Releases {
     this.voteCount,
   });
 
-  Releases.fromJson(dynamic json) {
+  Movie.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];

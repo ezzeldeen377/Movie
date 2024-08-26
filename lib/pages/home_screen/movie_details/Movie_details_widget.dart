@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../home_screen.dart';
 import '../model/movieDetails.dart';
 import '../../../app_colors.dart';
 import '../api/api_constant.dart';
-import '../more_like_this/more_like_this_logic.dart';
+import '../more_like_this/more_like_this_details.dart';
 
 class MovieDetailsUI extends StatelessWidget {
   final MovieDetails movie;
@@ -126,7 +127,7 @@ class MovieDetailsUI extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                'Action',
+                                movie.popularity.toString(),
                                 style: TextStyle(color: AppColors.whiteColor),
                                 textAlign: TextAlign.center,
                               ),
@@ -149,7 +150,7 @@ class MovieDetailsUI extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                'Action',
+                                movie.originalLanguage.toString(),
                                 style: TextStyle(color: AppColors.whiteColor),
                                 textAlign: TextAlign.center,
                               ),
@@ -176,7 +177,7 @@ class MovieDetailsUI extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                'Action',
+                                movie.runtime.toString(),
                                 style: TextStyle(color: AppColors.whiteColor),
                                 textAlign: TextAlign.center,
                               ),
@@ -199,7 +200,7 @@ class MovieDetailsUI extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                'Action',
+                                movie.revenue.toString(),
                                 style: TextStyle(color: AppColors.whiteColor),
                                 textAlign: TextAlign.center,
                               ),
@@ -247,7 +248,7 @@ class MovieDetailsUI extends StatelessWidget {
                 child: MoreLikeThisLogic(
                   id: movie.id.toString(),
                 )),
-            SizedBox(height: 16),
+            SizedBox(height: 15),
           ],
         ),
       ),
