@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
+import 'package:movie/pages/home_screen/widgets/video_details.dart';
 import 'package:movie/pages/home_screen/widgets/video_widget.dart';
 
 class VideoSliderWidget extends StatefulWidget {
@@ -61,7 +62,13 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
                     },
                   ),
                   itemBuilder: (context, index, realIndex) {
-                    return VideoWidget(video: state.videoList[index]);
+                    return Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(flex:3,child: VideoWidget(video: state.videoList[index])),
+                        Expanded(flex:1,child: VideoDetails(video: state.videoList[index]))
+
+                      ],
+                    );
                   }
               ),
             );

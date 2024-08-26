@@ -35,28 +35,17 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(height: MediaQuery.of(context).size.height*.4,
-      color: AppColors.darkGrayColor,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: YoutubePlayer(
-                controller: _controller,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: Colors.amber,
-                progressColors: const ProgressBarColors(
-                  playedColor: Colors.amber,
-                  handleColor: Colors.amberAccent,
-            
-                ),
-            
-              ),
-          ),
-          Text(widget.video.name??'',style: TextStyle(color: Colors.white),),
-          Text(widget.video.type??'',style: TextStyle(color: Colors.white),),
-        ],
-      ),
-    );
+    return YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Colors.amber,
+        progressColors: const ProgressBarColors(
+          playedColor: Colors.amber,
+          handleColor: Colors.amberAccent,
+
+        ),
+
+      );
 
 
 
