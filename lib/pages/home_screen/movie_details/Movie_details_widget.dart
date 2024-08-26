@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:movie/pages/home_screen/widgets/cast_widget.dart';
+import 'package:movie/pages/home_screen/widgets/video_slider_widget.dart';
 import '../home_screen.dart';
 import '../model/movieDetails.dart';
 import '../../../app_colors.dart';
 import '../api/api_constant.dart';
 import '../more_like_this/more_like_this_details.dart';
 
-class MovieDetailsUI extends StatelessWidget {
+class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
 
-  MovieDetailsUI({required this.movie});
+  MovieDetailsWidget({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -33,34 +35,38 @@ class MovieDetailsUI extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 16),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.6,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                      image: NetworkImage(fullImage2),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                Icon(
-                  Icons.play_circle_filled,
-                  size: 75,
-                  color: AppColors.whiteColor,
-                ),
-              ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height*.4,
+              child:Container(color:Colors.yellowAccent,child: VideoSliderWidget(movieId: movie.id.toString(),)),
             ),
-            SizedBox(height: 16),
+            // Stack(
+            //   alignment: Alignment.center,
+            //   children: [
+            //     Container(
+            //       width: MediaQuery
+            //           .of(context)
+            //           .size
+            //           .width,
+            //       height: MediaQuery
+            //           .of(context)
+            //           .size
+            //           .width * 0.6,
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(10),
+            //         image: DecorationImage(
+            //           image: NetworkImage(fullImage2),
+            //           fit: BoxFit.fill,
+            //         ),
+            //       ),
+            //     ),
+            //     Icon(
+            //       Icons.play_circle_filled,
+            //       size: 75,
+            //       color: AppColors.whiteColor,
+            //     ),
+            //   ],
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -239,6 +245,21 @@ class MovieDetailsUI extends StatelessWidget {
                 ),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Cast',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+
+            SizedBox(
+                height: MediaQuery.of(context).size.height*.15,
+                child: CastWidget(credits: movie.credits!)),
             SizedBox(height: 16),
             SizedBox(
                 height: MediaQuery

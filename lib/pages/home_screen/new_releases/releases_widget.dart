@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app_colors.dart';
-import '../Movie_list_widget.dart';
+import '../widgets/Movie_list_widget.dart';
 import '../model/movie_response.dart';
 
 class ReleasesWidget extends StatelessWidget {

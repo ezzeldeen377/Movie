@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/app_colors.dart';
-import 'package:movie/pages/home_screen/movie_details/movie_details_logic.dart';
+import 'package:movie/pages/home_screen/movie_details/movie_details_view.dart';
 import '../api/api_constant.dart';
 import '../model/movie_response.dart';
 
@@ -55,7 +55,7 @@ class PopularWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MovieDetailsLogic(
+                        builder: (context) => MovieDetailsView(
                           movieId: movie.id.toString(),
                         ),
                       ),
@@ -65,20 +65,23 @@ class PopularWidget extends StatelessWidget {
                     child: Stack(alignment: Alignment.topRight,
                       children: [
                         // Main image
-                        Image.network(
-                          fullImageUrl2,
-                          width: double.infinity,
-                          height: screenHeight * 0.30,
-                          fit: BoxFit.fill,
+                        Stack(alignment: Alignment.center,
+                          children: [
+                            Image.network(
+                              fullImageUrl2,
+                              width: double.infinity,
+                              height: screenHeight * 0.30,
+                              fit: BoxFit.fill,
+                            ),
+                            Icon(
+                              Icons.play_circle_filled,
+                              color: AppColors.whiteColor,
+                              size: screenWidth * 0.17, // Adjust size
+                            ),
+                          ],
                         ),
                         // Play icon positioned at the center of the large image
-                        Center(
-                          child: Icon(
-                            Icons.play_circle_filled,
-                            color: AppColors.whiteColor,
-                            size: screenWidth * 0.17, // Adjust size
-                          ),
-                        ),
+
                         // Overlay image positioned at the bottom
                         Row(crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.start,

@@ -7,16 +7,16 @@ import 'Movie_details_widget.dart';
 import 'cubit/movie_details_state.dart';
 import 'cubit/movie_details_view_model.dart';
 
-class MovieDetailsLogic extends StatefulWidget {
+class MovieDetailsView extends StatefulWidget {
   final String movieId;
 
-  MovieDetailsLogic({required this.movieId});
+  MovieDetailsView({required this.movieId});
 
   @override
-  State<MovieDetailsLogic> createState() => _MovieDetailsLogicState();
+  State<MovieDetailsView> createState() => _MovieDetailsViewState();
 }
 
-class _MovieDetailsLogicState extends State<MovieDetailsLogic> {
+class _MovieDetailsViewState extends State<MovieDetailsView> {
   MovieDetailsViewModel viewModel = MovieDetailsViewModel();
 
   @override
@@ -54,7 +54,7 @@ class _MovieDetailsLogicState extends State<MovieDetailsLogic> {
                 ),
               );
             } else if (state is MovieDetailsSuccessState) {
-              return MovieDetailsUI(movie: state.movieDetail);
+              return MovieDetailsWidget(movie: state.movieDetail);
             }
             return Text('noooooooo');
           }),

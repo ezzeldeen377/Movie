@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'model/movie_response.dart';
+import '../model/movie_response.dart';
 import 'movie_item.dart';
 import 'movie_list_header.dart';
 

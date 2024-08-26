@@ -9,7 +9,7 @@ class ReleasesDetailsViewModel extends Cubit<ReleasesState> {
   void getReleases() async {
     try {
       emit(ReleasesLoadingState());
-      var response = await ApiManager.getNewsReleases();
+      var response = await ApiManager.getNewReleases();
       if (response!.results!.isEmpty) {
         emit(ReleasesErrorState(errorMessage: 'Empty data'));
       } else {

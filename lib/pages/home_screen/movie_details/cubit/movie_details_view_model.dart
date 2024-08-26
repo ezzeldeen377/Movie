@@ -24,4 +24,21 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
       emit(MovieDetailsErrorState(errorMessage: e.toString()));
     }
   }
+   void getMovieVideos(String movieId) async {
+    emit(MovieVideoLoadingState());
+    try{
+      var response=await ApiManager.getMovieVideos(movieId);
+      if(response==null||response.results==null||response.results!.isEmpty){
+        print("111111111111111");
+        emit(MovieVideoErrorState(errorMessage:'no Data Found'));
+      }else {
+        print("22222222222");
+        emit(MovieVideoSuccessState(videoList: response.results!));
+
+      }
+
+    }catch(e){
+      emit(MovieVideoErrorState(errorMessage: e.toString()));
+    }
+  }
 }

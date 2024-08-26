@@ -5,10 +5,10 @@ import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
-import '../../../app_colors.dart';
-import 'api/api_constant.dart';
-import 'model/movie_response.dart';
-import 'movie_details/movie_details_logic.dart';
+import '../../../../app_colors.dart';
+import '../api/api_constant.dart';
+import '../model/movie_response.dart';
+import '../movie_details/movie_details_view.dart';
 
 class MovieItem extends StatefulWidget {
   final Movie movie;
@@ -45,7 +45,7 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MovieDetailsLogic(
+                  builder: (context) => MovieDetailsView(
                     movieId: widget.movie.id.toString(),
                   ),
                 ),

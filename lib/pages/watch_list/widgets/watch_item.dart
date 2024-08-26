@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:movie/app_colors.dart';
+import 'package:movie/pages/home_screen/api/api_constant.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
@@ -12,7 +13,6 @@ import '../../home_screen/model/movie_response.dart';
 class WatchItem extends StatefulWidget {
   Movie movie;
   WatchItem({required this.movie});
-  String baseImageUrl='https://image.tmdb.org/t/p/original';
   @override
   State<WatchItem> createState() => _WatchItemState();
 }
@@ -62,7 +62,7 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: CachedNetworkImage(
-                        imageUrl:  widget.baseImageUrl+widget.movie.posterPath!,
+                        imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
                         placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                         fit: BoxFit.fill, 
