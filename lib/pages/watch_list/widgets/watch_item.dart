@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:movie/pages/home_screen/api/api_constant.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
+
 
 import '../../home_screen/model/movie_response.dart';
 
@@ -50,8 +52,9 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
                     onPressed: (context){
                       viewModel.removeMovieFromFireStore(widget.movie);
                     },
-                    backgroundColor: Color(0xFFFE4A49),
-                    foregroundColor: Colors.white,
+                    backgroundColor:AppColors.yellowColor,
+                    foregroundColor: AppColors.blackColor,
+                    label: 'delete',
                     icon: Icons.delete,)
           ]),
             child: Row(crossAxisAlignment: CrossAxisAlignment.start,

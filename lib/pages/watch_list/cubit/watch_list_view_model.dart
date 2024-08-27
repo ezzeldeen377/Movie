@@ -1,13 +1,11 @@
-import 'dart:convert';
 
-import 'package:firebase_core/firebase_core.dart';
+import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
-import 'package:http/http.dart' as http;
 
-import '../../home_screen/model/movie_response.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 
 
 class WatchListViewModel extends Cubit<MoviesState>{

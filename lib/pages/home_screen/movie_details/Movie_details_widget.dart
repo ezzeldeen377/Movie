@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/widgets/video_slider_widget.dart';
 
 import '../../../app_colors.dart';
 import '../api/api_constant.dart';
-import '../model/movieDetails.dart';
 import 'more_like.dart';
 import 'movie_Info.dart';
 import 'movie_cast.dart';

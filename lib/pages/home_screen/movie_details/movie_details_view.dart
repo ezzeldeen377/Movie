@@ -1,11 +1,11 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../api/api_manager.dart';
-import '../model/movieDetails.dart';
-import '../../../app_colors.dart';
-import 'Movie_details_widget.dart';
-import 'cubit/movie_details_state.dart';
-import 'cubit/movie_details_view_model.dart';
+import 'package:movie/app_colors.dart';
+import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
+import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
+import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
 
 class MovieDetailsView extends StatefulWidget {
   final String movieId;

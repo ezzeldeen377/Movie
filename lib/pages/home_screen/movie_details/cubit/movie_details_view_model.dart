@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/pages/home_screen/api/api_manager.dart';
 import 'package:movie/pages/home_screen/more_like_this/cubit/more_like_this_state.dart';
+import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 
-import 'movie_details_state.dart';
 
 class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
   MovieDetailsViewModel() : super(MovieDetailsLoadingState());
