@@ -68,48 +68,58 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
                 Navigator.push(context, MaterialPageRoute(builder:
                     (context)=>MovieDetailsView(movieId: widget.movie.id.toString())));
               },
-              child: Row(crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    children: [
-                      // Base image
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(15),
-                          topRight: Radius.circular(15)
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
-                          placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
-                          fit: BoxFit.fill,
-                          width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
-                          height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
-                        )
-
-                      ),
-                      // Overlay icon
-                     Positioned(
-                         top: -6,
-                         left: -7,
-                         child: BookMarkWidget(viewModel: viewModel, movie: widget.movie,isBooked: true,))
-                    ],
-                  ),
-                  SizedBox(width: 15,),
-                  Column(crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(widget.movie.title??'',style: TextStyle(color: AppColors.whiteColor),), // movie name
-                      Text(widget.movie.releaseDate??"",style: TextStyle(color: AppColors.whiteColor)),    //relasse data
-                      Row(
-                        children: [
-                          Icon(Icons.star,size: 25,color: AppColors.yellowColor,),
-                          Text(widget.movie.voteAverage!.toStringAsFixed(1),style: TextStyle(color: AppColors.whiteColor)),                      ],
-                      )//actors names
-
-                    ],
+              child: Container(decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.blackColor.withOpacity(.8),
+                    blurRadius: 10,
+                    spreadRadius: 6
                   )
-                ],
+                ]
+              ),
+                child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        // Base image
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(15),
+                            topRight: Radius.circular(15)
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            fit: BoxFit.fill,
+                            width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                            height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                          )
+
+                        ),
+                        // Overlay icon
+                       Positioned(
+                           top: -6,
+                           left: -7,
+                           child: BookMarkWidget(viewModel: viewModel, movie: widget.movie,isBooked: true,))
+                      ],
+                    ),
+                    SizedBox(width: 15,),
+                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(widget.movie.title??'',style: TextStyle(color: AppColors.whiteColor),), // movie name
+                        Text(widget.movie.releaseDate??"",style: TextStyle(color: AppColors.whiteColor)),    //relasse data
+                        Row(
+                          children: [
+                            Icon(Icons.star,size: 25,color: AppColors.yellowColor,),
+                            Text(widget.movie.voteAverage!.toStringAsFixed(1),style: TextStyle(color: AppColors.whiteColor)),                      ],
+                        )//actors names
+
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),

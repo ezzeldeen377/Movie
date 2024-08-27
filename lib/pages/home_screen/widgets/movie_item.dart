@@ -56,7 +56,7 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
               margin: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 color: AppColors.darkGrayColor,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

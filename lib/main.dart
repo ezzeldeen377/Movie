@@ -17,7 +17,6 @@ Future<void> main () async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseFirestore.instance.enableNetwork();
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
