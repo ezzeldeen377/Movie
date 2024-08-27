@@ -3,26 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/pages/search/api/api_manager.dart';
 import 'package:movie/pages/search/model/SourcesMovie.dart';
 
-class SearchState {
-  final List<Results> results;
-  final bool isLoading;
-  final bool hasError;
-
-  SearchState({
-    this.results = const [],
-    this.isLoading = false,
-    this.hasError = false,
-  });
-}
-
-
 abstract class SearchEvent {}
 
-class SearchQueryChanged extends SearchEvent {
-  final String query;
-
-  SearchQueryChanged(this.query);
-}
 
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit() : super(SearchState());
@@ -45,4 +27,21 @@ class SearchCubit extends Cubit<SearchState> {
       emit(SearchState(hasError: true, isLoading: false));
     }
   }
+}
+class SearchQueryChanged extends SearchEvent {
+  final String query;
+
+  SearchQueryChanged(this.query);
+}
+
+class SearchState {
+  final List<Results> results;
+  final bool isLoading;
+  final bool hasError;
+
+  SearchState({
+    this.results = const [],
+    this.isLoading = false,
+    this.hasError = false,
+  });
 }
