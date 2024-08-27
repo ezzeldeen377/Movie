@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
@@ -30,8 +31,13 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
       builder: (context,state){
 
           if(state is MovieVideoLoadingState){
-            return Center(child: CircularProgressIndicator(color: Colors.white,));
-          }else if (state is MovieVideoErrorState){
+          return Center(
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: AppColors.whiteColor,
+              size: 50,
+            ),
+          );
+        }else if (state is MovieVideoErrorState){
             return  Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

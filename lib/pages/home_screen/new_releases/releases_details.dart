@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/home_screen/new_releases/cubit/releases_state.dart';
 import 'package:movie/pages/home_screen/new_releases/releases_widget.dart';
-import '../../../app_colors.dart';
 
+import '../../../app_colors.dart';
 import 'cubit/releases_details_view_model.dart';
 
 class ReleasesDetails extends StatefulWidget {
@@ -28,8 +29,9 @@ class _ReleasesDetailsState extends State<ReleasesDetails> {
           builder: (context, state) {
         if (state is ReleasesLoadingState) {
           return Center(
-            child: CircularProgressIndicator(
+            child: LoadingAnimationWidget.staggeredDotsWave(
               color: AppColors.whiteColor,
+              size: 50,
             ),
           );
         } else if (state is ReleasesErrorState) {

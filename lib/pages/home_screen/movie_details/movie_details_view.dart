@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../api/api_manager.dart';
-import '../model/movieDetails.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../../../app_colors.dart';
 import 'Movie_details_widget.dart';
 import 'cubit/movie_details_state.dart';
@@ -33,9 +33,10 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
           builder: (context, state) {
             if (state is MovieDetailsLoadingState) {
               return Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.whiteColor,
-                ),
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: AppColors.whiteColor,
+              size: 50,
+            ),
               );
             } else if (state is MovieDetailsErrorState) {
               return Center(

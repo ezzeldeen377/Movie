@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/api/api_constant.dart';
 import 'package:movie/pages/home_screen/api/api_manager.dart';
@@ -25,8 +26,13 @@ class CastItem extends StatelessWidget {
 
                 child: CachedNetworkImage(
                   imageUrl:  ApiConstant.baseImageUrl+(cast.profilePath??''),
-                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.white,),
+              placeholder: (context, url) => Center(
+                child: LoadingAnimationWidget.staggeredDotsWave(
+                  color: AppColors.whiteColor,
+                  size: 50,
+                ),
+              ),
+              errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.white,),
                   fit: BoxFit.fill,
                 )
             ),
