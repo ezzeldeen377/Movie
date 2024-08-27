@@ -23,67 +23,91 @@ class _MoviespageState extends State<Moviespage> {
   @override
   void initState() {
     super.initState();
-    viewModel.getMoives(widget.category.id!);
+    viewModel.getMoives(widget.category.id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.category.name ?? "",
-            style: TextStyle(color: Colors.white)),
-        backgroundColor: AppColors.primaryColor,
-        iconTheme: IconThemeData(color: AppColors.whiteColor),
-      ),
-      backgroundColor: Colors.black, // Set the Scaffold background color to black
-      body: BlocBuilder<MovieDetailsVeiwmodel, Moviestate>(
-        bloc: viewModel,
-        builder: (context, state) {
-          if (state is LoadingMovieState) {
-            return Center(
-              child: LoadingAnimationWidget.staggeredDotsWave(
-                color: AppColors.whiteColor,
-                size: 50,
-              ),
-            );
-          } else if (state is ErrorMovieState) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(state.errorMessage, style: TextStyle(color: Colors.white)), // Text color should be white for better visibility
-                ElevatedButton(
-                  onPressed: () {
-                    viewModel.getMoives(widget.category.id!);
-                  },
-                  child: Text("Try Again"),
-                ),
-              ],
-            );
-          } else if (state is SuccessMovieState) {
-            return Container(
-              color: Colors.black,
-              // Set the background color of the content to black
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 30,
-                  mainAxisSpacing: 30,
-                ),
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height *
-                        0.4, // Set the fixed height for MovieItem
-                    child: MovieItem(movie: state.movieList[index]),
+        appBar: AppBar(
+          title: Text(widget.category.name ?? "",
+              style: TextStyle(color: Colors.white)),
+          backgroundColor: AppColors.primaryColor,
+          iconTheme: IconThemeData(color: AppColors.whiteColor),
+        ),
+        backgroundColor:
+            Colors.black, // Set the Scaffold background color to black
+        body: BlocProvider(
+          create: (context) => viewModel,
+          child: BlocBuilder<MovieDetailsVeiwmodel, Moviestate>(
+              buildWhen: (previous, current) =>
+                  current is! PaginationMovieState,
+              builder: (context, state) {
+                if (state is LoadingMovieState) {
+                  return Center(
+                    child: LoadingAnimationWidget.staggeredDotsWave(
+                      color: AppColors.whiteColor,
+                      size: 50,
+                    ),
                   );
-                },
-                itemCount: state.movieList.length,
-              ),
-            );
-          }
-          return Container();
-        },
-      ),
-    );
+                } else if (state is ErrorMovieState) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Something went wrong: ${state.errorMessage}'),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Try Again'),
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (state is SuccessMovieState) {
+                  return NotificationListener<ScrollNotification>(
+                      onNotification: (notification) {
+                        if (notification.metrics.pixels ==
+                                notification.metrics.maxScrollExtent &&
+                            notification is ScrollUpdateNotification) {
+                          viewModel.getMoives(widget.category.id,
+                              fromPagination: true);
+                        }
+                        return true;
+                      },
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 30,
+                                mainAxisSpacing: 30,
+                              ),
+                              itemBuilder: (context, index) {
+                                return MovieItem(movie: state.movieList[index]);
+                              },
+                              itemCount: state.movieList.length,
+                            ),
+                          ),
+                          BlocBuilder<MovieDetailsVeiwmodel, Moviestate>(
+                              builder: (context, state) {
+                            if (state is PaginationMovieState) {
+                              return Center(
+                                  child: CircularProgressIndicator(
+                                      color: AppColors.whiteColor));
+                            } else {}
+                            return SizedBox.shrink();
+                          })
+                        ],
+                      ));
+                }
+                return Center(
+                    child: Text(
+                  'noooooooo',
+                  style: TextStyle(color: AppColors.whiteColor),
+                ));
+              }),
+        ));
   }
 }

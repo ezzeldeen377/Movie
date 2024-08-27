@@ -54,7 +54,7 @@ class _RecommendeDetailsState extends State<RecommendeDetails> {
                   onNotification: (notification){
 
                     if(notification.metrics.pixels==notification.metrics.maxScrollExtent&&notification is ScrollUpdateNotification){
-                      viewModel.getRecommended(fromPaination: true);
+                      viewModel.getRecommended(fromPagination: true);
                     }
                     return true ;
                   },child: Row(

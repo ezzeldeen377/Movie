@@ -8,14 +8,13 @@ class RecommendedDetailsViewModel extends Cubit<RecommendedState> {
   int pageNumber=1;
   List<Movie> list=[];
 
-  void getRecommended({bool fromPaination=false}) async {
-    if(fromPaination){
+  void getRecommended({bool fromPagination=false}) async {
+    if(fromPagination){
       emit(RecommendedPaginationState());
     }else{
       emit(RecommendedLoadingState());
     }
     try {
-      emit(RecommendedLoadingState());
       var response = await ApiManager.getRecommended(pageNumber);
       if (response!.results!.isEmpty) {
         emit(RecommendedErrorState(errorMessage: 'Empty data'));
