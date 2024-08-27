@@ -23,7 +23,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.darkGrayColor,
-          hintText: 'Search..', // Arabic for 'Search...'
+          hintText: 'Search..',
           hintStyle: TextStyle(color: AppColors.whiteColor),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
