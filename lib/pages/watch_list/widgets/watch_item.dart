@@ -1,17 +1,17 @@
+
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/api/api_constant.dart';
-import 'package:movie/pages/home_screen/model/movieDetails.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/movie_details/movie_details_view.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
-
-import '../../home_screen/model/movie_response.dart';
 
 class WatchItem extends StatefulWidget {
   Movie movie;

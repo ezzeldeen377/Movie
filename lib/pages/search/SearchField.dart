@@ -17,13 +17,13 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0), // Adjust padding as needed
+      padding: EdgeInsets.symmetric(vertical: 40,horizontal: 10),
       child: TextField(
         controller: _searchController,
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.darkGrayColor,
-          hintText: 'بحث...', // Arabic for 'Search...'
+          hintText: 'Search..', // Arabic for 'Search...'
           hintStyle: TextStyle(color: AppColors.whiteColor),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),

@@ -16,7 +16,7 @@ class Search extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.black,
-        padding: EdgeInsets.all(16.0), // تعديل الهوامش
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,7 +45,7 @@ class Search extends StatelessWidget {
                     searchController: _searchController,
                   );
                 }
-                return SizedBox.shrink(); // عنصر فارغ كبديل لقائمة الأفلام
+                return SizedBox.shrink();
               },
             ),
           ],
