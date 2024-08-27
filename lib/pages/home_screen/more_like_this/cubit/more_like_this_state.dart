@@ -2,16 +2,17 @@ import '../../model/movie_response.dart';
 
 abstract class MoreLikeState {}
 
-class MoreLikeLoadingState extends MoreLikeState {}
+class MoreLikeThisLoadingState extends MoreLikeState {}
 
-class MoreLikeErrorState extends MoreLikeState {
+class MoreLikeThisErrorState extends MoreLikeState {
   String errorMessage;
 
-  MoreLikeErrorState({required this.errorMessage});
+  MoreLikeThisErrorState({required this.errorMessage});
 }
 
-class MoreLikeStateSuccessState extends MoreLikeState {
+class MoreLikeThisSuccessState extends MoreLikeState {
   List<Movie> moreLike;
 
-  MoreLikeStateSuccessState({required this.moreLike});
+  MoreLikeThisSuccessState({required this.moreLike});
 }
+class MoreLikeThisPaginationState extends MoreLikeState{}

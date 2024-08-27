@@ -50,29 +50,31 @@ class _MovieCarouselState extends State<MovieCarousel> {
           },
         ),
         SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: widget.popularList.asMap().entries.map((entry) {
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  _current = entry.key;
-                });
-              },
-              child: Container(
-                width: 11.0,
-                height: 10.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.black
-                          : Colors.white)
-                      .withOpacity(_current == entry.key ? 0.9 : 0.4),
+        FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: widget.popularList.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _current = entry.key;
+                  });
+                },
+                child: Container(
+                  width: 11.0,
+                  height: 10.0,
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.black
+                            : Colors.white)
+                        .withOpacity(_current == entry.key ? 0.9 : 0.4),
+                  ),
                 ),
-              ),
-            );
-          }).toList(),
+              );
+            }).toList(),
+          ),
         ),
       ],
     );

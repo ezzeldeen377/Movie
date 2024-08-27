@@ -15,3 +15,4 @@ class RecommendedSuccessState extends RecommendedState {
 
   RecommendedSuccessState({required this.recommendedList});
 }
+class RecommendedPaginationState extends RecommendedState{}
