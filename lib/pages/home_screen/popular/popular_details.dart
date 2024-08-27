@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/home_screen/popular/cubit/popular_state.dart';
 import 'package:movie/pages/home_screen/popular/popular_widget.dart';
 
@@ -28,8 +29,9 @@ class _PopularDetailsState extends State<PopularDetails> {
           builder: (context, state) {
         if (state is PopularLoadingState) {
           return Center(
-            child: CircularProgressIndicator(
+            child: LoadingAnimationWidget.staggeredDotsWave(
               color: AppColors.whiteColor,
+              size: 50,
             ),
           );
         } else if (state is PopularErrorState) {

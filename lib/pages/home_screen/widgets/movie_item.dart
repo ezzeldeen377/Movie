@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
+
 import '../../../../app_colors.dart';
 import '../api/api_constant.dart';
 import '../model/movie_response.dart';
@@ -56,7 +58,7 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
               margin: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 color: AppColors.darkGrayColor,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,15 +66,20 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
                   Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                        borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+                topRight: Radius.circular(15)
+            ),
                         child: CachedNetworkImage(
                           imageUrl: fullImageUrl,
                           width: double.infinity,
                           height: MediaQuery.of(context).size.width * 0.45,
                           fit: BoxFit.fill,
                           placeholder: (context, url) => Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.cyan,
+                            child: LoadingAnimationWidget.staggeredDotsWave(
+                              color: AppColors.whiteColor,
+                              size: 50,
                             ),
                           ),
                           errorWidget: (context, url, error) => Icon(Icons.error),
@@ -146,14 +153,16 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
         else if(state is LoadingState){
          return Center(child:Padding(
            padding: const EdgeInsets.all(10.0),
-           child: CircularProgressIndicator(color: AppColors.whiteColor,),
-         ));
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: AppColors.whiteColor,
+              size: 50,
+            ),
+          ));
         }
         return Container();
     },
     );
   }
-
   @override
   showSnakeBar(String message) {
     // TODO: implement showSnakeBar

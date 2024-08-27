@@ -4,9 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/api/api_constant.dart';
+import 'package:movie/pages/home_screen/model/movieDetails.dart';
+import 'package:movie/pages/home_screen/movie_details/movie_details_view.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
+import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
 
 import '../../home_screen/model/movie_response.dart';
 
@@ -42,64 +45,82 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
           child: Slidable(
             closeOnScroll: true,
             startActionPane: ActionPane(
-              extentRatio: .25,
+              extentRatio: .20,
                 motion: DrawerMotion(),
                 children: [
                   SlidableAction(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+              topLeft: Radius.circular(10)
+          ),
                     onPressed: (context){
                       viewModel.removeMovieFromFireStore(widget.movie);
                     },
-                    backgroundColor: Color(0xFFFE4A49),
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete,)
+                    backgroundColor:AppColors.yellowColor,
+                    foregroundColor: AppColors.blackColor,
+                    icon: Icons.delete,
+                    label: 'Delete',
+                    padding: EdgeInsets.all(10),
+                  )
           ]),
-            child: Row(crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder:
+                    (context)=>MovieDetailsView(movieId: widget.movie.id.toString())));
+              },
+              child: Container(decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.blackColor.withOpacity(.8),
+                    blurRadius: 10,
+                    spreadRadius: 6
+                  )
+                ]
+              ),
+                child: Row(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Base image
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: CachedNetworkImage(
-                        imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
-                        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                        fit: BoxFit.fill, 
-                        width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
-                        height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
-                      )
-
-                    ),
-                    // Overlay icon
-                    Stack(alignment: Alignment.center,
-                        children:[
-                          ImageIcon(
-                            AssetImage('assets/icons/label_icon.png'),
-                            size: 40, // Adjust size as needed
-                            color: AppColors.yellowColor, // Adjust color as needed
+                    Stack(
+                      children: [
+                        // Base image
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(15),
+                            topRight: Radius.circular(15)
                           ),
-                          ImageIcon(
-                            AssetImage('assets/icons/check_icon.png'),
-                            size: 20, // Adjust size as needed
-                            color: Colors.white, // Adjust color as needed
-                          ),
+                          child: CachedNetworkImage(
+                            imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            fit: BoxFit.fill,
+                            width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                            height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                          )
 
-                        ]
+                        ),
+                        // Overlay icon
+                       Positioned(
+                           top: -6,
+                           left: -7,
+                           child: BookMarkWidget(viewModel: viewModel, movie: widget.movie,isBooked: true,))
+                      ],
                     ),
+                    SizedBox(width: 15,),
+                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(widget.movie.title??'',style: TextStyle(color: AppColors.whiteColor),), // movie name
+                        Text(widget.movie.releaseDate??"",style: TextStyle(color: AppColors.whiteColor)),    //relasse data
+                        Row(
+                          children: [
+                            Icon(Icons.star,size: 25,color: AppColors.yellowColor,),
+                            Text(widget.movie.voteAverage!.toStringAsFixed(1),style: TextStyle(color: AppColors.whiteColor)),                      ],
+                        )//actors names
+
+                      ],
+                    )
                   ],
                 ),
-                SizedBox(width: 15,),
-                Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(widget.movie.title??'',style: TextStyle(color: AppColors.whiteColor),), // movie name
-                    Text('2020',style: TextStyle(color: AppColors.whiteColor)),    //relasse data
-                    Text('Tom holand ',style: TextStyle(color: AppColors.whiteColor)),    //actors names
-
-                  ],
-                )
-              ],
+              ),
             ),
           ),
         );

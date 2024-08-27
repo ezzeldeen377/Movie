@@ -44,7 +44,8 @@ dependencies:
   http: ^1.2.2
   youtube_player_flutter: ^9.0.3
   flutter_inappwebview: ^6.0.0
-
+  timeago: ^3.7.0
+  loading_animation_widget: ^1.2.1
 
 
 

@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
+import 'package:movie/pages/home_screen/widgets/video_details.dart';
 import 'package:movie/pages/home_screen/widgets/video_widget.dart';
 
 class VideoSliderWidget extends StatefulWidget {
@@ -29,8 +31,13 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
       builder: (context,state){
 
           if(state is MovieVideoLoadingState){
-            return Center(child: CircularProgressIndicator(color: Colors.white,));
-          }else if (state is MovieVideoErrorState){
+          return Center(
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: AppColors.whiteColor,
+              size: 50,
+            ),
+          );
+        }else if (state is MovieVideoErrorState){
             return  Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -47,8 +54,8 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
               ),
             );
           }else if (state is MovieVideoSuccessState){
-            return  Container(color: Colors.blue,
-              child: CarouselSlider.builder(
+          return Container(
+            child: CarouselSlider.builder(
                   itemCount: state.videoList.length,
                   options: CarouselOptions(
                     // Adjust height based on screen size
@@ -61,7 +68,13 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
                     },
                   ),
                   itemBuilder: (context, index, realIndex) {
-                    return VideoWidget(video: state.videoList[index]);
+                    return Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(flex:3,child: VideoWidget(video: state.videoList[index])),
+                        Expanded(flex:1,child: VideoDetails(video: state.videoList[index]))
+
+                      ],
+                    );
                   }
               ),
             );
