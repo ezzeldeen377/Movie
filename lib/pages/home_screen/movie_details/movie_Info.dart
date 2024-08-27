@@ -1,7 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/home_screen/api/api_constant.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
@@ -171,7 +170,10 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
             else if(state is LoadingState){
               return Center(child:Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: CircularProgressIndicator(color: AppColors.whiteColor,),
+                child: LoadingAnimationWidget.staggeredDotsWave(
+                  color: AppColors.whiteColor,
+                  size: 50,
+                ),
               ));
             }
             return Container();

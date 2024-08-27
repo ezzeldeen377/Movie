@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../../../app_colors.dart';
 import 'cubit/more_like_this_state.dart';
 import 'cubit/more_like_this_view_model.dart';
@@ -31,8 +33,9 @@ class _MoreLikeThisLogicState extends State<MoreLikeThisLogic> {
           builder: (context, state) {
         if (state is MoreLikeLoadingState) {
           return Center(
-            child: CircularProgressIndicator(
+            child: LoadingAnimationWidget.staggeredDotsWave(
               color: AppColors.whiteColor,
+              size: 50,
             ),
           );
         } else if (state is MoreLikeErrorState) {

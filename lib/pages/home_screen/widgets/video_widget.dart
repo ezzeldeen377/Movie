@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movie/pages/home_screen/model/MovieVideos.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../app_colors.dart';
-
 class VideoWidget extends StatefulWidget {
   late Video video;
   VideoWidget({required this.video});
@@ -46,8 +44,6 @@ class _VideoWidgetState extends State<VideoWidget> {
         ),
 
       );
-
-
 
   }
 }

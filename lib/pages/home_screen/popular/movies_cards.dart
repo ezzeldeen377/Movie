@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
@@ -150,9 +151,13 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
           return Text('Something Went Wrong');
         }
         else if(state is LoadingState){
-          return Center(child:Padding(
+          return Center(
+              child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: CircularProgressIndicator(color: AppColors.whiteColor,),
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: AppColors.whiteColor,
+              size: 50,
+            ),
           ));
         }
         return Container();
