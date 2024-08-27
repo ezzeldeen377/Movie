@@ -80,7 +80,11 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                             .size
                             .height * 0.3,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+            topRight: Radius.circular(15)
+            ),
                           image: DecorationImage(
                             image: NetworkImage(ApiConstant.baseImageUrl +
                                 widget.movie.posterPath!),

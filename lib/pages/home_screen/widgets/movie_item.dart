@@ -64,7 +64,11 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
                   Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                        borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+                topRight: Radius.circular(15)
+            ),
                         child: CachedNetworkImage(
                           imageUrl: fullImageUrl,
                           width: double.infinity,

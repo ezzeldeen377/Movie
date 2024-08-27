@@ -86,7 +86,11 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
                   Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(15),
+              bottomRight: Radius.circular(15),
+              topRight: Radius.circular(15)
+          ),
                         child: Image.network(
                           fullImageUrl, // Use different image URL if needed
                           fit: BoxFit.fill,

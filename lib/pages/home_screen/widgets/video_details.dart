@@ -26,7 +26,6 @@ class VideoDetails extends StatelessWidget {
                   video.name ?? '',
                   style: TextStyle(color: AppColors.whiteColor, fontSize: 14),
                   maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
@@ -40,7 +39,7 @@ class VideoDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Type : ${video.name ?? ''}",
+                    "Type : ${video.type ?? ''}",
                     style: TextStyle(color: AppColors.whiteColor, fontSize: 12),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
