@@ -48,13 +48,7 @@ width: double.infinity,
                   SizedBox(height: 10),
                   Row(mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Image.asset(
-                          "assets/images/img.png", // Ensure this path is correct
-                          width: 24, // Set width and height as needed
-                          height: 24,
-                        ),
-                      ),
+                      Icon(Icons.star,color: Colors.yellow,),
                       SizedBox(width: 5),
                       Center(
                         child: Text(

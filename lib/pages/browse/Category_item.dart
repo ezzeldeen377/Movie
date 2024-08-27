@@ -11,8 +11,9 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
 
+    return Container(
+padding: EdgeInsets.all(15),
       child: Column(
         children: [
       Image.asset(categoryItem.imagePath,width: MediaQuery.of(context).size.width*0.5,
