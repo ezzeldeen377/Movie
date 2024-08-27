@@ -47,8 +47,8 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
               ),
             );
           }else if (state is MovieVideoSuccessState){
-            return  Container(color: Colors.blue,
-              child: CarouselSlider.builder(
+          return Container(
+            child: CarouselSlider.builder(
                   itemCount: state.videoList.length,
                   options: CarouselOptions(
                     // Adjust height based on screen size
