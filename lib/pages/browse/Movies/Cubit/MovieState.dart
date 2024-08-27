@@ -11,3 +11,4 @@ class SuccessMovieState extends Moviestate{
   List<Movie> movieList;
   SuccessMovieState({required this.movieList});
 }
+class PaginationMovieState extends Moviestate{}

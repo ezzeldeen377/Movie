@@ -41,11 +41,11 @@ class ApiManager {
   https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1
    */
 
-  static Future<MovieResponse?> getNewReleases() async {
+  static Future<MovieResponse?> getNewReleases(int pageNumber) async {
     Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.upcomingApi, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
       'language': 'en-US',
-      'page': '1',
+      'page': pageNumber.toString(),
     });
     try {
       var response = await http.get(url);
@@ -64,11 +64,11 @@ class ApiManager {
   https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1
    */
 
-  static Future<MovieResponse?> getRecommended() async {
+  static Future<MovieResponse?> getRecommended(int pageNumber) async {
     Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.topRatedApi, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
       'language': 'en-US',
-      'page': '1',
+      'page': pageNumber.toString(),
     });
     try {
       var response = await http.get(url);
@@ -107,12 +107,12 @@ class ApiManager {
   https://api.themoviedb.org/3/movie/{movie_id}/similar
    */
 
-  static Future<MovieResponse?> getMoreLikeThis(String id) async {
+  static Future<MovieResponse?> getMoreLikeThis(String id,int pageNumber) async {
     Uri url = Uri.https(ApiConstant.baseUrl,
         ApiConstant.apiName + id + ApiConstant.similar, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
       'language': 'en-US',
-      'page': '1',
+      'page': pageNumber.toString(),
     });
 
     try {

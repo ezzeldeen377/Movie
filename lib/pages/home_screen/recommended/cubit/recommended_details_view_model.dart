@@ -1,19 +1,29 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/pages/home_screen/api/api_manager.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_state.dart';
 
 class RecommendedDetailsViewModel extends Cubit<RecommendedState> {
   RecommendedDetailsViewModel() : super(RecommendedLoadingState());
+  int pageNumber=1;
+  List<Movie> list=[];
 
-  void getRecommended() async {
-    try {
+  void getRecommended({bool fromPagination=false}) async {
+    if(fromPagination){
+      emit(RecommendedPaginationState());
+    }else{
       emit(RecommendedLoadingState());
-      var response = await ApiManager.getRecommended();
+    }
+    try {
+      var response = await ApiManager.getRecommended(pageNumber);
       if (response!.results!.isEmpty) {
         emit(RecommendedErrorState(errorMessage: 'Empty data'));
       } else {
-        emit(RecommendedSuccessState(recommendedList: response.results!));
-        print(response.totalPages);
+        if(response.results!.isNotEmpty){
+          pageNumber++;
+          list.addAll(response.results!);
+        }
+        emit(RecommendedSuccessState(recommendedList:list));
       }
     } catch (e) {
       throw e;

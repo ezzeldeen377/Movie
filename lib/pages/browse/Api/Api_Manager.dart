@@ -37,10 +37,11 @@ rethrow ;
 
   }
 
-static Future<MovieResponse?>getMoives(int id)async{
+static Future<MovieResponse?>getMoives(int id,int pageNumber)async{
     Uri url =Uri.https(ApiConstants.baseUrl,ApiConstants.MovieApiName,{
       "api_key":ApiConstants.apiKey,
-      "with_genres":id.toString()
+      "with_genres":id.toString(),
+      'page':pageNumber.toString()
 
     });
     var response= await http.get(url);

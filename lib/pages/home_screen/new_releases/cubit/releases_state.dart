@@ -15,3 +15,6 @@ class ReleasesSuccessState extends ReleasesState {
 
   ReleasesSuccessState({required this.releasesList});
 }
+class ReleasesPaginationState extends ReleasesState{
+
+}
