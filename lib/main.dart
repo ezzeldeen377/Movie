@@ -7,7 +7,7 @@ import 'package:movie/my_bloc_observer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie/my_theme.dart';
 import 'package:movie/pages/init_route/init_route.dart';
-import 'package:movie/pages/search/Cubit/search_cubit.dart';
+import 'package:movie/pages/search/Cubit/search_View_Model.dart';
 
 Future<void> main() async {
   Bloc.observer = MyBlocObserver();
