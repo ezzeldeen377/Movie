@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/pages/browse/CategoryPhoto.dart';
 import 'package:movie/pages/browse/Models/CategoryResponse.dart';
 import 'package:movie/pages/browse/Movie_item.dart';
 import 'package:movie/pages/browse/Movies/Cubit/MovieState.dart';

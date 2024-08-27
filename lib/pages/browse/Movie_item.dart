@@ -43,18 +43,12 @@ width: double.infinity,
                     movie.title!,
                     style: TextStyle(color: Colors.white, fontSize: 22), // Set text color to white
                     overflow: TextOverflow.ellipsis, // Ellipsize the text if it overflows
-                    maxLines: 1, // Limit to one line
+                    maxLines: 7, // Limit to one line
                   ),
                   SizedBox(height: 10),
                   Row(mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: Image.asset(
-                          "assets/images/img.png", // Ensure this path is correct
-                          width: 24, // Set width and height as needed
-                          height: 24,
-                        ),
-                      ),
+                      Icon(Icons.star,color: Colors.yellow,),
                       SizedBox(width: 5),
                       Center(
                         child: Text(

@@ -1,3 +1,5 @@
+import 'package:movie/pages/browse/CategoryPhoto.dart';
+
 import '../../Models/CategoryResponse.dart';
 
 abstract class Categorystate {}
