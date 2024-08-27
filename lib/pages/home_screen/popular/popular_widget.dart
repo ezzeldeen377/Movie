@@ -14,7 +14,7 @@ class PopularWidget extends StatelessWidget {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
 
-    return Padding(
+    return Container(
       padding: EdgeInsets.only(top: screenHeight * 0.05), // Adjust top padding
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
