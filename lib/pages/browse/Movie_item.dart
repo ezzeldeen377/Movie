@@ -54,55 +54,57 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
               );
             },
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.35,
+              width: MediaQuery.of(context).size.width * 0.25,
               margin: EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 color: AppColors.darkGrayColor,
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                            topRight: Radius.circular(15)),
-                        child: CachedNetworkImage(
-                          imageUrl: fullImageUrl,
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.width * 0.30,
-                          fit: BoxFit.fill,
-                          placeholder: (context, url) => Center(
-                            child: LoadingAnimationWidget.staggeredDotsWave(
-                              color: AppColors.whiteColor,
-                              size: 50,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                              topRight: Radius.circular(15)),
+                          child: CachedNetworkImage(
+                            imageUrl: fullImageUrl,
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.width * 0.30,
+                            fit: BoxFit.fill,
+                            placeholder: (context, url) => Center(
+                              child: LoadingAnimationWidget.staggeredDotsWave(
+                                color: AppColors.whiteColor,
+                                size: 50,
+                              ),
                             ),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 3),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Text(
-                      widget.movie.title ?? "",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.whiteColor,
-                      ),
-                      textAlign: TextAlign.start,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(height: 3),
+                    Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Text(
+                        widget.movie.title ?? "",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.whiteColor,
+                        ),
+                        textAlign: TextAlign.start,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

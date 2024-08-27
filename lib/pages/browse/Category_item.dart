@@ -15,27 +15,30 @@ class CategoryItem extends StatelessWidget {
         color: AppColors.darkGrayColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            categoryItem.imagePath,
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.14,
-            fit: BoxFit.fill,
-          ),
-          SizedBox(height: 10),
-          Flexible(
-            child: Container(
-              child: Text(
-                categoryItem.name!,
-                style: TextStyle(color: Colors.white, fontSize: 20),
-                overflow: TextOverflow.ellipsis,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              categoryItem.imagePath,
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.13,
+              fit: BoxFit.fill,
+        
+            ),
+            SizedBox(height: 10),
+            Flexible(
+              child: Container(
+                child: Text(
+                  categoryItem.name!,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 10),
-        ],
+            SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }
