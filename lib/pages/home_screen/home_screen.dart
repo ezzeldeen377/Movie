@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie/pages/home_screen/new_releases/releases_details.dart';
+import 'package:movie/pages/home_screen/new_releases/releases_details_view.dart';
 import 'package:movie/pages/home_screen/popular/popular_details.dart';
 import 'package:movie/pages/home_screen/recommended/recommended_details.dart';
 
@@ -17,13 +17,13 @@ class HomeScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(vertical: 8),
               height: MediaQuery.of(context).size.height *
-                  0.5, // النسبة التي يشغلها العنصر الأول
+                  0.52, // النسبة التي يشغلها العنصر الأول
               child: PopularDetails(),
             ),
             Container(
               height: MediaQuery.of(context).size.height *
                   0.5, // النسبة التي يشغلها العنصر الثاني
-              child: ReleasesDetails(),
+              child: ReleasesDetailsView(),
             ),
             SizedBox(height: 10),
             Container(
