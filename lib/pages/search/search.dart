@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/pages/home_screen/model/movieDetails.dart';
-import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
-import 'package:movie/pages/search/Cubit/search_View_Model.dart';
+import 'package:movie/pages/search/Cubit/search_cubit.dart';
+import 'package:movie/pages/search/Cubit/search_state.dart';
 import 'package:movie/pages/search/SearchView/MovieList.dart';
 import 'package:movie/pages/search/SearchView/SearchField.dart';
 import 'package:movie/pages/search/SearchView/SearchStateDisplay.dart';

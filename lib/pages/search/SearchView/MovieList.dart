@@ -4,6 +4,7 @@ import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
 import 'package:movie/pages/search/model/SourcesMovie.dart';
 
+
 class MovieList extends StatelessWidget {
   final List<Results> movies;
   final TextEditingController searchController;
@@ -86,24 +87,15 @@ class MovieList extends StatelessWidget {
                                 color: Colors.yellow,
                                 size: 20,
                               ),
-                              SizedBox(width: mediaQuery.size.width * 0.009),
+                              SizedBox(width: mediaQuery.size.width * 0.02),
                               Text(
                                 rating.toStringAsFixed(1),
                                 style: TextStyle(color: AppColors.whiteColor),
                               ),
-                              SizedBox(width: mediaQuery.size.width * 0.05),
-                              Icon(
-                                Icons.calendar_today,
-                                color: AppColors.whiteColor,
-                                size: 12,
-                              ),
-                              SizedBox(width: mediaQuery.size.width * 0.009),
+                              SizedBox(width: mediaQuery.size.width * 0.02),
                               Text(
                                 releaseDate,
-                                style: TextStyle(
-                                  color: AppColors.whiteColor,
-                                  fontSize: mediaQuery.size.height * 0.018,
-                                ),
+                                style: TextStyle(color: AppColors.whiteColor),
                               ),
                             ],
                           ),

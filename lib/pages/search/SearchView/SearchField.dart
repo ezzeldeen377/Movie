@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/app_colors.dart';
-import 'package:movie/pages/search/Cubit/search_View_Model.dart';
+import 'package:movie/pages/search/Cubit/search_cubit.dart';
+
 
 class SearchField extends StatelessWidget {
   final TextEditingController _searchController;
@@ -17,7 +18,7 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 40,horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
       child: TextField(
         controller: _searchController,
         decoration: InputDecoration(
