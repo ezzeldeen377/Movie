@@ -16,12 +16,12 @@ class CastItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       margin: EdgeInsets.symmetric(horizontal: 20),
-      width: width*0.57,
+      width: width*0.6,
       child: Row(
         children: [
           Container(
-            width:70,
-            height: 70,
+            width:80,
+            height: 80,
             child: ClipOval(
 
                 child: CachedNetworkImage(
@@ -33,7 +33,7 @@ class CastItem extends StatelessWidget {
                 ),
               ),
               errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.white,),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 )
             ),
           ),

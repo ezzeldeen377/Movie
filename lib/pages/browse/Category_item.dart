@@ -45,7 +45,7 @@ class CategoryItem extends StatelessWidget {
                 categoryItem.imagePath,
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.2,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
 
               ),
             ),

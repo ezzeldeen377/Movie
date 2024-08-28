@@ -7,8 +7,8 @@ import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.
 
 class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
   MovieDetailsViewModel() : super(MovieDetailsLoadingState());
-  MovieDetails? movieDetails;
-  void getMovieDetail(String id) async {
+  late MovieDetails movieDetails;
+  Future<void> getMovieDetail(String id) async {
     try {
       emit(MovieDetailsLoadingState());
 

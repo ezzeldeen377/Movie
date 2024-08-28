@@ -19,7 +19,6 @@ class _SearchState extends State<Search> {
   final TextEditingController _searchController = TextEditingController();
 
   SearchViewModel viewModel =SearchViewModel();
-  MovieDetailsViewModel detailsViewModel=MovieDetailsViewModel();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -59,9 +58,20 @@ class _SearchState extends State<Search> {
                   return Expanded(
                     child: ListView.builder(
                         itemCount: state.movieResult.length,
-                        itemBuilder:(context,index){
-                          detailsViewModel.getMovieDetail(state.movieResult[index].id.toString());
-                          return ResultItem(movieDetails: detailsViewModel.movieDetails!);
+                        itemBuilder:(context,index) {
+                          return FutureBuilder<MovieDetails>(
+                            future: viewModel.getMovieDetails(state.movieResult[index].id.toString()),
+                            builder: (context, snapshot) {
+
+                               if (snapshot.hasError) {
+                                return Center(child: Text('Error: ${snapshot.error}'));
+                              } else if (snapshot.hasData) {
+                                return ResultItem(movieDetails: snapshot.data!);
+                              } else {
+                                return SizedBox.shrink();
+                              }
+                            },
+                          );
                         }
                     ),
                   );

@@ -16,6 +16,7 @@ class WatchListViewModel extends Cubit<MoviesState>{
     nagvigetor.showSnakeBar(message);
   }
 
+
   Future<CollectionReference<Movie>?> getCollection() async {
     return  FirebaseFirestore.instance.collection('Movies')
         .withConverter<Movie>(
