@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/browse/CategoryPhoto.dart';
-import 'package:movie/pages/browse/Movie_item.dart';
 import 'package:movie/pages/browse/Movies/Cubit/MovieState.dart';
 import 'package:movie/pages/browse/Movies/Cubit/Movie_details_viewModel.dart';
+import 'package:movie/pages/home_screen/widgets/movie_item.dart';
+
 
 import '../../../app_colors.dart';
 
@@ -83,6 +84,7 @@ class _MoviespageState extends State<Moviespage> {
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 30,
                                 mainAxisSpacing: 30,
+                                    childAspectRatio: .58
                               ),
                               itemBuilder: (context, index) {
                                 return MovieItem(movie: state.movieList[index]);

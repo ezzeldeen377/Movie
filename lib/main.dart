@@ -15,7 +15,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseFirestore.instance.disableNetwork();
+  await FirebaseFirestore.instance.enableNetwork();
   runApp(MyApp());
 }
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SearchCubit(),
+          create: (context) => SearchViewModel(),
         ),
       ],
       child: MaterialApp(

@@ -1,17 +1,15 @@
 
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 
-import 'package:movie/pages/search/model/SourcesMovie.dart';
 
 abstract class SearchState {}
 
-class SearchInitial extends SearchState {}
-
-class SearchLoading extends SearchState {}
+class SearchLoadingState extends SearchState {}
 
 class SearchLoaded extends SearchState {
-  final List<Results> results;
+  final List<Movie> movieResult;
 
-  SearchLoaded(this.results);
+  SearchLoaded({required this.movieResult});
 }
 
 class SearchError extends SearchState {

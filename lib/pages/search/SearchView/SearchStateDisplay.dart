@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/search/Cubit/search_View_Model.dart';
+import 'package:movie/pages/search/Cubit/search_state.dart';
 
 class SearchStateDisplay extends StatelessWidget {
   final SearchState state;
@@ -21,10 +22,10 @@ class SearchStateDisplay extends StatelessWidget {
     final padding = mediaQuery.size.height * 0.02;
     final iconSize = mediaQuery.size.height * 0.08;
 
-    if (state.isLoading) {
+    if (state is SearchLoadingState) {
       return Center(child: CircularProgressIndicator(color: AppColors.yellowColor));
     }
-    if (state.hasError) {
+    if (state is SearchError) {
       return Expanded(
         child: Center(
           child: Column(
@@ -63,7 +64,7 @@ class SearchStateDisplay extends StatelessWidget {
         ),
       );
     }
-    if (state.results.isEmpty) {
+    if (state is SearchLoaded) {
       return Expanded(
         child: Center(
           child: Column(

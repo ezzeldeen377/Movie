@@ -35,7 +35,7 @@ class SearchField extends StatelessWidget {
             icon: Icon(Icons.cancel, color: Colors.white),
             onPressed: () {
               _searchController.clear();
-              context.read<SearchCubit>().search('');
+              context.read<SearchViewModel>().search('');
             },
           )
               : null,
