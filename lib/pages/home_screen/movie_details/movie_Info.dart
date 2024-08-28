@@ -151,7 +151,8 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                             ),
                             SizedBox(width: 5),
                             Text(
-                              widget.movie.voteAverage?.toString() ?? 'N/A',
+                              widget.movie.voteAverage?.toStringAsFixed(1) ??
+                                  'N/A',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: AppColors.lightGrayColor,
