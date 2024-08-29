@@ -38,15 +38,21 @@ class _WatchListState extends State<WatchList>  {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
-                ElevatedButton.icon(
-                  label: Text('Delete All'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.yellowColor,
-                    foregroundColor: AppColors.backgroundColor,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ElevatedButton.icon(
+                    label: Text('Delete All'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.yellowColor,
+                      foregroundColor: AppColors.backgroundColor,
+                      padding: EdgeInsets.symmetric(horizontal: 10)
+                    ),
 
-                    onPressed: (){},
-                    icon: Icon(Icons.delete),
+                      onPressed: (){
+                      viewModel.deleteAllFromFireStore();
+                      },
+                      icon: Icon(Icons.delete),
+                  ),
                 )
               ],
             ),

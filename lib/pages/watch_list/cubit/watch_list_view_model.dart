@@ -11,7 +11,14 @@ class WatchListViewModel extends Cubit<MoviesState>{
   WatchListViewModel():super(InitState());
 
 
-
+  void deleteAllFromFireStore()async{
+    var collRef=await getCollection();
+    var snapshot= await collRef!.get();
+    for(QueryDocumentSnapshot doc in snapshot.docs){
+      doc.reference.delete();
+    }
+    emit(FinishState(finishMessage: "All Movies Delete Success"));
+  }
 
   Future<CollectionReference<Movie>?> getCollection() async {
     return  FirebaseFirestore.instance.collection('Movies')
