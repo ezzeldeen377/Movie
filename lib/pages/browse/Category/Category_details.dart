@@ -51,8 +51,9 @@ class _CategoryDetailsState extends State<CategoryDetails> {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: .8
               ),
               itemBuilder: (context, index) {
                 return Padding(
@@ -69,7 +70,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       );
                     },
                     child: CategoryItem(
-                      categoryItem: state.categoryList[index],
+                      categoryItem: state.categoryList[index],index:index,
                     ),
                   ),
                 );

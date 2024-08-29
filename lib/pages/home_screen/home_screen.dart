@@ -10,35 +10,50 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blackColor,
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 8),
-              height: MediaQuery.of(context).size.height *
-                  0.52, // النسبة التي يشغلها العنصر الأول
+              height: 350,// النسبة التي يشغلها العنصر الأول
               child: PopularDetails(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('New Releases',style: TextStyle(color: AppColors.whiteColor,fontSize: 24),),
+            Container(color: AppColors.backgroundColor,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'New Releases',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  Container(
+                    height: 310, // النسبة التي يشغلها العنصر الثاني
+                    child: ReleasesDetailsView(),
+                  ),
+                ],
+              ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height *
-                  0.4, // النسبة التي يشغلها العنصر الثاني
-              child: ReleasesDetailsView(),
+            SizedBox(height: 20,),
+            Container(color: AppColors.backgroundColor,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Recommended',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    height: 310, // النسبة التي يشغلها العنصر الثالث
+                    child: RecommendeDetails(),
+                  ),
+                ],
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Recommended',style: TextStyle(color: AppColors.whiteColor,fontSize: 24),),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 8),
-              height: MediaQuery.of(context).size.height *
-                  0.4, // النسبة التي يشغلها العنصر الثالث
-              child: RecommendeDetails(),
-            ),
+
             SizedBox(height: 10),
           ],
         ),

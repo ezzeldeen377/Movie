@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/browse/CategoryPhoto.dart';
-import 'package:movie/pages/browse/Movie_item.dart';
 import 'package:movie/pages/browse/Movies/Cubit/MovieState.dart';
 import 'package:movie/pages/browse/Movies/Cubit/Movie_details_viewModel.dart';
+import 'package:movie/pages/home_screen/widgets/movie_item.dart';
+
 
 import '../../../app_colors.dart';
 
@@ -32,11 +33,7 @@ class _MoviespageState extends State<Moviespage> {
         appBar: AppBar(
           title: Text(widget.category.name ?? "",
               style: TextStyle(color: Colors.white)),
-          backgroundColor: AppColors.primaryColor,
-          iconTheme: IconThemeData(color: AppColors.whiteColor),
         ),
-        backgroundColor:
-            Colors.black, // Set the Scaffold background color to black
         body: BlocProvider(
           create: (context) => viewModel,
           child: BlocBuilder<MovieDetailsVeiwmodel, Moviestate>(
@@ -81,8 +78,9 @@ class _MoviespageState extends State<Moviespage> {
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                crossAxisSpacing: 30,
+                                crossAxisSpacing: 5,
                                 mainAxisSpacing: 30,
+                                    childAspectRatio: .55
                               ),
                               itemBuilder: (context, index) {
                                 return MovieItem(movie: state.movieList[index]);
@@ -93,9 +91,11 @@ class _MoviespageState extends State<Moviespage> {
                           BlocBuilder<MovieDetailsVeiwmodel, Moviestate>(
                               builder: (context, state) {
                             if (state is PaginationMovieState) {
-                              return Center(
-                                  child: CircularProgressIndicator(
-                                      color: AppColors.whiteColor));
+                              return SafeArea(
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                        color: AppColors.yellowColor)),
+                              );
                             } else {}
                             return SizedBox.shrink();
                           })

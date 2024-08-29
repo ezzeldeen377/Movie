@@ -13,11 +13,7 @@ class MovieListHeader extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Text(
         title,
-        style: TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-          color: AppColors.whiteColor,
-        ),
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 17),
       ),
     );
   }

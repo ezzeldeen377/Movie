@@ -1,5 +1,5 @@
-import 'package:movie/pages/browse/Models/CategoryResponse.dart';
-import 'package:movie/pages/browse/Models/MovieResponse.dart';
+
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 
 abstract class Moviestate {}
 class LoadingMovieState extends Moviestate{}
