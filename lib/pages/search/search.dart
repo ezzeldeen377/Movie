@@ -14,7 +14,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final TextEditingController _searchController = TextEditingController();
+   TextEditingController _searchController = TextEditingController();
 
   SearchViewModel viewModel =SearchViewModel();
   @override
@@ -36,6 +36,10 @@ class _SearchState extends State<Search> {
               onChanged: (query) {
                 viewModel.search(query);
               },
+              onPreesd: (){
+                _searchController.clear();
+                viewModel.clear();
+              },
             ),
             // BlocBuilder<SearchViewModel, SearchState>(
             //   builder: (context, state) {
@@ -53,22 +57,15 @@ class _SearchState extends State<Search> {
               builder: (context, state) {
                 if (state is SearchLoaded) {
                   return Expanded(
-                    child: ListView.builder(
+                    child: ListView.separated(
+                        separatorBuilder:(context,index)=> Divider(
+                          thickness: 3,color: AppColors.darkGrayColor,
+                          endIndent: MediaQuery.of(context).size.width*0.1,
+                          indent: MediaQuery.of(context).size.width*0.1,
+                        ),
                         itemCount: state.movieResult.length,
                         itemBuilder:(context,index) {
-                          return FutureBuilder<MovieDetails>(
-                            future: viewModel.getMovieDetails(state.movieResult[index].id.toString()),
-                            builder: (context, snapshot) {
-
-                               if (snapshot.hasError) {
-                                return Center(child: Text('Error: ${snapshot.error}'));
-                              } else if (snapshot.hasData) {
-                                return ResultItem(movieDetails: snapshot.data!);
-                              } else {
-                                return SizedBox.shrink();
-                              }
-                            },
-                          );
+                          return ResultItem(movie: state.movieResult[index]);
                         }
                     ),
                   );

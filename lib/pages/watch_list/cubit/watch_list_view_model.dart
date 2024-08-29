@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
-import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 
 import 'package:movie/pages/home_screen/model/movie_response.dart';
 
@@ -11,10 +10,7 @@ import 'package:movie/pages/home_screen/model/movie_response.dart';
 class WatchListViewModel extends Cubit<MoviesState>{
   WatchListViewModel():super(LoadingState());
 
-  late WatchListNagvigetor nagvigetor;
-  void showSnakeBar(String message){
-    nagvigetor.showSnakeBar(message);
-  }
+
 
 
   Future<CollectionReference<Movie>?> getCollection() async {
@@ -29,7 +25,8 @@ class WatchListViewModel extends Cubit<MoviesState>{
     try {
       var collref = await getCollection();
        await collref?.doc(movie.id.toString()).set(movie);
-       nagvigetor.showSnakeBar("Added Successfully");
+      emit(FinishState(finishMessage: "Added Successfully"));
+      getAllMoviesFromFireStore();
     }catch (e){
       emit(ErrorState(errorMessage: e.toString()));
     }
@@ -58,7 +55,8 @@ class WatchListViewModel extends Cubit<MoviesState>{
     try {
       var collref = await getCollection();
       collref?.doc(movie.id.toString()).delete();
-      nagvigetor.showSnakeBar("Deleted Successfully");
+      emit(FinishState(finishMessage: "Deleted Successfully"));
+      getAllMoviesFromFireStore();
 
     }catch (e){
       emit(ErrorState(errorMessage: e.toString()));

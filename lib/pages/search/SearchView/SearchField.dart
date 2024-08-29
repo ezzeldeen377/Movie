@@ -6,10 +6,11 @@ import 'package:movie/pages/search/Cubit/search_View_Model.dart';
 class SearchField extends StatelessWidget {
   final TextEditingController _searchController;
   final Function(String) onChanged;
-
-  const SearchField({
+  final Function() onPreesd;
+   SearchField({
     required TextEditingController searchController,
     required this.onChanged,
+     required this.onPreesd,
     Key? key,
   })  : _searchController = searchController,
         super(key: key);
@@ -19,26 +20,25 @@ class SearchField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 40,horizontal: 10),
       child: TextField(
+        autofocus: true,
         controller: _searchController,
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.darkGrayColor,
           hintText: 'Search..',
-          hintStyle: TextStyle(color: AppColors.whiteColor),
+          hintStyle: TextStyle(color: AppColors.whiteColor,fontSize: 16),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide.none,
           ),
           prefixIcon: Icon(Icons.search, color: AppColors.whiteColor),
-          suffixIcon: _searchController.text.isNotEmpty
-              ? IconButton(
+          suffixIcon:
+               IconButton(
             icon: Icon(Icons.cancel, color: Colors.white),
             onPressed: () {
-              _searchController.clear();
-              context.read<SearchViewModel>().search('');
+              onPreesd.call();
             },
-          )
-              : null,
+          ),
         ),
         style: TextStyle(color: AppColors.whiteColor),
         onChanged: onChanged,

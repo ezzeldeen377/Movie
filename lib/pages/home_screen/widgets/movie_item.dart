@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
-import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
 
@@ -21,13 +20,12 @@ class MovieItem extends StatefulWidget {
   State<MovieItem> createState() => _MovieItemState();
 }
 
-class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
-  WatchListViewModel viewModel =WatchListViewModel();
+class _MovieItemState extends State<MovieItem> {
+  WatchListViewModel viewModel = WatchListViewModel();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.nagvigetor=this;
     viewModel.getAllMoviesFromFireStore();
   }
 
@@ -38,10 +36,16 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
         : widget.movie.posterPath ?? "";
     final fullImageUrl = ApiConstant.imageUrl + posterPath;
 
-    return BlocBuilder<WatchListViewModel,MoviesState>(
+    return BlocConsumer<WatchListViewModel, MoviesState>(
+      listener: (context, state) {
+        if (state is FinishState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.finishMessage)));
+        }
+      },
       bloc: viewModel,
-    builder: (context,state){
-        if(state is SuccessState){
+      builder: (context, state) {
+        if (state is SuccessState) {
           return InkWell(
             onTap: () {
               Navigator.push(
@@ -54,27 +58,26 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
               );
             },
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.35,
-              margin: EdgeInsets.symmetric(horizontal: 12),
+              width: 130,
+              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
               decoration: BoxDecoration(
-                color: AppColors.darkGrayColor,
+                color: AppColors.forGroundColor,
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Column(
+              child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-                topRight: Radius.circular(15)
-            ),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                            topRight: Radius.circular(15)),
                         child: CachedNetworkImage(
                           imageUrl: fullImageUrl,
                           width: double.infinity,
-                          height: MediaQuery.of(context).size.width * 0.40,
+                          height: 170,
                           fit: BoxFit.fill,
                           placeholder: (context, url) => Center(
                             child: LoadingAnimationWidget.staggeredDotsWave(
@@ -82,19 +85,23 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
                               size: 50,
                             ),
                           ),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                       Positioned(
                         top: -6,
                         left: -7,
-                        child: BookMarkWidget(movie:widget.movie,isBooked:state.movieList.any((movieSaved){
-                          return movieSaved.id==widget.movie.id;
-                        }) ,viewModel: viewModel,),
+                        child: BookMarkWidget(
+                          movie: widget.movie,
+                          isBooked: state.movieList.any((movieSaved) {
+                            return movieSaved.id == widget.movie.id;
+                          }),
+                          viewModel: viewModel,
+                        ),
                       )
                     ],
                   ),
-                  SizedBox(height: 7),
                   Padding(
                     padding: const EdgeInsets.all(11.0),
                     child: Text(
@@ -118,15 +125,13 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  SizedBox(height: 7),
                   Padding(
                     padding: const EdgeInsets.all(11.0),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 20.0,
+                        ImageIcon(
+                          AssetImage('assets/icons/star_icon.png'),
+                          color: AppColors.yellowColor,
                         ),
                         SizedBox(width: 7),
                         Text(
@@ -140,12 +145,12 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
               ),
             ),
           );
-        } else if (state is ErrorState){
+        } else if (state is ErrorState) {
           return Text('Something Went Wrong');
-        }
-        else if(state is LoadingState){
-         return Center(child:Padding(
-           padding: const EdgeInsets.all(10.0),
+        } else if (state is LoadingState) {
+          return Center(
+              child: Padding(
+            padding: const EdgeInsets.all(10.0),
             child: LoadingAnimationWidget.staggeredDotsWave(
               color: AppColors.whiteColor,
               size: 50,
@@ -153,14 +158,7 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
           ));
         }
         return Container();
-    },
-    );
-  }
-  @override
-  showSnakeBar(String message) {
-    // TODO: implement showSnakeBar
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message))
+      },
     );
   }
 }

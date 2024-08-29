@@ -10,7 +10,6 @@ import 'package:movie/pages/home_screen/api/api_constant.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/movie_details/movie_details_view.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
-import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
 
@@ -21,13 +20,12 @@ class WatchItem extends StatefulWidget {
   State<WatchItem> createState() => _WatchItemState();
 }
 
-class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
+class _WatchItemState extends State<WatchItem> {
   WatchListViewModel viewModel = WatchListViewModel();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.nagvigetor=this;
   }
 
   @override
@@ -35,7 +33,9 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
     return BlocConsumer<WatchListViewModel,MoviesState>(
       listener: (context,state){
         if(state is FinishState){
-          viewModel.showSnakeBar(state.finishMessage);
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.finishMessage))
+          );
         }
       },
       bloc: viewModel,
@@ -80,50 +80,72 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
               ),
                 child: Row(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Stack(
-                      children: [
-                        // Base image
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(15),
-                            topRight: Radius.circular(15)
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
-                                placeholder: (context, url) => Center(
-                                  child:
-                                      LoadingAnimationWidget.staggeredDotsWave(
-                                    color: AppColors.whiteColor,
-                                    size: 50,
+                    Flexible(
+                      child: Stack(
+                        children: [
+                          // Base image
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(15),
+                              topRight: Radius.circular(15)
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
+                                  placeholder: (context, url) => Center(
+                                    child:
+                                        LoadingAnimationWidget.staggeredDotsWave(
+                                      color: AppColors.whiteColor,
+                                      size: 50,
+                                    ),
                                   ),
-                                ),
-                                errorWidget: (context, url, error) => Icon(Icons.error),
-                            fit: BoxFit.fill,
-                            width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
-                            height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
-                          )
+                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                              fit: BoxFit.fill,
+                              width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                              height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
+                            )
 
-                        ),
-                        // Overlay icon
-                       Positioned(
-                           top: -6,
-                           left: -7,
-                           child: BookMarkWidget(viewModel: viewModel, movie: widget.movie,isBooked: true,))
-                      ],
+                          ),
+                          // Overlay icon
+                         Positioned(
+                             top: -6,
+                             left: -7,
+                             child: BookMarkWidget(viewModel: viewModel, movie: widget.movie,isBooked: true,))
+                        ],
+                      ),
                     ),
                     SizedBox(width: 15,),
-                    Column(crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(widget.movie.title??'',style: TextStyle(color: AppColors.whiteColor),), // movie name
-                        Text(widget.movie.releaseDate??"",style: TextStyle(color: AppColors.whiteColor)),    //relasse data
-                        Row(
-                          children: [
-                            Icon(Icons.star,size: 25,color: AppColors.yellowColor,),
-                            Text(widget.movie.voteAverage!.toStringAsFixed(1),style: TextStyle(color: AppColors.whiteColor)),                      ],
-                        )//actors names
+                    Expanded(
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(widget.movie.title??'',style: TextStyle(color: AppColors.whiteColor),maxLines: 3,softWrap: true,),
+                          Text(
+                            widget.movie.overview ?? 'No Title',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(fontSize: 10),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),// movie name
+                          Row(
+                            children: [
+                              Icon(Icons.star,size: 20,color: AppColors.yellowColor,),
+                              SizedBox(width: 5,),
+                              Text(widget.movie.voteAverage!.toStringAsFixed(1),
+                                  style: TextStyle(color: AppColors.whiteColor,fontSize: 12)),
+                              SizedBox(width: 5,),
+                              Icon(Icons.date_range,size: 17,color: AppColors.yellowColor,),
+                              SizedBox(width: 5,),
+                              Text(widget.movie.releaseDate??"",
+                                  style: TextStyle(color: AppColors.whiteColor,fontSize: 12)),    //relasse data
 
-                      ],
+                            ],
+
+                          )//actors names
+
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -135,12 +157,5 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
     );
   }
 
-  @override
-  showSnakeBar(String message) {
-    // TODO: implement showSnakeBar
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message))
-    );
-  }
 
 }

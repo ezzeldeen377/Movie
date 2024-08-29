@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
@@ -10,13 +11,8 @@ import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 
 
 class SearchViewModel extends Cubit<SearchState> {
-  SearchViewModel():super(SearchError('Search On Any Movie'));
-  MovieDetailsViewModel detailsViewModel=MovieDetailsViewModel();
 
-  Future<MovieDetails> getMovieDetails(String id) async {
-   await detailsViewModel.getMovieDetail(id);
-   return detailsViewModel.movieDetails;
-  }
+  SearchViewModel():super(SearchError('Search On Any Movie You want'));
 
   void search(String query) async {
 
@@ -33,6 +29,10 @@ class SearchViewModel extends Cubit<SearchState> {
     } catch (e) {
       emit(SearchError(e.toString()));
     }
+  }
+
+  void clear(){
+    emit(SearchError('Search On Any Movie You want'));
   }
 }
 

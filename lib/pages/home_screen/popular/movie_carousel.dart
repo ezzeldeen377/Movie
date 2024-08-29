@@ -6,13 +6,10 @@ import 'movies_cards.dart';
 
 class MovieCarousel extends StatefulWidget {
   final List<Movie> popularList;
-  final double screenWidth;
-  final double screenHeight;
+
 
   MovieCarousel({
     required this.popularList,
-    required this.screenWidth,
-    required this.screenHeight,
   });
 
   @override
@@ -29,7 +26,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
         CarouselSlider.builder(
           itemCount: widget.popularList.length,
           options: CarouselOptions(
-            height: widget.screenHeight * 0.4,
+            height:300,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 3),
             viewportFraction: 1,
@@ -42,10 +39,10 @@ class _MovieCarouselState extends State<MovieCarousel> {
           ),
           itemBuilder: (context, index, realIndex) {
             var movie = widget.popularList[index];
-            return MovieCard(
-              movie: movie,
-              screenWidth: widget.screenWidth,
-              screenHeight: widget.screenHeight,
+            return Container(height: 300,
+              child: MovieCard(
+                movie: movie,
+              ),
             );
           },
         ),

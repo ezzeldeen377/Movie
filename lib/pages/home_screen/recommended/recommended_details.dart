@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_details_view_model.dart';
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_state.dart';
-import 'package:movie/pages/home_screen/recommended/recommended_widget.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
 
 import '../../../app_colors.dart';

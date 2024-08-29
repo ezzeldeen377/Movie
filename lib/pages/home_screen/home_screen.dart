@@ -14,36 +14,46 @@ class HomeScreen extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 8),
-              height: MediaQuery.of(context).size.height *
-                  0.5, // النسبة التي يشغلها العنصر الأول
+              height: 350,// النسبة التي يشغلها العنصر الأول
               child: PopularDetails(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'New Releases',
-                style: Theme.of(context).textTheme.titleMedium,
+            Container(color: AppColors.backgroundColor,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'New Releases',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  Container(
+                    height: 310, // النسبة التي يشغلها العنصر الثاني
+                    child: ReleasesDetailsView(),
+                  ),
+                ],
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height *
-                  0.4, // النسبة التي يشغلها العنصر الثاني
-              child: ReleasesDetailsView(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Recommended',
-                style: Theme.of(context).textTheme.titleMedium,
+            SizedBox(height: 20,),
+            Container(color: AppColors.backgroundColor,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Recommended',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    height: 310, // النسبة التي يشغلها العنصر الثالث
+                    child: RecommendeDetails(),
+                  ),
+                ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 8),
-              height: MediaQuery.of(context).size.height *
-                  0.4, // النسبة التي يشغلها العنصر الثالث
-              child: RecommendeDetails(),
-            ),
+
             SizedBox(height: 10),
           ],
         ),

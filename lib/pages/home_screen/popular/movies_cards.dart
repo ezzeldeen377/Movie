@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
-import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
 
@@ -13,28 +12,24 @@ import '../movie_details/movie_details_view.dart';
 
 class MovieCard extends StatefulWidget {
   final Movie movie;
-  final double screenWidth;
-  final double screenHeight;
 
   MovieCard({
     required this.movie,
-    required this.screenWidth,
-    required this.screenHeight,
   });
 
   @override
   State<MovieCard> createState() => _MovieCardState();
 }
 
-class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
-  WatchListViewModel viewModel =WatchListViewModel();
+class _MovieCardState extends State<MovieCard> {
+  WatchListViewModel viewModel = WatchListViewModel();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.nagvigetor=this;
     viewModel.getAllMoviesFromFireStore();
   }
+
   @override
   Widget build(BuildContext context) {
     // Create the full image URL based on the current movie
@@ -46,19 +41,24 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
     final posterBackDropPath = widget.movie.backdropPath ?? "";
     final fullImageUrl2 = ApiConstant.imageUrl + posterBackDropPath;
 
-    return BlocBuilder<WatchListViewModel,MoviesState>(
+    return BlocConsumer<WatchListViewModel, MoviesState>(
+      listener: (context, state) {
+        if (state is FinishState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.finishMessage)));
+        }
+      },
       bloc: viewModel,
-      builder: (context,state){
-        if(state is SuccessState) {
+      builder: (context, state) {
+        if (state is SuccessState) {
           return InkWell(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      MovieDetailsView(
-                        movieId: widget.movie.id.toString(),
-                      ),
+                  builder: (context) => MovieDetailsView(
+                    movieId: widget.movie.id.toString(),
+                  ),
                 ),
               );
             },
@@ -68,13 +68,13 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
                 Image.network(
                   fullImageUrl2,
                   width: double.infinity,
-                  height: widget.screenHeight * 0.30,
+                  height: 230,
                   fit: BoxFit.fill,
                 ),
                 Icon(
                   Icons.play_circle_filled,
                   color: AppColors.whiteColor,
-                  size: widget.screenWidth * 0.17, // Adjust size
+                  size: 50, // Adjust size
                 ),
               ]),
               // Play icon positioned at the center of the large image
@@ -84,72 +84,72 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-              topRight: Radius.circular(15)
-          ),
-                        child: Image.network(
-                          fullImageUrl, // Use different image URL if needed
-                          fit: BoxFit.fill,
-                          width: widget.screenWidth * 0.35,
-                          height: widget.screenHeight * 0.25,
-                        ),
-                      ),
-                      Positioned(
-                          top: -6,
-                          left: -7,
-                          child: BookMarkWidget(
-                              viewModel: viewModel, movie: Movie.fromJson(widget
-                              .movie.toJson()),isBooked:state.movieList.any((movieSaved){
-                            return movieSaved.id==widget.movie.id;
-                          })))
-                    ],
-                  ),
                   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: widget.screenWidth * .6,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              widget.movie.title ?? 'No title',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      fontSize: widget.screenWidth * 0.05),
-                              softWrap: true,
-                              textAlign: TextAlign.start,
-                              maxLines: 2, // Limits the title to 2 lines
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Release Date: ${widget.movie.releaseDate ??
-                                  'No date'}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(
-                                      fontSize: widget.screenWidth * 0.04),
-                              softWrap: true,
-                              textAlign: TextAlign.start,
-                            ),
-                          ],
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                              topRight: Radius.circular(15)),
+                          child: Image.network(
+                            fullImageUrl, // Use different image URL if needed
+                            fit: BoxFit.fill,
+                            width: 100,
+                            height: 150,
+                          ),
                         ),
-                      )),
+                        Positioned(
+                            top: -6,
+                            left: -7,
+                            child: BookMarkWidget(
+                                viewModel: viewModel,
+                                movie: Movie.fromJson(widget.movie.toJson()),
+                                isBooked: state.movieList.any((movieSaved) {
+                                  return movieSaved.id == widget.movie.id;
+                                })))
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                widget.movie.title ?? 'No title',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(fontSize: 20),
+                                softWrap: true,
+                                textAlign: TextAlign.start,
+                                maxLines: 2, // Limits the title to 2 lines
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Release Date: ${widget.movie.releaseDate ?? 'No date'}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(fontSize: 20),
+                                softWrap: true,
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                        )),
+                  ),
                 ],
               ),
             ]),
           );
-        }else if (state is ErrorState){
+        } else if (state is ErrorState) {
           return Text('Something Went Wrong');
-        }
-        else if(state is LoadingState){
+        } else if (state is LoadingState) {
           return Center(
               child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -161,14 +161,6 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
         }
         return Container();
       },
-
-    );
-  }
-  @override
-  showSnakeBar(String message) {
-    // TODO: implement showSnakeBar
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message))
     );
   }
 }

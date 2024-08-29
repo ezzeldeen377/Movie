@@ -1,73 +1,73 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
+import 'package:movie/pages/home_screen/movie_details/movie_details_view.dart';
 
 
 class ResultItem extends StatelessWidget {
 
-  MovieDetails movieDetails;
-
+   Movie movie;
 
   ResultItem({
-    required this.movieDetails,
+    required this.movie,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final padding = mediaQuery.size.height * 0.02;
+
 
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MovieDetailsWidget(
-              movie:movieDetails ,
+            builder: (context) => MovieDetailsView(movieId:movie.id.toString(),
             ),
           ),
         );
       },
       child: Card(
-        margin: EdgeInsets.symmetric(vertical: padding),
+        margin: EdgeInsets.symmetric(vertical: 5),
         color: Colors.transparent,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            movieDetails.posterPath != null
-                ? ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(
-                'https://image.tmdb.org/t/p/w500${movieDetails.posterPath}',
-                height: mediaQuery.size.height * 0.17,
-                width: mediaQuery.size.width * 0.23,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: CachedNetworkImage(
+                height: 150,
+                width: 100,
                 fit: BoxFit.fill,
+                imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                placeholder: (context, url) => Center(child: CircularProgressIndicator(color: AppColors.yellowColor,)),
+                errorWidget: (context, url, error) => Icon(Icons.error,color: AppColors.whiteColor,),
               ),
-            )
-                : SizedBox(width: mediaQuery.size.width * 0.05),
+            ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(padding),
+                padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movieDetails.title ?? 'No Title',
+                      movie.title ?? 'No Title',
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall!
-                          .copyWith(fontSize: mediaQuery.size.height * 0.020),
+                          .copyWith(fontSize: 16),
                     ),
                     SizedBox(height: 4),
                     Text(
-                      movieDetails.overview ?? 'No Overview',
-                      style: TextStyle(color: AppColors.whiteColor),
+                      movie.overview ?? 'No Overview',
+                      style: TextStyle(color: AppColors.whiteColor,fontSize: 12),
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: mediaQuery.size.height * 0.01),
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Icon(
@@ -76,28 +76,28 @@ class ResultItem extends StatelessWidget {
                           size: 20,
                         ),
                         SizedBox(
-                            width: mediaQuery.size.width * 0.009),
+                            width: 5),
                         Text(
-                          movieDetails.voteAverage!.toStringAsFixed(1),
+                          movie.voteAverage!.toStringAsFixed(1),
                           style: TextStyle(
-                              color: AppColors.whiteColor),
+                              color: AppColors.whiteColor,fontSize: 12),
                         ),
                         SizedBox(
-                            width: mediaQuery.size.width * 0.05),
+                            width: 5),
                         Icon(
                           Icons.calendar_today,
                           color: AppColors.whiteColor,
                           size: 12,
                         ),
                         SizedBox(
-                            width: mediaQuery.size.width * 0.009),
+                            width: 5),
                         Text(
-                          movieDetails.releaseDate??'',
+                          movie.releaseDate??'',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
                               .copyWith(
-                                  fontSize: mediaQuery.size.height * 0.018),
+                                  fontSize: 12),
                         ),
                       ],
                     ),

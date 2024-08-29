@@ -8,16 +8,16 @@ import 'cubit/more_like_this_state.dart';
 import 'cubit/more_like_this_view_model.dart';
 import 'more_like_this_widget.dart';
 
-class MoreLikeThisLogic extends StatefulWidget {
+class MoreLikeThisDetailsView extends StatefulWidget {
   String id;
 
-  MoreLikeThisLogic({required this.id});
+  MoreLikeThisDetailsView({required this.id});
 
   @override
-  State<MoreLikeThisLogic> createState() => _MoreLikeThisLogicState();
+  State<MoreLikeThisDetailsView> createState() => _MoreLikeThisDetailsViewState();
 }
 
-class _MoreLikeThisLogicState extends State<MoreLikeThisLogic> {
+class _MoreLikeThisDetailsViewState extends State<MoreLikeThisDetailsView> {
   MoreLikeThisViewModel viewModel = MoreLikeThisViewModel();
 
   @override
@@ -73,6 +73,7 @@ class _MoreLikeThisLogicState extends State<MoreLikeThisLogic> {
                     ),
                   ),
                   BlocBuilder<MoreLikeThisViewModel, MoreLikeState>(
+                    bloc: viewModel,
                       builder: (context, state) {
                         if(state is MoreLikeThisPaginationState) {
                           return Center(child: CircularProgressIndicator(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
-import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 
 class BookMarkWidget extends StatefulWidget {
@@ -14,12 +13,11 @@ class BookMarkWidget extends StatefulWidget {
   State<BookMarkWidget> createState() => _BookMarkWidgetState();
 }
 
-class _BookMarkWidgetState extends State<BookMarkWidget> implements WatchListNagvigetor{
+class _BookMarkWidgetState extends State<BookMarkWidget> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.viewModel.nagvigetor=this;
   }
   @override
   Widget build(BuildContext context) {
@@ -49,11 +47,5 @@ class _BookMarkWidgetState extends State<BookMarkWidget> implements WatchListNag
       ),
     );
   }
-  @override
-  showSnakeBar(String message) {
-    // TODO: implement showSnakeBar
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message))
-    );
-  }
+
 }

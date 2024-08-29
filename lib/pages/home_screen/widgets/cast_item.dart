@@ -12,11 +12,9 @@ class CastItem extends StatelessWidget {
   CastItem({required this.cast});
   @override
   Widget build(BuildContext context) {
-    double width=MediaQuery.of(context).size.width;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       margin: EdgeInsets.symmetric(horizontal: 20),
-      width: width*0.6,
       child: Row(
         children: [
           Container(
@@ -40,7 +38,6 @@ class CastItem extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.all(10),
-            width: width*.28,
             child: Column(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
