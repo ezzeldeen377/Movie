@@ -78,9 +78,9 @@ class _MoviespageState extends State<Moviespage> {
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                crossAxisSpacing: 30,
+                                crossAxisSpacing: 5,
                                 mainAxisSpacing: 30,
-                                    childAspectRatio: .58
+                                    childAspectRatio: .55
                               ),
                               itemBuilder: (context, index) {
                                 return MovieItem(movie: state.movieList[index]);
@@ -91,9 +91,11 @@ class _MoviespageState extends State<Moviespage> {
                           BlocBuilder<MovieDetailsVeiwmodel, Moviestate>(
                               builder: (context, state) {
                             if (state is PaginationMovieState) {
-                              return Center(
-                                  child: CircularProgressIndicator(
-                                      color: AppColors.whiteColor));
+                              return SafeArea(
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                        color: AppColors.yellowColor)),
+                              );
                             } else {}
                             return SizedBox.shrink();
                           })

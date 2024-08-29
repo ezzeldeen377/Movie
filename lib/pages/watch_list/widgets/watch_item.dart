@@ -41,7 +41,7 @@ class _WatchItemState extends State<WatchItem> {
       bloc: viewModel,
       builder: (context,state){
         return Container(
-          height:MediaQuery.of(context).size.height*.18,
+          height:120,
 
           child: Slidable(
             closeOnScroll: true,
@@ -109,12 +109,14 @@ class _WatchItemState extends State<WatchItem> {
                          Positioned(
                              top: -6,
                              left: -7,
-                             child: BookMarkWidget(viewModel: viewModel, movie: widget.movie,isBooked: true,))
+                             child: BookMarkWidget( movie: widget.movie,)
+                         )
                         ],
                       ),
                     ),
                     SizedBox(width: 15,),
-                    Expanded(
+                    Container(
+                      width: 200,
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

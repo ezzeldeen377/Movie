@@ -29,12 +29,26 @@ class _WatchListState extends State<WatchList>  {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                'WatchList',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Text(
+                    'WatchList',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                ElevatedButton.icon(
+                  label: Text('Delete All'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.yellowColor,
+                    foregroundColor: AppColors.backgroundColor,
+                  ),
+
+                    onPressed: (){},
+                    icon: Icon(Icons.delete),
+                )
+              ],
             ),
             BlocConsumer<WatchListViewModel,MoviesState>(
               listener: (context,state){

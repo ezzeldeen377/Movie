@@ -6,7 +6,6 @@ import 'package:movie/pages/home_screen/widgets/movie_item.dart';
 import '../../../app_colors.dart';
 import 'cubit/more_like_this_state.dart';
 import 'cubit/more_like_this_view_model.dart';
-import 'more_like_this_widget.dart';
 
 class MoreLikeThisDetailsView extends StatefulWidget {
   String id;
@@ -76,8 +75,8 @@ class _MoreLikeThisDetailsViewState extends State<MoreLikeThisDetailsView> {
                     bloc: viewModel,
                       builder: (context, state) {
                         if(state is MoreLikeThisPaginationState) {
-                          return Center(child: CircularProgressIndicator(
-                              color: AppColors.whiteColor));
+                          return SafeArea(child:Center(child: CircularProgressIndicator(
+                              color: AppColors.yellowColor)));
                         }else{
 
                         }

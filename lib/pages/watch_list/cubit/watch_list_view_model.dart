@@ -8,7 +8,7 @@ import 'package:movie/pages/home_screen/model/movie_response.dart';
 
 
 class WatchListViewModel extends Cubit<MoviesState>{
-  WatchListViewModel():super(LoadingState());
+  WatchListViewModel():super(InitState());
 
 
 
@@ -32,9 +32,14 @@ class WatchListViewModel extends Cubit<MoviesState>{
     }
   }
 
-  Future<void> getAllMoviesFromFireStore() async {
-    try {
+  Future<void> getAllMoviesFromFireStore({bool fromWatchlist=false}) async {
+    if(fromWatchlist){
       emit(LoadingState());
+
+    }else{
+
+    }
+    try {
       var collref = await getCollection();
        collref?.snapshots().listen((snapshot) {
          var movieList= snapshot.docs.map((element) {

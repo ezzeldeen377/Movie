@@ -72,9 +72,11 @@ class _ReleasesDetailsViewState extends State<ReleasesDetailsView> {
                           bloc: viewModel,
                           builder: (context, state) {
                             if (state is ReleasesPaginationState) {
-                              return Center(
-                                  child: CircularProgressIndicator(
-                                      color: AppColors.whiteColor));
+                              return SafeArea(
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                        color: AppColors.yellowColor)),
+                              );
                             } else {}
                             return SizedBox.shrink();
                           })

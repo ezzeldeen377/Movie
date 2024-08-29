@@ -70,8 +70,10 @@ class _RecommendeDetailsState extends State<RecommendeDetails> {
                   BlocBuilder<RecommendedDetailsViewModel, RecommendedState>(
                       builder: (context, state) {
                         if(state is RecommendedPaginationState) {
-                          return Center(child: CircularProgressIndicator(
-                              color: AppColors.whiteColor));
+                          return SafeArea(
+                            child: Center(child: CircularProgressIndicator(
+                                color: AppColors.yellowColor)),
+                          );
                         }else{
 
                         }

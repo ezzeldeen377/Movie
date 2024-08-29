@@ -41,126 +41,97 @@ class _MovieCardState extends State<MovieCard> {
     final posterBackDropPath = widget.movie.backdropPath ?? "";
     final fullImageUrl2 = ApiConstant.imageUrl + posterBackDropPath;
 
-    return BlocConsumer<WatchListViewModel, MoviesState>(
-      listener: (context, state) {
-        if (state is FinishState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.finishMessage)));
-        }
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailsView(
+              movieId: widget.movie.id.toString(),
+            ),
+          ),
+        );
       },
-      bloc: viewModel,
-      builder: (context, state) {
-        if (state is SuccessState) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MovieDetailsView(
-                    movieId: widget.movie.id.toString(),
-                  ),
-                ),
-              );
-            },
-            child: Stack(alignment: Alignment.topRight, children: [
-              // Main image
-              Stack(alignment: Alignment.center, children: [
-                Image.network(
-                  fullImageUrl2,
-                  width: double.infinity,
-                  height: 230,
-                  fit: BoxFit.fill,
-                ),
-                Icon(
-                  Icons.play_circle_filled,
-                  color: AppColors.whiteColor,
-                  size: 50, // Adjust size
-                ),
-              ]),
-              // Play icon positioned at the center of the large image
+      child: Stack(alignment: Alignment.topRight, children: [
+        // Main image
+        Stack(alignment: Alignment.center, children: [
+          Image.network(
+            fullImageUrl2,
+            width: double.infinity,
+            height: 230,
+            fit: BoxFit.fill,
+          ),
+          Icon(
+            Icons.play_circle_filled,
+            color: AppColors.whiteColor,
+            size: 50, // Adjust size
+          ),
+        ]),
+        // Play icon positioned at the center of the large image
 
-              // Overlay image positioned at the bottom
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.start,
+        // Overlay image positioned at the bottom
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
-                              topRight: Radius.circular(15)),
-                          child: Image.network(
-                            fullImageUrl, // Use different image URL if needed
-                            fit: BoxFit.fill,
-                            width: 100,
-                            height: 150,
-                          ),
-                        ),
-                        Positioned(
-                            top: -6,
-                            left: -7,
-                            child: BookMarkWidget(
-                                viewModel: viewModel,
-                                movie: Movie.fromJson(widget.movie.toJson()),
-                                isBooked: state.movieList.any((movieSaved) {
-                                  return movieSaved.id == widget.movie.id;
-                                })))
-                      ],
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                        topRight: Radius.circular(15)),
+                    child: Image.network(
+                      fullImageUrl, // Use different image URL if needed
+                      fit: BoxFit.fill,
+                      width: 100,
+                      height: 150,
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                widget.movie.title ?? 'No title',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(fontSize: 20),
-                                softWrap: true,
-                                textAlign: TextAlign.start,
-                                maxLines: 2, // Limits the title to 2 lines
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'Release Date: ${widget.movie.releaseDate ?? 'No date'}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall!
-                                    .copyWith(fontSize: 20),
-                                softWrap: true,
-                                textAlign: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        )),
-                  ),
+                  Positioned(
+                      top: -6,
+                      left: -7,
+                      child: BookMarkWidget(movie: widget.movie,)
+                  )
                 ],
               ),
-            ]),
-          );
-        } else if (state is ErrorState) {
-          return Text('Something Went Wrong');
-        } else if (state is LoadingState) {
-          return Center(
-              child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: LoadingAnimationWidget.staggeredDotsWave(
-              color: AppColors.whiteColor,
-              size: 50,
             ),
-          ));
-        }
-        return Container();
-      },
+            Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          widget.movie.title ?? 'No title',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(fontSize: 20),
+                          softWrap: true,
+                          textAlign: TextAlign.start,
+                          maxLines: 2, // Limits the title to 2 lines
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Release Date: ${widget.movie.releaseDate ?? 'No date'}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(fontSize: 20),
+                          softWrap: true,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
+                  )),
+            ),
+          ],
+        ),
+      ]),
     );
   }
 }

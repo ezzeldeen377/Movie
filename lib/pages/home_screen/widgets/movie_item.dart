@@ -21,12 +21,10 @@ class MovieItem extends StatefulWidget {
 }
 
 class _MovieItemState extends State<MovieItem> {
-  WatchListViewModel viewModel = WatchListViewModel();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.getAllMoviesFromFireStore();
   }
 
   @override
@@ -36,129 +34,100 @@ class _MovieItemState extends State<MovieItem> {
         : widget.movie.posterPath ?? "";
     final fullImageUrl = ApiConstant.imageUrl + posterPath;
 
-    return BlocConsumer<WatchListViewModel, MoviesState>(
-      listener: (context, state) {
-        if (state is FinishState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.finishMessage)));
-        }
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailsView(
+              movieId: widget.movie.id.toString(),
+            ),
+          ),
+        );
       },
-      bloc: viewModel,
-      builder: (context, state) {
-        if (state is SuccessState) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MovieDetailsView(
-                    movieId: widget.movie.id.toString(),
+      child: Container(
+        width: 130,
+        margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+        decoration: BoxDecoration(
+          color: AppColors.forGroundColor,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                      topRight: Radius.circular(15)),
+                  child: CachedNetworkImage(
+                    imageUrl: fullImageUrl,
+                    width: double.infinity,
+                    height: 170,
+                    fit: BoxFit.fill,
+                    placeholder: (context, url) => Center(
+                      child: LoadingAnimationWidget.staggeredDotsWave(
+                        color: AppColors.whiteColor,
+                        size: 50,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        Icon(Icons.error),
                   ),
                 ),
-              );
-            },
-            child: Container(
-              width: 130,
-              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-              decoration: BoxDecoration(
-                color: AppColors.forGroundColor,
-                borderRadius: BorderRadius.circular(15),
+                Positioned(
+                  top: -6,
+                  left: -7,
+                  child: BookMarkWidget(
+                    movie: widget.movie,
+                  ),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(11.0),
+              child: Text(
+                widget.movie.title ?? "",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(fontSize: 15, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.start,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 11.0),
+              child: Text(
+                widget.movie.releaseDate ?? "",
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontSize: 13, fontWeight: FontWeight.normal),
+                textAlign: TextAlign.start,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(11.0),
+              child: Row(
                 children: [
-                  Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                            topRight: Radius.circular(15)),
-                        child: CachedNetworkImage(
-                          imageUrl: fullImageUrl,
-                          width: double.infinity,
-                          height: 170,
-                          fit: BoxFit.fill,
-                          placeholder: (context, url) => Center(
-                            child: LoadingAnimationWidget.staggeredDotsWave(
-                              color: AppColors.whiteColor,
-                              size: 50,
-                            ),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
-                      ),
-                      Positioned(
-                        top: -6,
-                        left: -7,
-                        child: BookMarkWidget(
-                          movie: widget.movie,
-                          isBooked: state.movieList.any((movieSaved) {
-                            return movieSaved.id == widget.movie.id;
-                          }),
-                          viewModel: viewModel,
-                        ),
-                      )
-                    ],
+                  ImageIcon(
+                    AssetImage('assets/icons/star_icon.png'),
+                    color: AppColors.yellowColor,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(11.0),
-                    child: Text(
-                      widget.movie.title ?? "",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(fontSize: 15, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.start,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 11.0),
-                    child: Text(
-                      widget.movie.releaseDate ?? "",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontSize: 13, fontWeight: FontWeight.normal),
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(11.0),
-                    child: Row(
-                      children: [
-                        ImageIcon(
-                          AssetImage('assets/icons/star_icon.png'),
-                          color: AppColors.yellowColor,
-                        ),
-                        SizedBox(width: 7),
-                        Text(
-                          widget.movie.voteAverage?.toStringAsFixed(1) ?? 'N/A',
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ],
-                    ),
+                  SizedBox(width: 7),
+                  Text(
+                    widget.movie.voteAverage?.toStringAsFixed(1) ?? 'N/A',
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ],
               ),
             ),
-          );
-        } else if (state is ErrorState) {
-          return Text('Something Went Wrong');
-        } else if (state is LoadingState) {
-          return Center(
-              child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: LoadingAnimationWidget.staggeredDotsWave(
-              color: AppColors.whiteColor,
-              size: 50,
-            ),
-          ));
-        }
-        return Container();
-      },
+          ],
+        ),
+      ),
     );
   }
 }

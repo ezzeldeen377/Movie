@@ -83,12 +83,8 @@ class _MovieInfoState extends State<MovieInfo> {
                       Positioned(
                           top: -6,
                           left: -7,
-                          child: BookMarkWidget(
-                              viewModel: viewModel,
-                              movie: Movie.fromJson(widget.movie.toJson()),
-                              isBooked: state.movieList.any((movieSaved) {
-                                return movieSaved.id == widget.movie.id;
-                              })))
+                          child:  BookMarkWidget(movie: Movie.fromJson(widget.movie.toJson()),)
+                      )
                     ],
                   ),
                   SizedBox(width: 15),
