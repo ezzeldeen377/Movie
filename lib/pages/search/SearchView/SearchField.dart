@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/app_colors.dart';
-import 'package:movie/pages/search/Cubit/search_cubit.dart';
 
 
 class SearchField extends StatelessWidget {
