@@ -42,21 +42,14 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
           padding: const EdgeInsets.all(8.0),
           child: Text(
             widget.movie.title!,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
             'Release Date: ${widget.movie.releaseDate}',
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.lightGrayColor,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
         SizedBox(height: 16),
@@ -115,19 +108,11 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                             widget.movie.overview??'',
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.lightGrayColor,
-
-                            ),
-
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           secondChild: Text(widget.movie.overview??'',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.lightGrayColor,
-
-                            ),),
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
                           crossFadeState: isExpanded
                               ? CrossFadeState.showSecond
                               : CrossFadeState.showFirst,
@@ -139,7 +124,10 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                               isExpanded = !isExpanded;
                             });
                           },
-                          child: Text(isExpanded ? 'Read less' : 'Read more',style: TextStyle(color: AppColors.yellowColor,fontSize: 18),),
+                          child: Text(
+                            isExpanded ? 'Read less' : 'Read more',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                         ),
                         SizedBox(height: 15),
                         Row(
@@ -153,10 +141,7 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                             Text(
                               widget.movie.voteAverage?.toStringAsFixed(1) ??
                                   'N/A',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: AppColors.lightGrayColor,
-                              ),
+                              style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           ],
                         ),

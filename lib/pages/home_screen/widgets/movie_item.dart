@@ -74,7 +74,7 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
                         child: CachedNetworkImage(
                           imageUrl: fullImageUrl,
                           width: double.infinity,
-                          height: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.width * 0.40,
                           fit: BoxFit.fill,
                           placeholder: (context, url) => Center(
                             child: LoadingAnimationWidget.staggeredDotsWave(
@@ -94,37 +94,33 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
                       )
                     ],
                   ),
-                  SizedBox(height: 3),
+                  SizedBox(height: 7),
                   Padding(
-                    padding: const EdgeInsets.all(6.0),
+                    padding: const EdgeInsets.all(11.0),
                     child: Text(
                       widget.movie.title ?? "",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.whiteColor,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontSize: 15, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.start,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 11.0),
                     child: Text(
                       widget.movie.releaseDate ?? "",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.whiteColor,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 13, fontWeight: FontWeight.normal),
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  SizedBox(height: 2),
+                  SizedBox(height: 7),
                   Padding(
-                    padding: const EdgeInsets.all(6.0),
+                    padding: const EdgeInsets.all(11.0),
                     child: Row(
                       children: [
                         Icon(
@@ -132,13 +128,10 @@ class _MovieItemState extends State<MovieItem> implements WatchListNagvigetor {
                           color: Colors.yellow,
                           size: 20.0,
                         ),
-                        SizedBox(width: 3),
+                        SizedBox(width: 7),
                         Text(
                           widget.movie.voteAverage?.toStringAsFixed(1) ?? 'N/A',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: AppColors.lightGrayColor,
-                          ),
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ],
                     ),

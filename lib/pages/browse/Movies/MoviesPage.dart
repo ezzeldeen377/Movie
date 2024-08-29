@@ -33,11 +33,7 @@ class _MoviespageState extends State<Moviespage> {
         appBar: AppBar(
           title: Text(widget.category.name ?? "",
               style: TextStyle(color: Colors.white)),
-          backgroundColor: AppColors.primaryColor,
-          iconTheme: IconThemeData(color: AppColors.whiteColor),
         ),
-        backgroundColor:
-            Colors.black, // Set the Scaffold background color to black
         body: BlocProvider(
           create: (context) => viewModel,
           child: BlocBuilder<MovieDetailsVeiwmodel, Moviestate>(

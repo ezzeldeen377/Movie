@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/watch_item.dart';
-
-import '../home_screen/model/movie_response.dart';
 
 class WatchList extends StatefulWidget {
   @override
@@ -34,7 +33,10 @@ class _WatchListState extends State<WatchList> implements WatchListNagvigetor {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Text('WatchList',style: TextStyle(color: AppColors.whiteColor,fontSize: 25),),
+              child: Text(
+                'WatchList',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
             BlocConsumer<WatchListViewModel,MoviesState>(
               listener: (context,state){
@@ -46,7 +48,10 @@ class _WatchListState extends State<WatchList> implements WatchListNagvigetor {
 
               builder: (context,state){
                 if(state is LoadingState){
-                  return CircularProgressIndicator(color:  AppColors.whiteColor,);
+                  return LoadingAnimationWidget.staggeredDotsWave(
+                    color: AppColors.whiteColor,
+                    size: 50,
+                  );
                 }else if(state is ErrorState){
                   return Expanded(
                     child: Column(mainAxisAlignment: MainAxisAlignment.center,

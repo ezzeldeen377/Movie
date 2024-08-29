@@ -32,7 +32,8 @@ class CastItem extends StatelessWidget {
                   size: 50,
                 ),
               ),
-              errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.white,),
+                  errorWidget: (context, url, error) =>
+                      Icon(Icons.error, color: AppColors.whiteColor,),
                   fit: BoxFit.cover,
                 )
             ),
@@ -42,9 +43,16 @@ class CastItem extends StatelessWidget {
             width: width*.28,
             child: Column(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(cast.originalName??'',style: TextStyle(color: AppColors.whiteColor,fontSize: 16),),
-                Text(cast.character??'',style: TextStyle(color: AppColors.whiteColor,fontSize: 10),)
-
+                Text(
+                  cast.originalName ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text(
+                  cast.character ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 10,
+                      ),
+                )
               ],
             ),
           ),

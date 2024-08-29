@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
-import 'package:movie/pages/search/Cubit/search_View_Model.dart';
 import 'package:movie/pages/search/Cubit/search_state.dart';
 
 class SearchStateDisplay extends StatelessWidget {
@@ -23,7 +22,12 @@ class SearchStateDisplay extends StatelessWidget {
     final iconSize = mediaQuery.size.height * 0.08;
 
     if (state is SearchLoadingState) {
-      return Center(child: CircularProgressIndicator(color: AppColors.yellowColor));
+      return Center(
+        child: LoadingAnimationWidget.staggeredDotsWave(
+          color: AppColors.whiteColor,
+          size: 50,
+        ),
+      );
     }
     if (state is SearchError) {
       return Expanded(
@@ -34,11 +38,10 @@ class SearchStateDisplay extends StatelessWidget {
             children: [
               Text(
                 'An error occurred, please try again',
-                style: TextStyle(
-                  color: AppColors.whiteColor,
-                  fontSize: mediaQuery.size.height * 0.025,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: mediaQuery.size.height * 0.025),
               ),
               SizedBox(height: padding),
               ElevatedButton(
@@ -52,11 +55,10 @@ class SearchStateDisplay extends StatelessWidget {
                 onPressed: onRetry,
                 child: Text(
                   'Try Again',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: mediaQuery.size.height * 0.022,
-                  ),
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontSize: mediaQuery.size.height * 0.022,
+                        color: AppColors.blackColor,
+                      ),
                 ),
               ),
             ],

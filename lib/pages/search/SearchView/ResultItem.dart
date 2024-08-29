@@ -1,9 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
-import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
 
 
@@ -58,11 +55,10 @@ class ResultItem extends StatelessWidget {
                   children: [
                     Text(
                       movieDetails.title ?? 'No Title',
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: mediaQuery.size.height * 0.020,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontSize: mediaQuery.size.height * 0.020),
                     ),
                     SizedBox(height: 4),
                     Text(
@@ -97,11 +93,11 @@ class ResultItem extends StatelessWidget {
                             width: mediaQuery.size.width * 0.009),
                         Text(
                           movieDetails.releaseDate??'',
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontSize:
-                            mediaQuery.size.height * 0.018,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  fontSize: mediaQuery.size.height * 0.018),
                         ),
                       ],
                     ),

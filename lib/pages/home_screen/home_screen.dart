@@ -10,19 +10,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.blackColor,
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               margin: EdgeInsets.symmetric(vertical: 8),
               height: MediaQuery.of(context).size.height *
-                  0.52, // النسبة التي يشغلها العنصر الأول
+                  0.5, // النسبة التي يشغلها العنصر الأول
               child: PopularDetails(),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('New Releases',style: TextStyle(color: AppColors.whiteColor,fontSize: 24),),
+              child: Text(
+                'New Releases',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
             Container(
               height: MediaQuery.of(context).size.height *
@@ -31,7 +33,10 @@ class HomeScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('Recommended',style: TextStyle(color: AppColors.whiteColor,fontSize: 24),),
+              child: Text(
+                'Recommended',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 8),

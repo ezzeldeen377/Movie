@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
-import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
-import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
 import 'package:movie/pages/search/Cubit/search_View_Model.dart';
 import 'package:movie/pages/search/Cubit/search_state.dart';
 import 'package:movie/pages/search/SearchView/ResultItem.dart';
 import 'package:movie/pages/search/SearchView/SearchField.dart';
-import 'package:movie/pages/search/SearchView/SearchStateDisplay.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -29,7 +27,6 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.black,
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,8 +74,11 @@ class _SearchState extends State<Search> {
                   );
                 } else if (state is SearchLoadingState) {
                   return Center(
-                      child: CircularProgressIndicator(
-                          color: AppColors.yellowColor));
+                    child: LoadingAnimationWidget.staggeredDotsWave(
+                      color: AppColors.whiteColor,
+                      size: 50,
+                    ),
+                  );
                 } else if (state is SearchError) {
                   return Expanded(
                     child: Center(

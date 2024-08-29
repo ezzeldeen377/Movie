@@ -54,7 +54,9 @@ class CategoryItem extends StatelessWidget {
               child: Container(
                 child: Text(
                   categoryItem.name!,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontSize: 20,
+                      ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

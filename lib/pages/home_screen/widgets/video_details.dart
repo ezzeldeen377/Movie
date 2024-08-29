@@ -24,7 +24,9 @@ class VideoDetails extends StatelessWidget {
                 ),
                 child: Text(
                   video.name ?? '',
-                  style: TextStyle(color: AppColors.whiteColor, fontSize: 14),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 14,
+                      ),
                   maxLines: 2,
                 ),
               ),
@@ -46,7 +48,9 @@ class VideoDetails extends StatelessWidget {
                   ),
                   Text(
                     timeago.format(DateTime.parse(video.publishedAt ?? '')),
-                    style: TextStyle(color: AppColors.whiteColor, fontSize: 10),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 12,
+                        ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

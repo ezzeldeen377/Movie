@@ -118,12 +118,11 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
                           children: [
                             Text(
                               widget.movie.title ?? 'No title',
-                              style: TextStyle(
-                                fontSize: widget.screenWidth * 0.05,
-                                // Adjust font size
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.whiteColor,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      fontSize: widget.screenWidth * 0.05),
                               softWrap: true,
                               textAlign: TextAlign.start,
                               maxLines: 2, // Limits the title to 2 lines
@@ -132,11 +131,11 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
                             Text(
                               'Release Date: ${widget.movie.releaseDate ??
                                   'No date'}',
-                              style: TextStyle(
-                                fontSize: widget.screenWidth * 0.04,
-                                // Adjust font size
-                                color: Colors.grey[600],
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(
+                                      fontSize: widget.screenWidth * 0.04),
                               softWrap: true,
                               textAlign: TextAlign.start,
                             ),

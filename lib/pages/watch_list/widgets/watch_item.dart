@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/api/api_constant.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
@@ -89,8 +90,14 @@ class _WatchItemState extends State<WatchItem> implements WatchListNagvigetor{
                           ),
                           child: CachedNetworkImage(
                             imageUrl:  ApiConstant.baseImageUrl+widget.movie.posterPath!,
-                            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                placeholder: (context, url) => Center(
+                                  child:
+                                      LoadingAnimationWidget.staggeredDotsWave(
+                                    color: AppColors.whiteColor,
+                                    size: 50,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) => Icon(Icons.error),
                             fit: BoxFit.fill,
                             width: MediaQuery.of(context).size.width*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container
                             height: MediaQuery.of(context).size.height*.3,// Ensures the image covers the entire container// Makes the image fill the height of its container

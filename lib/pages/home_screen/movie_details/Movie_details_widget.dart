@@ -18,14 +18,11 @@ class MovieDetailsWidget extends StatelessWidget {
     final fullImageUrl = ApiConstant.imageUrl + (movie.posterPath ?? "");
 
     return Scaffold(
-      backgroundColor: AppColors.blackColor,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
         title: Text(
           movie.title ?? 'Movie Details',
-          style: TextStyle(color: AppColors.whiteColor),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
-        iconTheme: IconThemeData(color: AppColors.whiteColor),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -41,11 +38,7 @@ class MovieDetailsWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Cast',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
             MovieCast(credits: movie.credits),
