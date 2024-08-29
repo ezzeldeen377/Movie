@@ -5,26 +5,18 @@ import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/search/Cubit/search_View_Model.dart';
 import 'package:movie/pages/search/Cubit/search_state.dart';
+import 'package:movie/pages/search/Repositroy/data_Source/movie_Remote_data_source_impl.dart';
+import 'package:movie/pages/search/Repositroy/repository/movie_repository_impl.dart';
 import 'package:movie/pages/search/SearchView/ResultItem.dart';
 import 'package:movie/pages/search/SearchView/SearchField.dart';
 
-class Search extends StatefulWidget {
-  @override
-  State<Search> createState() => _SearchState();
-}
 
-class _SearchState extends State<Search> {
-   TextEditingController _searchController = TextEditingController();
-
-  SearchViewModel viewModel =SearchViewModel();
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _searchController.dispose();
-  }
+class Search extends StatelessWidget {
+  SearchViewModel viewModel = SearchViewModel();
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _searchController = TextEditingController();
+
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -36,37 +28,27 @@ class _SearchState extends State<Search> {
               onChanged: (query) {
                 viewModel.search(query);
               },
-              onPreesd: (){
+              onPreesd: () {
                 _searchController.clear();
-                viewModel.clear();
+                context.read<SearchViewModel>().clear();
               },
             ),
-            // BlocBuilder<SearchViewModel, SearchState>(
-            //   builder: (context, state) {
-            //     return SearchStateDisplay(
-            //       state: state,
-            //       searchController: _searchController,
-            //       onRetry: () {
-            //         context.read<SearchViewModel>().search(_searchController.text);
-            //       },
-            //     );
-            //   },
-            // ),
             BlocBuilder<SearchViewModel, SearchState>(
-              bloc: viewModel,
+              bloc: viewModel ,
               builder: (context, state) {
                 if (state is SearchLoaded) {
                   return Expanded(
                     child: ListView.separated(
-                        separatorBuilder:(context,index)=> Divider(
-                          thickness: 3,color: AppColors.darkGrayColor,
-                          endIndent: MediaQuery.of(context).size.width*0.1,
-                          indent: MediaQuery.of(context).size.width*0.1,
-                        ),
-                        itemCount: state.movieResult.length,
-                        itemBuilder:(context,index) {
-                          return ResultItem(movie: state.movieResult[index]);
-                        }
+                      separatorBuilder: (context, index) => Divider(
+                        thickness: 3,
+                        color: AppColors.darkGrayColor,
+                        endIndent: MediaQuery.of(context).size.width * 0.1,
+                        indent: MediaQuery.of(context).size.width * 0.1,
+                      ),
+                      itemCount: state.movieResult.length,
+                      itemBuilder: (context, index) {
+                        return ResultItem(movie: state.movieResult[index]);
+                      },
                     ),
                   );
                 } else if (state is SearchLoadingState) {
