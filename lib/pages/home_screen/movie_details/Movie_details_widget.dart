@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
+import 'package:movie/pages/home_screen/more_like_this/more_like_this_details_view.dart';
+import 'package:movie/pages/home_screen/widgets/cast_widget.dart';
 import 'package:movie/pages/home_screen/widgets/video_slider_widget.dart';
 
 import '../../../app_colors.dart';
@@ -18,14 +20,11 @@ class MovieDetailsWidget extends StatelessWidget {
     final fullImageUrl = ApiConstant.imageUrl + (movie.posterPath ?? "");
 
     return Scaffold(
-      backgroundColor: AppColors.blackColor,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
         title: Text(
           movie.title ?? 'Movie Details',
-          style: TextStyle(color: AppColors.whiteColor),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
-        iconTheme: IconThemeData(color: AppColors.whiteColor),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -41,16 +40,29 @@ class MovieDetailsWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Cast',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
-            MovieCast(credits: movie.credits),
-            SizedBox(height: 16),
-            MoreLikeThis(movieId: movie.id.toString()),
+            Container(
+              height: 150,
+                child: CastWidget(credits: movie.credits!)),
+            Container(color: AppColors.backgroundColor,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'More Like This',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  Container(
+                      height: 310,
+                      child: MoreLikeThisDetailsView(id: movie.id.toString())),
+                ],
+              ),
+            ),
+
             SizedBox(height: 15),
           ],
         ),

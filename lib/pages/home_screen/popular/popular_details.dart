@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/home_screen/popular/cubit/popular_state.dart';
-import 'package:movie/pages/home_screen/popular/popular_widget.dart';
+import 'package:movie/pages/home_screen/popular/movie_carousel.dart';
 
 import '../../../app_colors.dart';
 import 'cubit/popular_details_view_model.dart';
@@ -48,7 +48,7 @@ class _PopularDetailsState extends State<PopularDetails> {
             ),
           );
         } else if (state is PopularSuccessState) {
-          return PopularWidget(popularList: state.popularList);
+          return MovieCarousel(popularList: state.popularList);
         }
         return Text('noooooooo');
       }),

@@ -1,3 +1,4 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -6,13 +7,9 @@ import 'movies_cards.dart';
 
 class MovieCarousel extends StatefulWidget {
   final List<Movie> popularList;
-  final double screenWidth;
-  final double screenHeight;
 
   MovieCarousel({
     required this.popularList,
-    required this.screenWidth,
-    required this.screenHeight,
   });
 
   @override
@@ -21,15 +18,17 @@ class MovieCarousel extends StatefulWidget {
 
 class _MovieCarouselState extends State<MovieCarousel> {
   int _current = 0;
+  final CarouselSliderController _controller = CarouselSliderController(); // Create a CarouselController
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CarouselSlider.builder(
+          carouselController: _controller, // Assign the controller to the CarouselSlider
           itemCount: widget.popularList.length,
           options: CarouselOptions(
-            height: widget.screenHeight * 0.4,
+            height: 300,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 3),
             viewportFraction: 1,
@@ -42,10 +41,11 @@ class _MovieCarouselState extends State<MovieCarousel> {
           ),
           itemBuilder: (context, index, realIndex) {
             var movie = widget.popularList[index];
-            return MovieCard(
-              movie: movie,
-              screenWidth: widget.screenWidth,
-              screenHeight: widget.screenHeight,
+            return Container(
+              height: 300,
+              child: MovieCard(
+                movie: movie,
+              ),
             );
           },
         ),
@@ -56,6 +56,7 @@ class _MovieCarouselState extends State<MovieCarousel> {
             children: widget.popularList.asMap().entries.map((entry) {
               return GestureDetector(
                 onTap: () {
+                  _controller.animateToPage(entry.key); // Move to the selected page
                   setState(() {
                     _current = entry.key;
                   });
@@ -67,8 +68,8 @@ class _MovieCarouselState extends State<MovieCarousel> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: (Theme.of(context).brightness == Brightness.dark
-                            ? Colors.black
-                            : Colors.white)
+                        ? Colors.black
+                        : Colors.white)
                         .withOpacity(_current == entry.key ? 0.9 : 0.4),
                   ),
                 ),

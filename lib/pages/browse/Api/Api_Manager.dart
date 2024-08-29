@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:movie/pages/browse/Api/Api_Constants.dart';
-import 'package:movie/pages/browse/Models/MovieResponse.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 
 
 

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/pages/browse/Models/MovieResponse.dart';
+import 'package:movie/pages/home_screen/model/movie_response.dart';
 
 
 import '../../Api/Api_Manager.dart';

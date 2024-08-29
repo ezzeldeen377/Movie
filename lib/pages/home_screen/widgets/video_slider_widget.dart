@@ -55,11 +55,13 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
             );
           }else if (state is MovieVideoSuccessState){
           return Container(
+            color: AppColors.darkGrayColor,
             child: CarouselSlider.builder(
                   itemCount: state.videoList.length,
                   options: CarouselOptions(
                     // Adjust height based on screen size
                     autoPlay: false,
+                    height: 300,
                     autoPlayInterval: Duration(seconds: 3),
                     viewportFraction: 1,
                     enlargeCenterPage: true,
@@ -70,8 +72,8 @@ class _VideoSliderWidgetState extends State<VideoSliderWidget> {
                   itemBuilder: (context, index, realIndex) {
                     return Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(flex:3,child: VideoWidget(video: state.videoList[index])),
-                        Expanded(flex:1,child: VideoDetails(video: state.videoList[index]))
+                        Expanded(child: VideoWidget(video: state.videoList[index])),
+                        VideoDetails(video: state.videoList[index])
 
                       ],
                     );

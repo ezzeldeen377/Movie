@@ -1,9 +1,19 @@
-import 'package:movie/pages/search/model/SourcesMovie.dart';
 
-abstract class SearchState {
-  List<Results> get results;
-  bool get isLoading;
-  bool get hasError;
+import 'package:movie/pages/home_screen/model/movie_response.dart';
+
+
+abstract class SearchState {}
+
+class SearchLoadingState extends SearchState {}
+
+class SearchLoaded extends SearchState {
+  final List<Movie> movieResult;
+
+  SearchLoaded({required this.movieResult});
 }
 
-abstract class SearchEvent {}
+class SearchError extends SearchState {
+  final String message;
+
+  SearchError(this.message);
+}

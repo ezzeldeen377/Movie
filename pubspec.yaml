@@ -47,6 +47,8 @@ dependencies:
   timeago: ^3.7.0
   bloc: ^8.0.0
   loading_animation_widget: ^1.2.1
+  flutter_screenutil: ^5.9.3
+  device_preview: ^1.2.0
 
 
 

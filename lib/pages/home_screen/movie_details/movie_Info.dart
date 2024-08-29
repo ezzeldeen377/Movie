@@ -6,33 +6,30 @@ import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/widgets/category_view_widget.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
-import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
 
 import '../../../app_colors.dart';
 
 class MovieInfo extends StatefulWidget {
- MovieDetails movie;
+  MovieDetails movie;
 
-  MovieInfo({
-    required this.movie
-  });
+  MovieInfo({required this.movie});
 
   @override
   State<MovieInfo> createState() => _MovieInfoState();
 }
 
-class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
-  WatchListViewModel viewModel =WatchListViewModel();
-  bool isExpanded=false;
+class _MovieInfoState extends State<MovieInfo> {
+  WatchListViewModel viewModel = WatchListViewModel();
+  bool isExpanded = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.nagvigetor=this;
     viewModel.getAllMoviesFromFireStore();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,48 +39,40 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
           padding: const EdgeInsets.all(8.0),
           child: Text(
             widget.movie.title!,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
             'Release Date: ${widget.movie.releaseDate}',
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.lightGrayColor,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
         SizedBox(height: 16),
-        BlocBuilder<WatchListViewModel,MoviesState>(
+        BlocConsumer<WatchListViewModel, MoviesState>(
+          listener: (context, state) {
+            if (state is FinishState) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.finishMessage)));
+            }
+          },
           bloc: viewModel,
-          builder: (context,state){
-            if(state is SuccessState) {
+          builder: (context, state) {
+            if (state is SuccessState) {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
                     children: [
                       Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.4,
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height * 0.3,
+                        width: 150,
+                        height: 200,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(15),
-            bottomRight: Radius.circular(15),
-            topRight: Radius.circular(15)
-            ),
+                          borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                              topRight: Radius.circular(15)),
                           image: DecorationImage(
                             image: NetworkImage(ApiConstant.baseImageUrl +
                                 widget.movie.posterPath!),
@@ -94,11 +83,8 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                       Positioned(
                           top: -6,
                           left: -7,
-                          child: BookMarkWidget(
-                              viewModel: viewModel, movie: Movie.fromJson(widget
-                              .movie.toJson()),isBooked:state.movieList.any((movieSaved){
-                            return movieSaved.id==widget.movie.id;
-                          })))
+                          child:  BookMarkWidget(movie: Movie.fromJson(widget.movie.toJson()),)
+                      )
                     ],
                   ),
                   SizedBox(width: 15),
@@ -106,28 +92,24 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       Wrap(children: widget.movie.genres!.map((category){
-                         return CategoryViewWidget(categoryName: category.name??"");
-                       }).toList(),),
+                        Wrap(
+                          children: widget.movie.genres!.map((category) {
+                            return CategoryViewWidget(
+                                categoryName: category.name ?? "");
+                          }).toList(),
+                        ),
                         SizedBox(height: 15),
                         AnimatedCrossFade(
                           firstChild: Text(
-                            widget.movie.overview??'',
+                            widget.movie.overview ?? '',
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.lightGrayColor,
-
-                            ),
-
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
-                          secondChild: Text(widget.movie.overview??'',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.lightGrayColor,
-
-                            ),),
+                          secondChild: Text(
+                            widget.movie.overview ?? '',
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
                           crossFadeState: isExpanded
                               ? CrossFadeState.showSecond
                               : CrossFadeState.showFirst,
@@ -139,7 +121,10 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                               isExpanded = !isExpanded;
                             });
                           },
-                          child: Text(isExpanded ? 'Read less' : 'Read more',style: TextStyle(color: AppColors.yellowColor,fontSize: 18),),
+                          child: Text(
+                            isExpanded ? 'Read less' : 'Read more',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                         ),
                         SizedBox(height: 15),
                         Row(
@@ -153,10 +138,7 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                             Text(
                               widget.movie.voteAverage?.toStringAsFixed(1) ??
                                   'N/A',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: AppColors.lightGrayColor,
-                              ),
+                              style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           ],
                         ),
@@ -165,11 +147,11 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                   ),
                 ],
               );
-            }else if (state is ErrorState){
+            } else if (state is ErrorState) {
               return Text('Something Went Wrong');
-            }
-            else if(state is LoadingState){
-              return Center(child:Padding(
+            } else if (state is LoadingState) {
+              return Center(
+                  child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: LoadingAnimationWidget.staggeredDotsWave(
                   color: AppColors.whiteColor,
@@ -209,13 +191,6 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
           textAlign: TextAlign.center,
         ),
       ),
-    );
-  }
-  @override
-  showSnakeBar(String message) {
-    // TODO: implement showSnakeBar
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message))
     );
   }
 }
