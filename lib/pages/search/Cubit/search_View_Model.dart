@@ -1,12 +1,8 @@
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/pages/home_screen/model/movieDetails.dart';
-import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
 import 'package:movie/pages/search/Cubit/search_state.dart';
 import 'package:movie/pages/search/api/api_manager.dart';
-import 'package:movie/pages/search/model/SourcesMovie.dart';
-import 'package:movie/pages/watch_list/cubit/movies_state.dart';
+
 
 
 
