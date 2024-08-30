@@ -6,6 +6,7 @@ import 'package:movie/pages/browse/Category/Cubit/CategoryState.dart';
 import 'package:movie/pages/browse/Category/Cubit/Category_details_VeiwModel.dart';
 import 'package:movie/pages/browse/Category_item.dart';
 import 'package:movie/pages/browse/Movies/MoviesPage.dart';
+import 'package:movie/pages/browse/Repo/Category/repo/source_repo_impl.dart';
 import '../Api/Api_Manager.dart';
 
 class CategoryDetails extends StatefulWidget {
@@ -40,7 +41,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               Text(state.ErrorMessage),
               ElevatedButton(
                 onPressed: () {
-                  ApiManager.getCategory();
+                  viewModel.getCategory();
                 },
                 child: Text("Try Again"),
               )

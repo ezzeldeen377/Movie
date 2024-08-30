@@ -16,7 +16,7 @@ import '../Models/CategoryResponse.dart';
 // https://api.themoviedb.org/3/genre/movie/list?api_key=d17eaee37c3c16b0b2ccaee413f91589
 class ApiManager{
 
-  static Future<CategoryResponse>getCategory()async{
+   Future<CategoryResponse>getCategory()async{
 
     Uri url=Uri.https(ApiConstants.baseUrl,ApiConstants.CategoryApiName,{
       "api_key":"d17eaee37c3c16b0b2ccaee413f91589",
@@ -37,7 +37,7 @@ rethrow ;
 
   }
 
-static Future<MovieResponse?>getMoives(int id,int pageNumber)async{
+   Future<MovieResponse?>getMoives(int id,int pageNumber)async{
     Uri url =Uri.https(ApiConstants.baseUrl,ApiConstants.MovieApiName,{
       "api_key":ApiConstants.apiKey,
       "with_genres":id.toString(),
