@@ -9,7 +9,7 @@ import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../app_colors.dart';
 
 class MovieInfo extends StatefulWidget {
@@ -48,7 +48,7 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Release Date: ${widget.movie.releaseDate}',
+            '${AppLocalizations.of(context)!.release_data}' '${widget.movie.releaseDate}',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
@@ -125,7 +125,7 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                             });
                           },
                           child: Text(
-                            isExpanded ? 'Read less' : 'Read more',
+                            isExpanded ? AppLocalizations.of(context)!.less : AppLocalizations.of(context)!.more_read,
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
@@ -151,7 +151,7 @@ class _MovieInfoState extends State<MovieInfo> implements WatchListNagvigetor{
                 ],
               );
             }else if (state is ErrorState){
-              return Text('Something Went Wrong');
+              return Text(AppLocalizations.of(context)!.some);
             }
             else if(state is LoadingState){
               return Center(child:Padding(

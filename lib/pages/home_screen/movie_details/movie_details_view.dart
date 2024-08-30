@@ -6,7 +6,7 @@ import 'package:movie/app_colors.dart';
 import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class MovieDetailsView extends StatefulWidget {
   final String movieId;
 
@@ -43,13 +43,13 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Something went wrong: ${state.errorMessage}',
+                    Text('${AppLocalizations.of(context)!.some}'
+                      '${state.errorMessage}',
                       style: TextStyle(color: AppColors.whiteColor),
                     ),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Try Again'),
+                      child: Text(AppLocalizations.of(context)!.try_again),
                     ),
                   ],
                 ),
@@ -57,7 +57,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
             } else if (state is MovieDetailsSuccessState) {
               return MovieDetailsWidget(movie: state.movieDetail);
             }
-            return Text('noooooooo');
+            return Text(AppLocalizations.of(context)!.no);
           }),
     );
   }

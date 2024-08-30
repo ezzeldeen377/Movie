@@ -7,7 +7,7 @@ import 'package:movie/pages/browse/Category/Cubit/Category_details_VeiwModel.dar
 import 'package:movie/pages/browse/Category_item.dart';
 import 'package:movie/pages/browse/Movies/MoviesPage.dart';
 import '../Api/Api_Manager.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CategoryDetails extends StatefulWidget {
   @override
   State<CategoryDetails> createState() => _CategoryDetailsState();
@@ -42,7 +42,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                 onPressed: () {
                   ApiManager.getCategory();
                 },
-                child: Text("Try Again"),
+                child: Text(AppLocalizations.of(context)!.try_again),
               )
             ],
           );

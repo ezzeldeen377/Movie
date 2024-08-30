@@ -1,3 +1,25 @@
 {
-  "app_title": "Movie App"
+  "app_title": "Movie App",
+  "new_releases": "New Releases",
+  "home": "HOME",
+  "search": "SEARCH",
+  "browse": "BROWSE",
+  "watch_list":"WATCH LIST ",
+  "search_on_any_movie": "Search On Any Movie",
+  "recommended": "Recommended",
+  "no_data":"No Data Found",
+  "try_again": "Try again",
+  "some":"Something went wrong",
+  "no": "Noo",
+  "more": "More like this",
+  "cast": "Cast",
+  "release_data":"Release Date",
+  "empty":"Empty data",
+  "more_read":"Read more",
+  "less": "Read less",
+ "no_title":"No title",
+  "lan":"Languages",
+  "arabic": "Arabic",
+  "english": "English"
+
 }

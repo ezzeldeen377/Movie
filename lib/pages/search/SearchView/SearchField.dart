@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/pages/search/Cubit/search_View_Model.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SearchField extends StatelessWidget {
   final TextEditingController _searchController;
   final Function(String) onChanged;
@@ -23,7 +23,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.darkGrayColor,
-          hintText: 'Search..',
+          hintText:AppLocalizations.of(context)!.search ,
           hintStyle: TextStyle(color: AppColors.whiteColor),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),

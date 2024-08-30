@@ -6,7 +6,7 @@ import 'package:movie/pages/search/Cubit/search_state.dart';
 import 'package:movie/pages/search/api/api_manager.dart';
 import 'package:movie/pages/search/model/SourcesMovie.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class SearchViewModel extends Cubit<SearchState> {

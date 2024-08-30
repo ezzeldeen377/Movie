@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/pages/home_screen/new_releases/releases_details_view.dart';
 import 'package:movie/pages/home_screen/popular/popular_details.dart';
 import 'package:movie/pages/home_screen/recommended/recommended_details.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'New Releases',
+                AppLocalizations.of(context)!.new_releases,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Recommended',
+                AppLocalizations.of(context)!.recommended,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),

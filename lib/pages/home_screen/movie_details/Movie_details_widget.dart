@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/widgets/video_slider_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../app_colors.dart';
 import '../api/api_constant.dart';
 import 'more_like.dart';
@@ -37,7 +37,7 @@ class MovieDetailsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Cast',
+                AppLocalizations.of(context)!.cast,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),

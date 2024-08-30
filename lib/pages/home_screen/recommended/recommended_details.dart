@@ -5,7 +5,7 @@ import 'package:movie/pages/home_screen/recommended/cubit/recommended_details_vi
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_state.dart';
 import 'package:movie/pages/home_screen/recommended/recommended_widget.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../app_colors.dart';
 
 class RecommendeDetails extends StatefulWidget {
@@ -41,10 +41,10 @@ class _RecommendeDetailsState extends State<RecommendeDetails> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Something went wrong: ${state.errorMessage}'),
+                    Text('${AppLocalizations.of(context)!.some}'' ${state.errorMessage}'),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Try Again'),
+                      child: Text(AppLocalizations.of(context)!.no),
                     ),
                   ],
                 ),
@@ -82,7 +82,7 @@ class _RecommendeDetailsState extends State<RecommendeDetails> {
               )
               );
             }
-            return Center(child: Text('noooooooo',style: TextStyle(color: AppColors.whiteColor),));
+            return Center(child: Text(AppLocalizations.of(context)!.no,style: TextStyle(color: AppColors.whiteColor),));
           }),
     );
   }

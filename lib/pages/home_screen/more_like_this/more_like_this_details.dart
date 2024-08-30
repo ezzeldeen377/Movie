@@ -7,6 +7,7 @@ import '../../../app_colors.dart';
 import 'cubit/more_like_this_state.dart';
 import 'cubit/more_like_this_view_model.dart';
 import 'more_like_this_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MoreLikeThisLogic extends StatefulWidget {
   String id;
@@ -45,10 +46,10 @@ class _MoreLikeThisLogicState extends State<MoreLikeThisLogic> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Something went wrong: ${state.errorMessage}'),
+                    Text('${AppLocalizations.of(context)!.some} ${state.errorMessage}'),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Try Again'),
+                      child: Text(AppLocalizations.of(context)!.try_again),
                     ),
                   ],
                 ),
@@ -86,7 +87,7 @@ class _MoreLikeThisLogicState extends State<MoreLikeThisLogic> {
               )
               );
             }
-            return Center(child: Text('noooooooo',style: TextStyle(color: AppColors.whiteColor),));
+            return Center(child: Text(AppLocalizations.of(context)!.no,style: TextStyle(color: AppColors.whiteColor),));
           }),
     );
   }

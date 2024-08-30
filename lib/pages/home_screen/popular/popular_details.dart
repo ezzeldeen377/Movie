@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/home_screen/popular/cubit/popular_state.dart';
 import 'package:movie/pages/home_screen/popular/popular_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../app_colors.dart';
 import 'cubit/popular_details_view_model.dart';
 
@@ -39,10 +39,10 @@ class _PopularDetailsState extends State<PopularDetails> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Something went wrong: ${state.errorMessage}'),
+                Text( '${AppLocalizations.of(context)!.some}''${state.errorMessage}'),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Try Again'),
+                  child: Text(AppLocalizations.of(context)!.try_again),
                 ),
               ],
             ),
@@ -50,7 +50,7 @@ class _PopularDetailsState extends State<PopularDetails> {
         } else if (state is PopularSuccessState) {
           return PopularWidget(popularList: state.popularList);
         }
-        return Text('noooooooo');
+        return Text(AppLocalizations.of(context)!.no);
       }),
     );
   }

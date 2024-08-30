@@ -6,7 +6,7 @@ import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_navigetor.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../api/api_constant.dart';
 import '../model/movie_response.dart';
 import '../movie_details/movie_details_view.dart';
@@ -117,7 +117,7 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              widget.movie.title ?? 'No title',
+                              widget.movie.title ?? AppLocalizations.of(context)!.no_title,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -129,8 +129,8 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
                             ),
                             SizedBox(height: 4),
                             Text(
-                              'Release Date: ${widget.movie.releaseDate ??
-                                  'No date'}',
+                              '${AppLocalizations.of(context)!.release_data}''${widget.movie.releaseDate ??
+                            AppLocalizations.of(context)!.release_data }',
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall!
@@ -147,7 +147,7 @@ class _MovieCardState extends State<MovieCard> implements WatchListNagvigetor {
             ]),
           );
         }else if (state is ErrorState){
-          return Text('Something Went Wrong');
+          return Text(AppLocalizations.of(context)!.some);
         }
         else if(state is LoadingState){
           return Center(

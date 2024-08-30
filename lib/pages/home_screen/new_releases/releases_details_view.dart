@@ -4,7 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/pages/home_screen/new_releases/cubit/releases_state.dart';
 import 'package:movie/pages/home_screen/new_releases/releases_widget.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../app_colors.dart';
 import 'cubit/releases_details_view_model.dart';
 
@@ -40,10 +40,10 @@ ReleasesDetailsViewModel viewModel=ReleasesDetailsViewModel();
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Something went wrong: ${state.errorMessage}'),
+                Text('${AppLocalizations.of(context)!.some}' '${state.errorMessage}'),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Try Again'),
+                  child: Text(AppLocalizations.of(context)!.try_again),
                 ),
               ],
             ),
@@ -81,7 +81,7 @@ ReleasesDetailsViewModel viewModel=ReleasesDetailsViewModel();
               )
                 );
         }
-        return Center(child: Text('noooooooo',style: TextStyle(color: AppColors.whiteColor),));
+        return Center(child: Text(AppLocalizations.of(context)!.no,style: TextStyle(color: AppColors.whiteColor),));
       }),
     );
   }

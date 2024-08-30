@@ -5,7 +5,7 @@ import 'package:movie/pages/browse/CategoryPhoto.dart';
 import 'package:movie/pages/browse/Movies/Cubit/MovieState.dart';
 import 'package:movie/pages/browse/Movies/Cubit/Movie_details_viewModel.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../app_colors.dart';
 
@@ -52,10 +52,10 @@ class _MoviespageState extends State<Moviespage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Something went wrong: ${state.errorMessage}'),
+                        Text('${AppLocalizations.of(context)!.some} ${state.errorMessage}'),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('Try Again'),
+                          child: Text(AppLocalizations.of(context)!.try_again),
                         ),
                       ],
                     ),
@@ -102,7 +102,7 @@ class _MoviespageState extends State<Moviespage> {
                 }
                 return Center(
                     child: Text(
-                  'noooooooo',
+                  AppLocalizations.of(context)!.no,
                   style: TextStyle(color: AppColors.whiteColor),
                 ));
               }),
