@@ -9,8 +9,8 @@ class MovieRepositoryImpl implements MovieRepository {
   MovieRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<MovieResponse?> searchMovies(String query) async {
-    return await remoteDataSource.searchMovies(query);
+  Future<MovieResponse?> searchMovies(String query,String appLanguage) async {
+    return await remoteDataSource.searchMovies(query,appLanguage);
   }
 
 }

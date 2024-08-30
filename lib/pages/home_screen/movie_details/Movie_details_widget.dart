@@ -9,7 +9,7 @@ import '../api/api_constant.dart';
 import 'more_like.dart';
 import 'movie_Info.dart';
 import 'movie_cast.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
 
@@ -39,7 +39,7 @@ class MovieDetailsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Cast',
+                AppLocalizations.of(context)!.cast,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
@@ -52,7 +52,7 @@ class MovieDetailsWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'More Like This',
+                      AppLocalizations.of(context)!.more,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),

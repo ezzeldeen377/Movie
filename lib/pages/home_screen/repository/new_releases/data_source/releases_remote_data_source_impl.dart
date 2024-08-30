@@ -8,10 +8,10 @@ import '../../../api/api_constant.dart';
 
 class ReleasesRemoteDataSourceImpl implements ReleasesRemoteDataSource {
   @override
-  Future<MovieResponse?> getNewReleases(int pageNumber) async {
+  Future<MovieResponse?> getNewReleases(int pageNumber,String appLanguage) async {
     Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.upcomingApi, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
-      'language': 'en-US',
+      'language': 'en',
       'page': pageNumber.toString(),
     });
     try {

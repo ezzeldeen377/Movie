@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/app_colors.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchField extends StatelessWidget {
   final TextEditingController _searchController;
@@ -25,7 +25,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.darkGrayColor,
-          hintText: 'Search..',
+          hintText:AppLocalizations.of(context)!.search.toLowerCase()+'...' ,
           hintStyle: TextStyle(color: AppColors.whiteColor,fontSize: 16),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),

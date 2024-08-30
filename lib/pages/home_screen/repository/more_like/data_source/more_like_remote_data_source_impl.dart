@@ -7,11 +7,11 @@ import '../../../api/api_constant.dart';
 
 class MoreLikeRemoteDataSourceImpl implements MoreLikeRemoteDataSource {
   @override
-  Future<MovieResponse?> getMoreLike(String id, int pageNumber) async {
+  Future<MovieResponse?> getMoreLike(String id, int pageNumber,String appLanguage) async {
     Uri url = Uri.https(
         ApiConstant.baseUrl, ApiConstant.apiName + id + ApiConstant.similar, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
-      'language': 'en-US',
+      'language': appLanguage,
       'page': pageNumber.toString(),
     });
 

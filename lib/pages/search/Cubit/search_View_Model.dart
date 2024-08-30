@@ -15,11 +15,11 @@ class SearchViewModel extends Cubit<SearchState> {
     repository = MovieRepositoryImpl(remoteDataSource: dataSource);
   }
 
-  void search(String query) async {
+  void search(String query,String appLanguage) async {
     emit(SearchLoadingState());
 
     try {
-      final response = await repository.searchMovies(query);
+      final response = await repository.searchMovies(query,appLanguage);
       if(response == null || response.results == null || response.results!.isEmpty) {
         emit(SearchError("No Data Found"));
       } else {
