@@ -5,35 +5,31 @@ import 'package:http/http.dart' as http;
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 
 import 'package:movie/pages/home_screen/model/movie_response.dart';
+import 'package:movie/pages/watch_list/repository/data_source/watch_list_data_soucre_impl.dart';
+import 'package:movie/pages/watch_list/repository/data_source/watch_list_data_source.dart';
+import 'package:movie/pages/watch_list/repository/repository/watch_list_repository.dart';
+import 'package:movie/pages/watch_list/repository/repository/watch_list_repository_impl.dart';
 
 
 class WatchListViewModel extends Cubit<MoviesState>{
-  WatchListViewModel():super(InitState());
-
-
-  void deleteAllFromFireStore()async{
-    var collRef=await getCollection();
-    var snapshot= await collRef!.get();
-    for(QueryDocumentSnapshot doc in snapshot.docs){
-      doc.reference.delete();
-    }
-    emit(FinishState(finishMessage: "All Movies Delete Success"));
+  late WatchListRepository repository;
+  late WatchListDataSource dataSource;
+  WatchListViewModel():super(LoadingState()){
+    dataSource=WatchListDataSourceImpl();
+    repository=WatchListRepositoryImpl(dataSource:dataSource );
   }
 
-  Future<CollectionReference<Movie>?> getCollection() async {
-    return  FirebaseFirestore.instance.collection('Movies')
-        .withConverter<Movie>(
-        fromFirestore: (snapshot,options)=>Movie.fromJson(snapshot.data()),
-        toFirestore: (movie,options)=>movie.toJson()
-    );
+
+  Future<void> deleteAllFromFireStore()async{
+    await repository.deleteAll();
+    emit(FinishState(finishMessage: "All Movies Delete Success"));
   }
 
   Future<void> addMovieToFireStore(Movie movie) async {
     try {
-      var collref = await getCollection();
-       await collref?.doc(movie.id.toString()).set(movie);
-      emit(FinishState(finishMessage: "Added Successfully"));
-      getAllMoviesFromFireStore();
+      var response=await repository.addMovie(movie);
+        emit(FinishState(finishMessage: "Added Successfully"));
+        getAllMoviesFromFireStore();
     }catch (e){
       emit(ErrorState(errorMessage: e.toString()));
     }
@@ -42,34 +38,25 @@ class WatchListViewModel extends Cubit<MoviesState>{
   Future<void> getAllMoviesFromFireStore({bool fromWatchlist=false}) async {
     if(fromWatchlist){
       emit(LoadingState());
-
-    }else{
-
     }
-    try {
-      var collref = await getCollection();
-       collref?.snapshots().listen((snapshot) {
-         var movieList= snapshot.docs.map((element) {
-          return element.data();
-        }).toList();
-         emit(SuccessState(movieList: movieList));
-
-
-       });
-    }catch (e){
-      emit(ErrorState(errorMessage: e.toString()));
-
-    }
-
+   try{
+     var response= repository.getAllMovies().listen((movieList){
+       emit(SuccessState(movieList: movieList));
+     });
+   }catch(e){
+      emit(ErrorState(errorMessage:e.toString()));
+   }
   }
 
   Future<void> removeMovieFromFireStore(Movie movie) async {
     try {
-      var collref = await getCollection();
-      collref?.doc(movie.id.toString()).delete();
-      emit(FinishState(finishMessage: "Deleted Successfully"));
-      getAllMoviesFromFireStore();
-
+      bool response =await repository.removeMovie(movie);
+      if(response) {
+        emit(FinishState(finishMessage: "Deleted Successfully"));
+        getAllMoviesFromFireStore();
+      }else{
+        emit(ErrorState(errorMessage: 'Something went wrong '));
+      }
     }catch (e){
       emit(ErrorState(errorMessage: e.toString()));
     }

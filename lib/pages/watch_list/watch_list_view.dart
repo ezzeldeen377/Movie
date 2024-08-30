@@ -83,21 +83,42 @@ class _WatchListState extends State<WatchList>  {
                       ],
                     ),
                   );
-                }else if(state is SuccessState){
-                  return Expanded(
-                    child: ListView.separated(
-                      separatorBuilder:(context,index)=> Divider(
-                        thickness: 3,color: AppColors.darkGrayColor,
-                      endIndent: MediaQuery.of(context).size.width*0.1,
-                      indent: MediaQuery.of(context).size.width*0.1,
+                }else if(state is SuccessState) {
+                  if (state.movieList.isNotEmpty) {
+                    return Expanded(
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            Divider(
+                              thickness: 3, color: AppColors.darkGrayColor,
+                              endIndent: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * 0.1,
+                              indent: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * 0.1,
+                            ),
+                        itemBuilder: (context, index) =>
+                            Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: WatchItem(movie: state.movieList[index],),
+                            ),
+                        itemCount: state.movieList.length,
                       ),
-                        itemBuilder: (context,index)=>Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: WatchItem(movie: state.movieList[index],),
-                        ),
-                    itemCount: state.movieList.length,
-                    ),
-                  );
+                    );
+                  }else{
+                    return Expanded(
+                      child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ImageIcon(AssetImage('assets/icons/no_data_icon.png'),size: 100,color: AppColors.whiteColor,),
+                          SizedBox(height: 10,),
+                          Text("No Movies To Show\n Try Add One",style: TextStyle(color: AppColors.whiteColor),textAlign: TextAlign.center,),
+                        ],
+                      ),
+                    );
+                  }
                 }
                 return Container();
             },
