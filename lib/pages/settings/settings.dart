@@ -8,6 +8,7 @@ import 'package:movie/pages/home_screen/recommended/cubit/recommended_details_vi
 import 'package:movie/pages/home_screen/recommended/recommended_details.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movie/pages/init_route/init_route.dart';
 
 import '../home_screen/home_screen.dart';
 import '../home_screen/popular/cubit/popular_details_view_model.dart';
@@ -28,7 +29,7 @@ class SettingScreen extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => InitRoute(),
           ),
         );
       },
