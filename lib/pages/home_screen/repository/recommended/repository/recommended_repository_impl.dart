@@ -9,7 +9,7 @@ class RecommendedRepositoryImpl implements RecommendedRepository {
   RecommendedRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<MovieResponse?> getNewRecommended(int pageNumber) async {
-    return await remoteDataSource.getRecommended(pageNumber);
+  Future<MovieResponse?> getNewRecommended(int pageNumber,String appLanguage) async {
+    return await remoteDataSource.getRecommended(pageNumber,appLanguage);
   }
 }

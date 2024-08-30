@@ -8,7 +8,6 @@ import 'package:movie/pages/home_screen/repository/new_releases/repository/relea
 
 class ReleasesDetailsViewModel extends Cubit<ReleasesState> {
   late ReleasesRepository releasesRepository;
-
   late ReleasesRemoteDataSource remoteDataSource;
 
   ReleasesDetailsViewModel() : super(ReleasesLoadingState()) {
@@ -18,7 +17,7 @@ class ReleasesDetailsViewModel extends Cubit<ReleasesState> {
   }
   int pageNumber=1;
    List<Movie> list=[];
-  void getReleases({bool fromPagination=false}) async {
+  void getReleases(String appLanguage,{bool fromPagination=false}) async {
     if(fromPagination){
       emit(ReleasesPaginationState());
     }else{
@@ -26,7 +25,7 @@ class ReleasesDetailsViewModel extends Cubit<ReleasesState> {
 
     }
     try {
-      var response = await releasesRepository.getNewReleases(pageNumber);
+      var response = await releasesRepository.getNewReleases(pageNumber,appLanguage);
       if (response!.results!.isEmpty) {
         emit(ReleasesErrorState(errorMessage: 'Empty data'));
       } else {
@@ -35,7 +34,7 @@ class ReleasesDetailsViewModel extends Cubit<ReleasesState> {
           list.addAll(response.results ?? []);
         }
         emit(ReleasesSuccessState(releasesList: list));
-        print(response.totalPages);
+        print(response.results![1].title);
       }
     } catch (e) {
       throw e;

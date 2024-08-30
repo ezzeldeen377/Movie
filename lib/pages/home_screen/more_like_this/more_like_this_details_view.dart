@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app_colors.dart';
 import 'cubit/more_like_this_state.dart';
 import 'cubit/more_like_this_view_model.dart';
-
-class MoreLikeThisDetailsView extends StatefulWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+class MoreLikeThisDetailsView extends StatelessWidget {
   String id;
 
   MoreLikeThisDetailsView({required this.id});
 
-  @override
-  State<MoreLikeThisDetailsView> createState() => _MoreLikeThisDetailsViewState();
-}
-
-class _MoreLikeThisDetailsViewState extends State<MoreLikeThisDetailsView> {
   MoreLikeThisViewModel viewModel = MoreLikeThisViewModel();
+  AppProvider provider=AppProvider();
 
   @override
-  void initState() {
-    super.initState();
-    viewModel.getMoreLike(widget.id);
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    viewModel.getMoreLike(id,provider.appLanguage);
+
     return BlocProvider(
       create: (context)=>viewModel,
       child: BlocBuilder<MoreLikeThisViewModel, MoreLikeState>(
@@ -44,10 +41,10 @@ class _MoreLikeThisDetailsViewState extends State<MoreLikeThisDetailsView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Something went wrong: ${state.errorMessage}'),
+                    Text(AppLocalizations.of(context)!.some +state.errorMessage),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Try Again'),
+                      child: Text(AppLocalizations.of(context)!.try_again),
                     ),
                   ],
                 ),
@@ -57,7 +54,7 @@ class _MoreLikeThisDetailsViewState extends State<MoreLikeThisDetailsView> {
                   onNotification: (notification){
 
                     if(notification.metrics.pixels==notification.metrics.maxScrollExtent&&notification is ScrollUpdateNotification){
-                      viewModel.getMoreLike(widget.id,fromPagination: true);
+                      viewModel.getMoreLike(id,provider.appLanguage,fromPagination: true);
                     }
                     return true ;
                   },child: Row(
@@ -86,7 +83,7 @@ class _MoreLikeThisDetailsViewState extends State<MoreLikeThisDetailsView> {
               )
               );
             }
-            return Center(child: Text('noooooooo',style: TextStyle(color: AppColors.whiteColor),));
+            return Center(child: Text(AppLocalizations.of(context)!.empty,style: TextStyle(color: AppColors.whiteColor),));
           }),
     );
   }

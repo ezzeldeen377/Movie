@@ -12,7 +12,7 @@ import 'package:movie/pages/home_screen/movie_details/movie_details_view.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/book_mark_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class WatchItem extends StatefulWidget {
   Movie movie;
   WatchItem({required this.movie});
@@ -60,7 +60,7 @@ class _WatchItemState extends State<WatchItem> {
                     backgroundColor:AppColors.yellowColor,
                     foregroundColor: AppColors.blackColor,
                     icon: Icons.delete,
-                    label: 'Delete',
+                    label:AppLocalizations.of(context)!.delete,
                     padding: EdgeInsets.all(10),
                   )
           ]),

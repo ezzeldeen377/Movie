@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_details_view_model.dart';
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_state.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
 
 import '../../../app_colors.dart';
 
-class RecommendeDetails extends StatefulWidget {
-  @override
-  State<RecommendeDetails> createState() => _RecommendeDetailsState();
-}
-
-class _RecommendeDetailsState extends State<RecommendeDetails> {
+class RecommendeDetails extends StatelessWidget {
   RecommendedDetailsViewModel viewModel = RecommendedDetailsViewModel();
-
-  @override
-  void initState() {
-    super.initState();
-    viewModel.getRecommended();
-  }
-
+  AppProvider provider=AppProvider();
   @override
   Widget build(BuildContext context) {
+    viewModel.getRecommended(provider.appLanguage);
     return BlocProvider(
       create: (context)=>viewModel,
       child: BlocBuilder<RecommendedDetailsViewModel, RecommendedState>(
@@ -53,7 +44,7 @@ class _RecommendeDetailsState extends State<RecommendeDetails> {
                   onNotification: (notification){
 
                     if(notification.metrics.pixels==notification.metrics.maxScrollExtent&&notification is ScrollUpdateNotification){
-                      viewModel.getRecommended(fromPagination: true);
+                      viewModel.getRecommended(provider.appLanguage,fromPagination: true);
                     }
                     return true ;
                   },child: Row(

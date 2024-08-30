@@ -5,7 +5,7 @@ import 'package:movie/app_colors.dart';
 import 'package:movie/pages/watch_list/cubit/movies_state.dart';
 import 'package:movie/pages/watch_list/cubit/watch_list_view_model.dart';
 import 'package:movie/pages/watch_list/widgets/watch_item.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class WatchList extends StatefulWidget {
   @override
   State<WatchList> createState() => _WatchListState();
@@ -34,14 +34,14 @@ class _WatchListState extends State<WatchList>  {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Text(
-                    'WatchList',
+                    AppLocalizations.of(context)!.watch_list,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: ElevatedButton.icon(
-                    label: Text('Delete All'),
+                    label: Text(AppLocalizations.of(context)!.delete_all),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.yellowColor,
                       foregroundColor: AppColors.backgroundColor,
@@ -114,7 +114,7 @@ class _WatchListState extends State<WatchList>  {
                         children: [
                           ImageIcon(AssetImage('assets/icons/no_data_icon.png'),size: 100,color: AppColors.whiteColor,),
                           SizedBox(height: 10,),
-                          Text("No Movies To Show\n Try Add One",style: TextStyle(color: AppColors.whiteColor),textAlign: TextAlign.center,),
+                          Text(AppLocalizations.of(context)!.no_movie_to_show,style: TextStyle(color: AppColors.whiteColor),textAlign: TextAlign.center,),
                         ],
                       ),
                     );

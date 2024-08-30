@@ -19,14 +19,14 @@ class MoreLikeThisViewModel extends Cubit<MoreLikeState> {
   int pageNumber=1;
   List<Movie> list=[];
 
-  void getMoreLike(String id,{bool fromPagination=false}) async {
+  void getMoreLike(String id,String appLanguage,{bool fromPagination=false}) async {
     if(fromPagination){
       emit(MoreLikeThisPaginationState());
     }else{
       emit(MoreLikeThisLoadingState());
     }
     try {
-      var response = await moreLikeRepository.getMoreLike(id, pageNumber);
+      var response = await moreLikeRepository.getMoreLike(id, pageNumber,appLanguage);
 
       if (response == null ||
           response.results == null ||

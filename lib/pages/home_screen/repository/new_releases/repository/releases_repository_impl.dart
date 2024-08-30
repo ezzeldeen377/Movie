@@ -8,7 +8,7 @@ class ReleasesRepositoryImpl implements ReleasesRepository {
   ReleasesRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<MovieResponse?> getNewReleases(int pageNumber) async {
-    return await remoteDataSource.getNewReleases(pageNumber);
+  Future<MovieResponse?> getNewReleases(int pageNumber,String appLanguage) async {
+    return await remoteDataSource.getNewReleases(pageNumber,appLanguage);
   }
 }

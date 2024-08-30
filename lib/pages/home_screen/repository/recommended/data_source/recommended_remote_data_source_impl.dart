@@ -8,10 +8,10 @@ import '../recommended_data_source.dart';
 
 class RecommendedRemoteDataSourceImpl implements RecommendedRemoteDataSource {
   @override
-  Future<MovieResponse?> getRecommended(int pageNumber) async {
+  Future<MovieResponse?> getRecommended(int pageNumber,String appLanguage) async {
     Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.topRatedApi, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
-      'language': 'en-US',
+      'language': appLanguage,
       'page': pageNumber.toString(),
     });
     try {

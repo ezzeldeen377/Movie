@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/new_releases/cubit/releases_state.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app_colors.dart';
 import 'cubit/releases_details_view_model.dart';
@@ -14,14 +16,12 @@ class ReleasesDetailsView extends StatefulWidget {
 
 class _ReleasesDetailsViewState extends State<ReleasesDetailsView> {
   ReleasesDetailsViewModel viewModel = ReleasesDetailsViewModel();
-  @override
-  void initState() {
-    super.initState();
-    viewModel.getReleases();
-  }
+  AppProvider provider=AppProvider();
 
   @override
   Widget build(BuildContext context) {
+    viewModel.getReleases(provider.appLanguage);
+
     return BlocProvider(
       create: (context) => viewModel,
       child: BlocBuilder<ReleasesDetailsViewModel, ReleasesState>(
@@ -53,7 +53,9 @@ class _ReleasesDetailsViewState extends State<ReleasesDetailsView> {
                     if (notification.metrics.pixels ==
                             notification.metrics.maxScrollExtent &&
                         notification is ScrollUpdateNotification) {
-                      viewModel.getReleases(fromPagination: true);
+                      viewModel.getReleases(provider.appLanguage,fromPagination: true);
+                      print('@@@@@@@@@@@@@@@@@@@here');
+
                     }
                     return true;
                   },

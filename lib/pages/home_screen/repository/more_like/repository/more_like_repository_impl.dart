@@ -8,7 +8,7 @@ class MoreLikeRepositoryImpl implements MoreLikeRepository {
   MoreLikeRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<MovieResponse?> getMoreLike(String id, int pageNumber) async {
-    return await remoteDataSource.getMoreLike(id, pageNumber);
+  Future<MovieResponse?> getMoreLike(String id, int pageNumber,String appLanguage) async {
+    return await remoteDataSource.getMoreLike(id, pageNumber,appLanguage);
   }
 }
