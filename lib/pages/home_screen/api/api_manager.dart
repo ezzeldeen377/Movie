@@ -83,25 +83,25 @@ class ApiManager {
   //   }
   // }
 
-  static Future<MovieDetails?> getMovieDetails(String movieId) async {
-    Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.apiName + movieId, {
-      'api_key': '8ad9e9ba188516e715696297859dfd0f',
-      'language': 'en-US',
-      'page': '1',
-      'append_to_response':'credits'
-    });
-
-    try {
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        return MovieDetails.fromJson(jsonDecode(response.body));
-      } else {
-        throw Exception('Failed to load movie details: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw e;
-    }
-  }
+  // static Future<MovieDetails?> getMovieDetails(String movieId) async {
+  //   Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.apiName + movieId, {
+  //     'api_key': '8ad9e9ba188516e715696297859dfd0f',
+  //     'language': 'en-US',
+  //     'page': '1',
+  //     'append_to_response':'credits'
+  //   });
+  //
+  //   try {
+  //     var response = await http.get(url);
+  //     if (response.statusCode == 200) {
+  //       return MovieDetails.fromJson(jsonDecode(response.body));
+  //     } else {
+  //       throw Exception('Failed to load movie details: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
   /*
   https://api.themoviedb.org/3/movie/{movie_id}/similar
