@@ -10,7 +10,6 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
   late MovieDetails movieDetails;
   Future<void> getMovieDetail(String id) async {
     try {
-      emit(MovieDetailsLoadingState());
 
       var response = await ApiManager.getMovieDetails(id);
 

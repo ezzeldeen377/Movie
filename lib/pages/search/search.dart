@@ -30,7 +30,7 @@ class Search extends StatelessWidget {
               },
               onPreesd: () {
                 _searchController.clear();
-                context.read<SearchViewModel>().clear();
+                viewModel.clear();
               },
             ),
             BlocBuilder<SearchViewModel, SearchState>(

@@ -78,7 +78,7 @@ class ResultItem extends StatelessWidget {
                         SizedBox(
                             width: 5),
                         Text(
-                          movie.voteAverage!.toStringAsFixed(1),
+                          movie.voteAverage?.toStringAsFixed(1)??'',
                           style: TextStyle(
                               color: AppColors.whiteColor,fontSize: 12),
                         ),

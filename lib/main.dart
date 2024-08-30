@@ -18,9 +18,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseFirestore.instance.enableNetwork();
-  runApp( DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MyApp()),
+  runApp( MyApp(),
   );
 }
 
