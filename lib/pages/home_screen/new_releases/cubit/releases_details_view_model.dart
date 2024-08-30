@@ -1,12 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/new_releases/cubit/releases_state.dart';
-
-import '../../api/api_manager.dart';
+import 'package:movie/pages/home_screen/repository/new_releases/data_source/releases_remote_data_source_impl.dart';
+import 'package:movie/pages/home_screen/repository/new_releases/relases_repository.dart';
+import 'package:movie/pages/home_screen/repository/new_releases/releases_data_source.dart';
+import 'package:movie/pages/home_screen/repository/new_releases/repository/releases_repository_impl.dart';
 
 class ReleasesDetailsViewModel extends Cubit<ReleasesState> {
-  ReleasesDetailsViewModel() : super(ReleasesLoadingState());
-   int pageNumber=1;
+  late ReleasesRepository releasesRepository;
+
+  late ReleasesRemoteDataSource remoteDataSource;
+
+  ReleasesDetailsViewModel() : super(ReleasesLoadingState()) {
+    remoteDataSource = ReleasesRemoteDataSourceImpl();
+    releasesRepository =
+        ReleasesRepositoryImpl(remoteDataSource: remoteDataSource);
+  }
+  int pageNumber=1;
    List<Movie> list=[];
   void getReleases({bool fromPagination=false}) async {
     if(fromPagination){
@@ -16,7 +26,7 @@ class ReleasesDetailsViewModel extends Cubit<ReleasesState> {
 
     }
     try {
-      var response = await ApiManager.getNewReleases(pageNumber);
+      var response = await releasesRepository.getNewReleases(pageNumber);
       if (response!.results!.isEmpty) {
         emit(ReleasesErrorState(errorMessage: 'Empty data'));
       } else {
