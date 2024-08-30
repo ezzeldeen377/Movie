@@ -7,22 +7,17 @@ import 'package:movie/pages/home_screen/popular/movie_carousel.dart';
 import '../../../app_colors.dart';
 import 'cubit/popular_details_view_model.dart';
 
-class PopularDetails extends StatefulWidget {
-  @override
-  State<PopularDetails> createState() => _PopularDetailsState();
-}
-
-class _PopularDetailsState extends State<PopularDetails> {
+class PopularDetails extends StatelessWidget {
   PopularDetailsViewModel viewModel = PopularDetailsViewModel();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    viewModel.getPopular();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
+    viewModel.getPopular(provider.appLanguage);
+
     return BlocProvider(
       create: (context) => viewModel,
       child: BlocBuilder<PopularDetailsViewModel, PopularState>(

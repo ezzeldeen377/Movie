@@ -8,9 +8,9 @@ import '../popular_data_source.dart';
 
 class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
   @override
-  Future<MovieResponse?> getPopular() async {
+  Future<MovieResponse?> getPopular(String appLanguage) async {
     Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.popularApi, {
-      'language': 'en-US',
+      'language': appLanguage,
       'page': '1',
       'api_key': '8ad9e9ba188516e715696297859dfd0f'
     });

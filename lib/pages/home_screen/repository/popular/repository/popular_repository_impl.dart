@@ -8,7 +8,7 @@ class PopularRepositoryImpl implements PopularRepository {
   PopularRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<MovieResponse?> getPopular() async {
-    return await remoteDataSource.getPopular();
+  Future<MovieResponse?> getPopular(String appLanguage) async {
+    return await remoteDataSource.getPopular(appLanguage);
   }
 }

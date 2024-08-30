@@ -15,10 +15,10 @@ class PopularDetailsViewModel extends Cubit<PopularState> {
         PopularRepositoryImpl(remoteDataSource: remoteDataSource);
   }
 
-  void getPopular() async {
+  void getPopular(String appLanguage) async {
     try {
       emit(PopularLoadingState());
-      var response = await popularRepository.getPopular();
+      var response = await popularRepository.getPopular(appLanguage);
       if (response!.results!.isEmpty) {
         emit(PopularErrorState(errorMessage: 'Empty data'));
       } else {
