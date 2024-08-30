@@ -2,14 +2,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/pages/browse/Api/Api_Manager.dart';
 import 'package:movie/pages/browse/Category/Cubit/CategoryState.dart';
 import 'package:movie/pages/browse/CategoryPhoto.dart';
+import 'package:movie/pages/browse/Repo/Category/data_source/source_remote_data_source.dart';
+import 'package:movie/pages/browse/Repo/Category/repo/source_repo_impl.dart';
+
+import '../../Repo/Category/Category_data_source.dart';
+import '../../Repo/Category/Category_repo_contract.dart';
 
 
 class CategoryDetailsVeiwmodel extends Cubit<Categorystate>{
-  CategoryDetailsVeiwmodel():super(LoadingCategoryState());
+  late CategoryRepoContract repository ;
+  late Online dataSource;
+  late ApiManager apiManager ;
+  CategoryDetailsVeiwmodel():super(LoadingCategoryState()){
+    apiManager=ApiManager();
+    dataSource=SourceRemoteDataSourceIMPL(apiManager: apiManager);
+    repository=SourceRepoImpl(remote:dataSource );
+
+
+  }
 void getCategory()async{
   try {
-    var response = await ApiManager.getCategory();
-    if(response.genres!.isEmpty){
+    var response = await repository.getCategory();
+    if(response!.genres!.isEmpty){
       emit(ErrorCategoryState(ErrorMessage: "error List is empty "));
 
     }
