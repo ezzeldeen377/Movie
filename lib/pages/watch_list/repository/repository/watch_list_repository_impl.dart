@@ -1,6 +1,6 @@
 import 'package:movie/pages/home_screen/model/movie_response.dart';
-import 'package:movie/pages/watch_list/repository/data_source/watch_list_data_source.dart';
-import 'package:movie/pages/watch_list/repository/repository/watch_list_repository.dart';
+import 'package:movie/pages/watch_list/repository/watch_list_data_source.dart';
+import 'package:movie/pages/watch_list/repository/watch_list_repository.dart';
 
 class WatchListRepositoryImpl implements WatchListRepository{
   WatchListDataSource dataSource;

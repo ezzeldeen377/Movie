@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
 import 'package:movie/pages/home_screen/api/api_constant.dart';
-import 'package:movie/pages/search/Repositroy/data_Source/movie_remote_data_source.dart';
+import 'package:movie/pages/search/Repositroy/movie_remote_data_source.dart';
 import 'package:movie/pages/search/api/api_constants.dart';
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {

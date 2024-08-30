@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
-import 'package:movie/pages/watch_list/repository/data_source/watch_list_data_source.dart';
+import 'package:movie/pages/watch_list/repository/watch_list_data_source.dart';
 
 class WatchListDataSourceImpl implements WatchListDataSource{
   @override

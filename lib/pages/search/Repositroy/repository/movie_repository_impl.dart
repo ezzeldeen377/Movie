@@ -1,7 +1,7 @@
 import 'package:movie/pages/home_screen/model/movieDetails.dart';
 import 'package:movie/pages/home_screen/model/movie_response.dart';
-import 'package:movie/pages/search/Repositroy/data_Source/movie_remote_data_source.dart';
-import 'package:movie/pages/search/Repositroy/repository/movie_repository_contract.dart';
+import 'package:movie/pages/search/Repositroy/movie_remote_data_source.dart';
+import 'package:movie/pages/search/Repositroy/movie_repository_contract.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
