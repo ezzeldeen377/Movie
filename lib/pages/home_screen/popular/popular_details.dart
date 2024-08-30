@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/popular/cubit/popular_state.dart';
 import 'package:movie/pages/home_screen/popular/movie_carousel.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app_colors.dart';
 import 'cubit/popular_details_view_model.dart';
