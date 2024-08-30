@@ -8,7 +8,7 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
   MovieDetailsRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<MovieDetails?> getMovieDetails(String movieId) async {
-    return await remoteDataSource.getMovieDetails(movieId);
+  Future<MovieDetails?> getMovieDetails(String movieId,String appLanguage) async {
+    return await remoteDataSource.getMovieDetails(movieId,appLanguage);
   }
 }

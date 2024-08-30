@@ -3,30 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
+import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
 
-class MovieDetailsView extends StatefulWidget {
+class MovieDetailsView extends StatelessWidget {
   final String movieId;
 
   MovieDetailsView({required this.movieId});
 
-  @override
-  State<MovieDetailsView> createState() => _MovieDetailsViewState();
-}
-
-class _MovieDetailsViewState extends State<MovieDetailsView> {
   MovieDetailsViewModel viewModel = MovieDetailsViewModel();
-
-  @override
-  void initState() {
-    super.initState();
-    viewModel.getMovieDetail(widget.movieId);
-  }
+  AppProvider provider=AppProvider();
 
   @override
   Widget build(BuildContext context) {
+    viewModel.getMovieDetail(movieId, provider.appLanguage);
     return BlocProvider(
       create: (context) => viewModel,
       child: BlocBuilder<MovieDetailsViewModel, MovieDetailsState>(

@@ -7,10 +7,10 @@ import 'package:movie/pages/home_screen/repository/movie_details/movie_details_d
 
 class MovieDetailsRemoteDataSourceImpl implements MovieDetailsRemoteDataSource {
   @override
-  Future<MovieDetails?> getMovieDetails(String movieId) async {
+  Future<MovieDetails?> getMovieDetails(String movieId,String appLanguage) async {
     Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.apiName + movieId, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
-      'language': 'en-US',
+      'language': appLanguage,
       'page': '1',
       'append_to_response': 'credits'
     });

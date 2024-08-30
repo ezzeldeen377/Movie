@@ -11,7 +11,7 @@ class ReleasesRemoteDataSourceImpl implements ReleasesRemoteDataSource {
   Future<MovieResponse?> getNewReleases(int pageNumber,String appLanguage) async {
     Uri url = Uri.https(ApiConstant.baseUrl, ApiConstant.upcomingApi, {
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
-      'language': 'en',
+      'language': appLanguage,
       'page': pageNumber.toString(),
     });
     try {

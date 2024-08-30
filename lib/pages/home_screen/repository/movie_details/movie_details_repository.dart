@@ -1,5 +1,5 @@
 import '../../model/movieDetails.dart';
 
 abstract class MovieDetailsRepository {
-  Future<MovieDetails?> getMovieDetails(String movieId);
+  Future<MovieDetails?> getMovieDetails(String movieId,String appLanguage);
 }

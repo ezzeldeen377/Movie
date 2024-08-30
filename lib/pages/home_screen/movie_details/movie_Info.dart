@@ -101,7 +101,7 @@ class _MovieInfoState extends State<MovieInfo> {
                         SizedBox(height: 15),
                         AnimatedCrossFade(
                           firstChild: Text(
-                            widget.movie.overview ?? '',
+                            widget.movie.overview ?? AppLocalizations.of(context)!.empty,
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.headlineMedium,
