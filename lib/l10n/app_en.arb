@@ -23,6 +23,7 @@
   "search_on_any_movie": "Search On Any Movie You Want",
   "delete_all": "Delete All",
   "no_movie_to_show": "No Movies To Show\n Try Add One",
-  "delete": "Delete"
+  "delete": "Delete",
+  "settings": "Settings"
 
 }

@@ -6,25 +6,18 @@ import 'package:movie/pages/browse/Category/Cubit/CategoryState.dart';
 import 'package:movie/pages/browse/Category/Cubit/Category_details_VeiwModel.dart';
 import 'package:movie/pages/browse/Category_item.dart';
 import 'package:movie/pages/browse/Movies/MoviesPage.dart';
-import 'package:movie/pages/browse/Repo/Category/repo/source_repo_impl.dart';
+import 'package:movie/pages/browse/Repo/Category/repo/category_repository_impl.dart';
+import 'package:provider/provider.dart';
+import '../../../app_provider/app_provider.dart';
 import '../Api/Api_Manager.dart';
 
-class CategoryDetails extends StatefulWidget {
-  @override
-  State<CategoryDetails> createState() => _CategoryDetailsState();
-}
-
-class _CategoryDetailsState extends State<CategoryDetails> {
-  @override
-  void initState() {
-    super.initState();
-    viewModel.getCategory();
-  }
-
-  @override
+class CategoryDetails extends StatelessWidget {
   CategoryDetailsVeiwmodel viewModel = CategoryDetailsVeiwmodel();
 
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
+    viewModel.getCategory(provider.appLanguage);
     return BlocBuilder<CategoryDetailsVeiwmodel, Categorystate>(
       bloc: viewModel,
       builder: (context, state) {
@@ -41,7 +34,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               Text(state.ErrorMessage),
               ElevatedButton(
                 onPressed: () {
-                  viewModel.getCategory();
+                  viewModel.getCategory(provider.appLanguage);
                 },
                 child: Text("Try Again"),
               )

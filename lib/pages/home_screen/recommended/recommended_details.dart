@@ -5,14 +5,16 @@ import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_details_view_model.dart';
 import 'package:movie/pages/home_screen/recommended/cubit/recommended_state.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app_colors.dart';
 
 class RecommendeDetails extends StatelessWidget {
   RecommendedDetailsViewModel viewModel = RecommendedDetailsViewModel();
-  AppProvider provider=AppProvider();
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
     viewModel.getRecommended(provider.appLanguage);
     return BlocProvider(
       create: (context)=>viewModel,

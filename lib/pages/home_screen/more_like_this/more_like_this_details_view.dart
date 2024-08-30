@@ -15,13 +15,14 @@ class MoreLikeThisDetailsView extends StatelessWidget {
   MoreLikeThisDetailsView({required this.id});
 
   MoreLikeThisViewModel viewModel = MoreLikeThisViewModel();
-  AppProvider provider=AppProvider();
 
   @override
 
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
     viewModel.getMoreLike(id,provider.appLanguage);
 
     return BlocProvider(

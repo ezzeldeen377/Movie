@@ -1,5 +1,5 @@
 import 'package:movie/pages/browse/Models/CategoryResponse.dart';
 
-abstract class Online{
- Future<CategoryResponse?> getCategory();
+abstract class CategoryDataSource{
+ Future<CategoryResponse?> getCategory(String appLanguage);
 }

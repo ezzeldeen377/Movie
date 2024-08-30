@@ -7,6 +7,7 @@ import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/movie_details/Movie_details_widget.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MovieDetailsView extends StatelessWidget {
   final String movieId;
@@ -14,10 +15,11 @@ class MovieDetailsView extends StatelessWidget {
   MovieDetailsView({required this.movieId});
 
   MovieDetailsViewModel viewModel = MovieDetailsViewModel();
-  AppProvider provider=AppProvider();
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
     viewModel.getMovieDetail(movieId, provider.appLanguage);
     return BlocProvider(
       create: (context) => viewModel,

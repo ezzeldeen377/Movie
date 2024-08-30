@@ -16,10 +16,11 @@ class ReleasesDetailsView extends StatefulWidget {
 
 class _ReleasesDetailsViewState extends State<ReleasesDetailsView> {
   ReleasesDetailsViewModel viewModel = ReleasesDetailsViewModel();
-  AppProvider provider=AppProvider();
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
     viewModel.getReleases(provider.appLanguage);
 
     return BlocProvider(
@@ -54,7 +55,6 @@ class _ReleasesDetailsViewState extends State<ReleasesDetailsView> {
                             notification.metrics.maxScrollExtent &&
                         notification is ScrollUpdateNotification) {
                       viewModel.getReleases(provider.appLanguage,fromPagination: true);
-                      print('@@@@@@@@@@@@@@@@@@@here');
 
                     }
                     return true;

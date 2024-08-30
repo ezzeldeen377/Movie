@@ -4,13 +4,13 @@ import 'package:movie/pages/browse/Repo/Category/Category_data_source.dart';
 import 'package:movie/pages/browse/Repo/Category/Category_repo_contract.dart';
 
 
-class SourceRemoteDataSourceIMPL implements Online{
+class CategoryDataSourceImpl implements CategoryDataSource{
   ApiManager apiManager;
-  SourceRemoteDataSourceIMPL({required this.apiManager});
+  CategoryDataSourceImpl({required this.apiManager});
 
   @override
-  Future<CategoryResponse?> getCategory()async {
- var response= await  apiManager.getCategory();
+  Future<CategoryResponse?> getCategory(String appLanguage)async {
+ var response= await  apiManager.getCategory(appLanguage);
  return response;
   }
 

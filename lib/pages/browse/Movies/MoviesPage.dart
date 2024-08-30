@@ -5,33 +5,28 @@ import 'package:movie/pages/browse/CategoryPhoto.dart';
 import 'package:movie/pages/browse/Movies/Cubit/MovieState.dart';
 import 'package:movie/pages/browse/Movies/Cubit/Movie_details_viewModel.dart';
 import 'package:movie/pages/home_screen/widgets/movie_item.dart';
+import 'package:provider/provider.dart';
 
 
 import '../../../app_colors.dart';
+import '../../../app_provider/app_provider.dart';
 
-class Moviespage extends StatefulWidget {
+class Moviespage extends StatelessWidget {
   static const String routeName = "Moviespage";
   final Category category;
   Moviespage({required this.category});
 
-  @override
-  State<Moviespage> createState() => _MoviespageState();
-}
-
-class _MoviespageState extends State<Moviespage> {
   MovieDetailsVeiwmodel viewModel = MovieDetailsVeiwmodel();
 
   @override
-  void initState() {
-    super.initState();
-    viewModel.getMoives(widget.category.id);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
+    viewModel.getMoives(category.id,provider.appLanguage);
+
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.category.name ?? "",
+          title: Text(category.name ?? "",
               style: TextStyle(color: Colors.white)),
         ),
         body: BlocProvider(
@@ -66,7 +61,7 @@ class _MoviespageState extends State<Moviespage> {
                         if (notification.metrics.pixels ==
                                 notification.metrics.maxScrollExtent &&
                             notification is ScrollUpdateNotification) {
-                          viewModel.getMoives(widget.category.id,
+                          viewModel.getMoives(category.id,provider.appLanguage,
                               fromPagination: true);
                         }
                         return true;

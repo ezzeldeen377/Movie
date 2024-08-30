@@ -46,5 +46,30 @@ class MyTheme{
         color: AppColors.whiteColor,
       ),
     ),
+      dropdownMenuTheme: DropdownMenuThemeData(
+          textStyle: TextStyle(color: AppColors.blackColor,fontWeight: FontWeight.bold),
+          menuStyle: MenuStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+
+              filled: true,
+              fillColor: AppColors.yellowColor,
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: AppColors.lightGrayColor,
+                    width: 1,
+
+                  )
+              ),
+              focusedBorder:  OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: AppColors.lightGrayColor,
+                    width: 1,
+
+                  )
+              )
+          )
+      )
   );
 }

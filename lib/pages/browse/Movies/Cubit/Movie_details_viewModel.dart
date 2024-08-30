@@ -5,8 +5,8 @@ import 'package:movie/pages/home_screen/model/movie_response.dart';
 
 import '../../Api/Api_Manager.dart';
 import '../../Repo/Movie/Data_Source/Movie_remote_data_source.dart';
-import '../../Repo/Movie/Repository/Movie_data_Source.dart';
-import '../../Repo/Movie/Repository/Movie_repository_Contract.dart';
+import '../../Repo/Movie/Movie_data_Source.dart';
+import '../../Repo/Movie/Movie_repository_Contract.dart';
 import 'MovieState.dart';
 
 class MovieDetailsVeiwmodel extends Cubit<Moviestate>{
@@ -24,14 +24,14 @@ class MovieDetailsVeiwmodel extends Cubit<Moviestate>{
   int pageNumber=1;
   List<Movie> list=[];
 
-  void getMoives(int id,{bool fromPagination=false} )async {
+  void getMoives(int id,String appLanguage,{bool fromPagination=false} )async {
     if(fromPagination){
       emit(PaginationMovieState());
     }else{
       emit(LoadingMovieState());
     }
     try {
-      var response = await movie.getMovies(id,pageNumber);
+      var response = await movie.getMovies(id,pageNumber,appLanguage);
       if (response!.results!.isEmpty) {
         emit(ErrorMovieState(errorMessage: "error List is empty "));
       }

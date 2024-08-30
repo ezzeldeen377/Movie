@@ -68,12 +68,7 @@ class HomeScreen extends StatelessWidget {
             height: 45.0, // Set height of the button
             child: FloatingActionButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SettingScreen(),
-                    ),
-                  );
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SettingScreen()));
 
               },
               foregroundColor: AppColors.blackColor,

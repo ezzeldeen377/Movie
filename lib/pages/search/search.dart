@@ -22,7 +22,6 @@ class _SearchState extends State<Search> {
   SearchViewModel viewModel = SearchViewModel();
 
   final TextEditingController _searchController = TextEditingController();
-  AppProvider provider=AppProvider();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -32,6 +31,8 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<AppProvider>(context);
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(16.0),

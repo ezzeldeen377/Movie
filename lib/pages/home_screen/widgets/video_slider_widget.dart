@@ -8,26 +8,22 @@ import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
 import 'package:movie/pages/home_screen/widgets/video_details.dart';
 import 'package:movie/pages/home_screen/widgets/video_widget.dart';
+import 'package:provider/provider.dart';
 
-class VideoSliderWidget extends StatefulWidget {
+class VideoSliderWidget extends StatelessWidget {
   String movieId;
   VideoSliderWidget({required this.movieId});
-
-  @override
-  State<VideoSliderWidget> createState() => _VideoSliderWidgetState();
-}
-
-class _VideoSliderWidgetState extends State<VideoSliderWidget> {
   MovieDetailsViewModel viewModel=MovieDetailsViewModel();
-  AppProvider provider=AppProvider();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    viewModel.getMovieVideos(widget.movieId,provider.appLanguage);
-  }
+
+
   @override
   Widget build(BuildContext context) {
+
+
+    var pro=Provider.of<AppProvider>(context);
+
+    AppProvider provider=AppProvider(appLanguage:pro.appLanguage);
+    viewModel.getMovieVideos(movieId, provider.appLanguage);
     return BlocBuilder<MovieDetailsViewModel,MovieDetailsState>(
       bloc: viewModel,
       builder: (context,state){
