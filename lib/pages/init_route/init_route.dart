@@ -20,6 +20,7 @@ class _InitRouteState extends State<InitRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pagesList[selectedIndex],
+
       bottomNavigationBar:Theme(
           data: Theme.of(context).copyWith(
             canvasColor: AppColors.primaryColor
@@ -54,7 +55,11 @@ class _InitRouteState extends State<InitRoute> {
         ],
       )
 
-      )
+      ),
+
+
+
     );
+
   }
 }

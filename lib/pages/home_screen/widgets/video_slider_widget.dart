@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/app_colors.dart';
+import 'package:movie/app_provider/app_provider.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_state.dart';
 import 'package:movie/pages/home_screen/movie_details/cubit/movie_details_view_model.dart';
 import 'package:movie/pages/home_screen/widgets/video_details.dart';
@@ -18,11 +19,12 @@ class VideoSliderWidget extends StatefulWidget {
 
 class _VideoSliderWidgetState extends State<VideoSliderWidget> {
   MovieDetailsViewModel viewModel=MovieDetailsViewModel();
+  AppProvider provider=AppProvider();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    viewModel.getMovieVideos(widget.movieId);
+    viewModel.getMovieVideos(widget.movieId,provider.appLanguage);
   }
   @override
   Widget build(BuildContext context) {

@@ -132,7 +132,7 @@ class ApiManager {
   https://api.themoviedb.org/3/movie/{movie_id}/videos
    */
 
-  static Future<MovieVideos?> getMovieVideos(String movieId) async {
+   Future<MovieVideos?> getMovieVideos(String movieId) async {
     Uri url =Uri.https(ApiConstant.baseUrl,ApiConstant.apiName+movieId+ApiConstant.video,{
       'api_key': '8ad9e9ba188516e715696297859dfd0f',
       'language': 'en-US',
