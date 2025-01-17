@@ -6,6 +6,8 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id 'org.jetbrains.kotlin.android'
+    
 }
 
 def localProperties = new Properties()
@@ -28,24 +30,25 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.example.movie"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
-
+    compileSdk = 34
+    ndkVersion = 25.18937393
+     kotlinOptions {
+        jvmTarget = '21' // Set Kotlin JVM target to 21
+    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+ sourceCompatibility JavaVersion.VERSION_21 // Set Java compatibility to 21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.movie"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = 21
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInteger()
-        versionName = flutterVersionName
+         applicationId "com.example.movie"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
     }
+      
 
     buildTypes {
         release {

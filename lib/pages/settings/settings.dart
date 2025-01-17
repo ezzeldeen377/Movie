@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movie/app_colors.dart';
 import 'package:movie/app_provider/app_provider.dart';
-import 'package:movie/pages/home_screen/new_releases/cubit/releases_details_view_model.dart';
-import 'package:movie/pages/home_screen/new_releases/releases_details_view.dart';
-import 'package:movie/pages/home_screen/popular/popular_details.dart';
-import 'package:movie/pages/home_screen/recommended/cubit/recommended_details_view_model.dart';
-import 'package:movie/pages/home_screen/recommended/recommended_details.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie/pages/init_route/init_route.dart';
 
-import '../home_screen/home_screen.dart';
-import '../home_screen/popular/cubit/popular_details_view_model.dart';
 class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
