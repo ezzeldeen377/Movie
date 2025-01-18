@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie/features/home_screen/data/models/movieDetails.dart';
-import 'package:movie/features/home_screen/presentation/widgets/cast_item.dart';
+import 'package:movie/features/home_screen/presentation/widgets/movie_details/cast_item.dart';
 
 
 class CastWidget extends StatelessWidget {

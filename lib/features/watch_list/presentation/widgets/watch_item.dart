@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movie/app_colors.dart';
 import 'package:movie/core/api/api_constants.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/home_screen/data/models/movie_response.dart';
 import 'package:movie/features/home_screen/presentation/pages/movie_details_view.dart';
 import 'package:movie/features/watch_list/presentation/bloc/watch_list_view_model.dart';
@@ -73,7 +73,7 @@ class WatchItem extends StatelessWidget {
                             placeholder: (context, url) => Center(
                               child: LoadingAnimationWidget.staggeredDotsWave(
                                 color: AppColors.whiteColor,
-                                size: 50,
+                                size: 50.h,
                               ),
                             ),
                             errorWidget: (context, url, error) =>
@@ -98,7 +98,7 @@ class WatchItem extends StatelessWidget {
                   width: 15,
                 ),
                 SizedBox(
-                  width: 200,
+                  width: 200.w,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -114,7 +114,7 @@ class WatchItem extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
-                            .copyWith(fontSize: 10),
+                            .copyWith(fontSize: 10.h),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ), // movie name
@@ -122,7 +122,7 @@ class WatchItem extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.star,
-                            size: 20,
+                            size: 20.h,
                             color: AppColors.yellowColor,
                           ),
                           const SizedBox(
@@ -136,7 +136,7 @@ class WatchItem extends StatelessWidget {
                           ),
                           Icon(
                             Icons.date_range,
-                            size: 17,
+                            size: 17.h,
                             color: AppColors.yellowColor,
                           ),
                           const SizedBox(
@@ -145,7 +145,7 @@ class WatchItem extends StatelessWidget {
                           Text(movie.releaseDate ?? "",
                               style: TextStyle(
                                   color: AppColors.whiteColor,
-                                  fontSize: 12)), //relasse data
+                                  fontSize: 12.h)), //relasse data
                         ],
                       ) //actors names
                     ],

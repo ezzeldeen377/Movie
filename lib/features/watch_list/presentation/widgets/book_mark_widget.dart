@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/home_screen/data/models/movie_response.dart';
 import 'package:movie/features/watch_list/presentation/bloc/movies_state.dart';
 import 'package:movie/features/watch_list/presentation/bloc/watch_list_view_model.dart';
@@ -30,7 +31,7 @@ class BookMarkWidget extends StatelessWidget {
     child: Stack(alignment: Alignment.center, children: [
       ImageIcon(
         const AssetImage('assets/icons/label_icon.png'),
-        size: 40, // Adjust size as needed
+        size: 40.h, // Adjust size as needed
         color: isBooked
             ? AppColors.yellowColor
             : AppColors.darkGrayColor, // Adjust color as needed
@@ -39,7 +40,7 @@ class BookMarkWidget extends StatelessWidget {
         isBooked
             ? const AssetImage('assets/icons/check_icon.png')
             : const AssetImage('assets/icons/add_icon.png'),
-        size: 20, // Adjust size as needed
+        size: 20.h, // Adjust size as needed
         color: Colors.white, // Adjust color as needed
       )
     ]),

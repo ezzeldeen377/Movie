@@ -3,16 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_hero_transform/local_hero_transform.dart';
-import 'package:movie/app_provider/app_provider.dart';
+import 'package:movie/core/common/app_provider/app_cubit.dart';
 import 'package:movie/core/di/di.dart';
+import 'package:movie/core/theme/my_theme.dart';
 import 'package:movie/features/watch_list/presentation/bloc/watch_list_view_model.dart';
 import 'package:movie/firebase_options.dart';
 import 'package:movie/my_bloc_observer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie/my_theme.dart';
-import 'package:movie/pages/init_route/init_route.dart';
-import 'package:provider/provider.dart';
+import 'package:movie/core/common/screens/init_route.dart';
 
 Future<void> main() async {
   Bloc.observer = MyBlocObserver();
@@ -25,11 +23,17 @@ Future<void> main() async {
   await FirebaseFirestore.instance.disableNetwork();
 
   runApp(
-    BlocProvider(
-      create: (context) =>
-          getIt<WatchListViewModel>()..getAllMoviesFromFireStore(),
-      child: ChangeNotifierProvider(
-          create: (context) => AppProvider(), child: const MyApp()),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              getIt<WatchListViewModel>()..getAllMoviesFromFireStore(),
+        ),
+        BlocProvider(
+          create: (context) => AppCubit(),
+        ),
+      ],
+      child: const MyApp(),
     ),
   );
 }
@@ -39,8 +43,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppProvider>(context);
-
     return ScreenUtilInit(
       designSize: const Size(412, 892),
       minTextAdapt: true,
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
         return MaterialApp(
-          locale: Locale(provider.appLanguage),
+          locale: Locale(context.watch<AppCubit>().state),
           debugShowCheckedModeBanner: false,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,

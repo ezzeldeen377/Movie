@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie/app_colors.dart';
-import 'package:movie/features/browse/presentation/widgets/CategoryPhoto.dart';
+import 'package:movie/core/theme/app_colors.dart';
+import 'package:movie/features/browse/presentation/widgets/category_photo.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category categoryItem;

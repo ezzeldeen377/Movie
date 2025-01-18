@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie/app_colors.dart';
-import 'package:movie/app_provider/app_provider.dart';
+import 'package:movie/core/common/app_provider/app_cubit.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/home_screen/data/models/movie_response.dart';
 import 'package:movie/features/home_screen/presentation/bloc/home_screen/home_screen_state.dart';
 import 'package:movie/features/home_screen/presentation/bloc/home_screen/home_screen_view_model.dart';
@@ -34,7 +34,7 @@ class RecommendedMoviesSection extends StatelessWidget {
                           notification.metrics.maxScrollExtent &&
                       notification is ScrollUpdateNotification) {
                     context.read<HomeScreenViewModel>().getRecommended(
-                        fromPagination: true, context.read<AppProvider>().appLanguage);
+                        fromPagination: true, context.read<AppCubit>().state);
                   }
                   return true;
                 },

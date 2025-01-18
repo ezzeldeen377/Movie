@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movie/core/theme/app_colors.dart';
 
 class SearchField extends StatelessWidget {
   final TextEditingController _searchController;
@@ -24,8 +24,8 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.darkGrayColor,
-          hintText:AppLocalizations.of(context)!.search.toLowerCase()+'...' ,
-          hintStyle: TextStyle(color: AppColors.whiteColor,fontSize: 16.sp),
+          hintText:'${AppLocalizations.of(context)!.search.toLowerCase()}...' ,
+          hintStyle: TextStyle(color: AppColors.whiteColor,fontSize: 16.h),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0.r),
             borderSide: BorderSide.none,

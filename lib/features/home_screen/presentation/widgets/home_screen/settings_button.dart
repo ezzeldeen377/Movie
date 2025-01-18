@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie/app_colors.dart';
-import 'package:movie/pages/settings/settings.dart';
+import 'package:movie/core/common/screens/settings.dart';
+import 'package:movie/core/theme/app_colors.dart';
 
 class SettingsButton extends StatelessWidget {
   const SettingsButton({super.key});

@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:movie/features/browse/presentation/widgets/CategoryPhoto.dart';
+import 'package:movie/features/browse/presentation/widgets/category_photo.dart';
 import 'package:movie/features/home_screen/data/models/movie_response.dart';
 
 enum BrowseStatus { initial, loading, loaded, error,paginationLoading }

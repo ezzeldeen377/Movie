@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie/core/api/api_constants.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/home_screen/data/models/movie_response.dart';
 import 'package:movie/features/watch_list/presentation/widgets/book_mark_widget.dart';
 
@@ -50,13 +51,13 @@ class _MovieCardState extends State<MovieCard> {
           CachedNetworkImage(
             imageUrl: fullImageUrl2,
             width: double.infinity,
-            height: 230,
+            height: 230.h,
             fit: BoxFit.fill,
           ),
           Icon(
             Icons.play_circle_filled,
             color: AppColors.whiteColor,
-            size: 50, // Adjust size
+            size: 50.h, // Adjust size
           ),
         ]),
         // Play icon positioned at the center of the large image
@@ -79,8 +80,8 @@ class _MovieCardState extends State<MovieCard> {
                       imageUrl:
                           fullImageUrl, // Use different image URL if needed
                       fit: BoxFit.fill,
-                      width: 100,
-                      height: 150,
+                      width: 100.w,
+                      height: 150.h,
                     ),
                   ),
                   Positioned(
@@ -103,7 +104,7 @@ class _MovieCardState extends State<MovieCard> {
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
-                            .copyWith(fontSize: 20),
+                            .copyWith(fontSize: 20.h),
                         softWrap: true,
                         textAlign: TextAlign.start,
                         maxLines: 2, // Limits the title to 2 lines
@@ -114,7 +115,7 @@ class _MovieCardState extends State<MovieCard> {
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall!
-                            .copyWith(fontSize: 20),
+                            .copyWith(fontSize: 20.h),
                         softWrap: true,
                         textAlign: TextAlign.start,
                       ),

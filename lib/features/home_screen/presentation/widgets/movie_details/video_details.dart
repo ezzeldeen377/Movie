@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/home_screen/data/models/MovieVideos.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -22,7 +23,7 @@ class VideoDetails extends StatelessWidget {
                   child: Text(
                     video.name ?? '',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontSize: 14,
+                          fontSize: 14.h,
                         ),
                     maxLines: 2,
                   ),
@@ -45,7 +46,7 @@ class VideoDetails extends StatelessWidget {
                     Text(
                       timeago.format(DateTime.parse(video.publishedAt ?? '')),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.h,
                           ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

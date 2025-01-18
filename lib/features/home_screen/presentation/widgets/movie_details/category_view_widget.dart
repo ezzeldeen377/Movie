@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie/app_colors.dart';
+import 'package:movie/core/theme/app_colors.dart';
 
 class CategoryViewWidget extends StatelessWidget {
  final String categoryName;

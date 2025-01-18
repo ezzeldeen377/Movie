@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movie/app_colors.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/watch_list/presentation/bloc/movies_state.dart';
 import 'package:movie/features/watch_list/presentation/bloc/watch_list_view_model.dart';
 import 'package:movie/features/watch_list/presentation/widgets/watch_item.dart';
@@ -54,7 +55,7 @@ class WatchList extends StatelessWidget {
                   child: Center(
                     child: LoadingAnimationWidget.staggeredDotsWave(
                       color: AppColors.whiteColor,
-                      size: 50,
+                      size: 50.h,
                     ),
                   ),
                 );
@@ -66,7 +67,7 @@ class WatchList extends StatelessWidget {
                     children: [
                       ImageIcon(
                         const AssetImage('assets/icons/no_data_icon.png'),
-                        size: 100,
+                        size: 100.h,
                         color: AppColors.whiteColor,
                       ),
                       const SizedBox(
@@ -107,7 +108,7 @@ class WatchList extends StatelessWidget {
                       children: [
                         ImageIcon(
                           const AssetImage('assets/icons/no_data_icon.png'),
-                          size: 100,
+                          size: 100.h,
                           color: AppColors.whiteColor,
                         ),
                         const SizedBox(

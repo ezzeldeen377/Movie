@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/app_colors.dart';
-import 'package:movie/app_provider/app_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie/core/common/app_provider/app_cubit.dart';
 import 'package:movie/core/di/di.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/browse/presentation/bloc/browse_view_model.dart';
 import 'package:movie/features/browse/presentation/pages/browse.dart';
 import 'package:movie/features/home_screen/presentation/bloc/home_screen/home_screen_view_model.dart';
-import 'package:movie/features/search/presentation/bloc/search_View_Model.dart';
 import 'package:movie/features/search/presentation/pages/search.dart';
-import 'package:movie/features/watch_list/presentation/bloc/watch_list_view_model.dart';
 import 'package:movie/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:movie/features/watch_list/presentation/pages/watch_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,16 +29,16 @@ class _InitRouteState extends State<InitRoute> {
   final List<Widget> _pages = [
     BlocProvider(
       create: (context) => getIt<HomeScreenViewModel>()
-        ..getPopular(context.read<AppProvider>().appLanguage)
-        ..getNewReleases( context.read<AppProvider>().appLanguage,
+        ..getPopular(context.read<AppCubit>().state)
+        ..getNewReleases( context.read<AppCubit>().state,
             fromPagination: false)
-        ..getRecommended( context.read<AppProvider>().appLanguage,fromPagination: false),
+        ..getRecommended( context.read<AppCubit>().state,fromPagination: false),
       child: const HomeScreen(),
     ),
     Search(),
     BlocProvider(
       create: (context) => getIt<BrowseViewModel>()
-        ..getCategory(context.read<AppProvider>().appLanguage),
+        ..getCategory(context.read<AppCubit>().state),
       child: const Browse(),
     ),
     const WatchList(),
@@ -76,20 +75,20 @@ class _InitRouteState extends State<InitRoute> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: const ImageIcon(AssetImage('assets/icons/home_icon.png')),
+              icon:  ImageIcon(const AssetImage('assets/icons/home_icon.png'),size: 20.h,),
               label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
-              icon: const ImageIcon(AssetImage('assets/icons/search_icon.png')),
+              icon:  ImageIcon(const AssetImage('assets/icons/search_icon.png'),size: 20.h),
               label: AppLocalizations.of(context)!.search,
             ),
             BottomNavigationBarItem(
-              icon: const ImageIcon(AssetImage('assets/icons/browse_icon.png')),
+              icon:  ImageIcon(const AssetImage('assets/icons/browse_icon.png'),size: 20.h),
               label: AppLocalizations.of(context)!.browse,
             ),
             BottomNavigationBarItem(
-              icon: const ImageIcon(
-                  AssetImage('assets/icons/watchlist_icon.png')),
+              icon:  ImageIcon(
+                  const AssetImage('assets/icons/watchlist_icon.png'),size: 20.h),
               label: AppLocalizations.of(context)!.watch_list,
             ),
           ],

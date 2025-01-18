@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie/app_colors.dart';
 import 'package:movie/core/api/api_constants.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/home_screen/data/models/movieDetails.dart';
 import 'package:movie/features/home_screen/data/models/movie_response.dart';
-import 'package:movie/features/home_screen/presentation/widgets/category_view_widget.dart';
-import 'package:movie/features/home_screen/presentation/widgets/read_more_widget.dart';
+import 'package:movie/features/home_screen/presentation/widgets/movie_details/category_view_widget.dart';
+import 'package:movie/features/home_screen/presentation/widgets/movie_details/read_more_widget.dart';
 import 'package:movie/features/watch_list/presentation/widgets/book_mark_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -82,10 +82,10 @@ class MovieInfo extends StatelessWidget {
                 const SizedBox(height: 15),
                 Row(
                   children: [
-                    const Icon(
+                     Icon(
                       Icons.star,
                       color: Colors.yellow,
-                      size: 24.0,
+                      size: 24.h,
                     ),
                     const SizedBox(width: 5),
                     Text(

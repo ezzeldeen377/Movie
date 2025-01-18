@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_debouncer/flutter_debouncer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:movie/app_colors.dart';
-import 'package:movie/app_provider/app_provider.dart';
+import 'package:movie/core/common/app_provider/app_cubit.dart';
 import 'package:movie/core/di/di.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/search/presentation/bloc/search_view_model.dart';
 import 'package:movie/features/search/presentation/bloc/search_state.dart';
-import 'package:movie/features/search/presentation/widgets/result_Item.dart';
+import 'package:movie/features/search/presentation/widgets/result_item.dart';
 import 'package:movie/features/search/presentation/widgets/search_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 class Search extends StatelessWidget {
   Search({super.key});
@@ -18,7 +18,6 @@ class Search extends StatelessWidget {
   final Debouncer debouncer = Debouncer();
   @override
   Widget build(BuildContext context) {
-    var pro = Provider.of<AppProvider>(context);
     return BlocProvider(
       create: (context) => getIt<SearchViewModel>(),
       child: BlocBuilder<SearchViewModel, SearchState>(
@@ -37,7 +36,7 @@ class Search extends StatelessWidget {
                           onDebounce: () {
                             context
                                 .read<SearchViewModel>()
-                                .search(query, pro.appLanguage);
+                                .search(query, context.read<AppCubit>().state);
                           });
                     },
                     onPreesd: () {
@@ -70,7 +69,7 @@ class Search extends StatelessWidget {
                         return Center(
                           child: LoadingAnimationWidget.staggeredDotsWave(
                             color: AppColors.whiteColor,
-                            size: 50,
+                            size: 50.h,
                           ),
                         );
                       } else if (state.isError) {
@@ -84,7 +83,7 @@ class Search extends StatelessWidget {
                                   const AssetImage(
                                       'assets/icons/icon_background.png'),
                                   color: AppColors.whiteColor,
-                                  size: 50,
+                                  size: 50.h,
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
@@ -108,7 +107,7 @@ class Search extends StatelessWidget {
                                   const AssetImage(
                                       'assets/icons/icon_background.png'),
                                   color: AppColors.whiteColor,
-                                  size: 50,
+                                  size: 50.h,
                                 ),
                                 const SizedBox(height: 10),
                                 Text(

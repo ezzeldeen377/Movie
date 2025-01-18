@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:movie/core/api/api_constants.dart';
+import 'package:movie/core/theme/app_colors.dart';
 import 'package:movie/features/watch_list/presentation/widgets/book_mark_widget.dart';
 
-import '../../../../../../app_colors.dart';
 import '../../../data/models/movie_response.dart';
 import '../../pages/movie_details_view.dart';
 
@@ -58,7 +58,7 @@ class MovieItem extends StatelessWidget {
                     placeholder: (context, url) => Center(
                       child: LoadingAnimationWidget.staggeredDotsWave(
                         color: AppColors.whiteColor,
-                        size: 50,
+                        size: 50.h,
                       ),
                     ),
                     errorWidget: (context, url, error) =>
@@ -84,7 +84,7 @@ class MovieItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
-                        .copyWith(fontSize: 15, fontWeight: FontWeight.bold),
+                        .copyWith(fontSize: 15.h, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -92,7 +92,7 @@ class MovieItem extends StatelessWidget {
                   Text(
                     movie.releaseDate ?? "",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontSize: 13, fontWeight: FontWeight.normal),
+                        fontSize: 13.h, fontWeight: FontWeight.normal),
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.ellipsis,
                   ),

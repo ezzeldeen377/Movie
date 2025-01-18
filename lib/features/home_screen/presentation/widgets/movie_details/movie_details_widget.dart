@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie/app_colors.dart';
 import 'package:movie/features/home_screen/data/models/movieDetails.dart';
 import 'package:movie/features/home_screen/presentation/bloc/movie_details/movie_details_view_model.dart';
-import 'package:movie/features/home_screen/presentation/widgets/more_like_this_movies_section.dart';
-import 'package:movie/features/home_screen/presentation/widgets/cast_widget.dart';
-import 'package:movie/features/home_screen/presentation/widgets/movie_info.dart';
-import 'package:movie/features/home_screen/presentation/widgets/video_slider_widget.dart';
+import 'package:movie/features/home_screen/presentation/widgets/movie_details/more_like_this_movies_section.dart';
+import 'package:movie/features/home_screen/presentation/widgets/movie_details/cast_widget.dart';
+import 'package:movie/features/home_screen/presentation/widgets/movie_details/movie_info.dart';
+import 'package:movie/features/home_screen/presentation/widgets/movie_details/video_slider_widget.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

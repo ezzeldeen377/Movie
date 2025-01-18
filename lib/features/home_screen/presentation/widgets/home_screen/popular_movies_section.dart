@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie/features/home_screen/presentation/widgets/home_screen/dot_indicator.dart';
 
 import '../../../data/models/movie_response.dart';
@@ -23,7 +24,7 @@ class PopularMoviesSection extends StatelessWidget {
           // Assign the controller to the CarouselSlider
           itemCount: popularList.length,
           options: CarouselOptions(
-            height: 300,
+            height: 300.h,
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 3),
             viewportFraction: 1,
@@ -39,7 +40,7 @@ class PopularMoviesSection extends StatelessWidget {
             );
           },
         ),
-        const SizedBox(height: 10),
+         SizedBox(height: 10.h),
         ValueListenableBuilder<int>(
           valueListenable: currentIndexNotifier,
           builder: (context, currentIndex, child) {
